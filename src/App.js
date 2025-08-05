@@ -1,7 +1,9 @@
+import React from "react";
+import { MenuSelection } from "./pages/menuSelection/MenuSelection";
 function App() {
   return (
     <div className="App">
-      <p>Hello, World!</p>
+      <MenuSelection/>
     </div>
   );
 }
