@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+## 🛠 기술 스택
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- **Language**: Javascript
+- **Framework**: React
 
-## Available Scripts
+---
+## 🔹 커밋 메시지 규칙
 
-In the project directory, you can run:
+| 깃모지 | 커밋 유형 | 설명 |
+|-------|-----------|------|
+|✨| `feat` | 새로운 기능 추가 또는 기존 기능 개선 |
+|🐛| `fix` | 버그 수정 |
+|♻️| `refactor` | 코드 리팩토링 (기능 변화 없이 구조 개선) |
+|📝| `doc` | 문서 작업 (README 등) |
+|✅| `test` | 테스트 코드 추가 또는 수정 |
+|⚡️| `perform` | 성능 개선 |
+|🔥| `clean` | 불필요한 코드 제거, 정리 |
+|💄| `design` | UI/UX 디자인 작업 또는 개선 |
+|🎨| `style` | 코드 스타일 변경 (세미콜론, 들여쓰기 등) – 기능 변화 없음 |
+|💡| `comment` | 주석 수정, 추가 |
+|🔀| `merge` | 브랜치 병합 |
 
-### `npm start`
+### 🔹 Git 명령어
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| 명령어                      | 설명                                    |
+| --------------------------- | --------------------------------------- |
+| `git clone <url>`           | 원격 저장소 복제                        |
+| `git add .` ⭐              | 전체 변경 파일 스테이징                 |
+| `git add <파일명>`          | 특정 파일만 스테이징                    |
+| `git commit -m "메시지"` ⭐ | 커밋 메시지와 함께 커밋                 |
+| `git log`                   | 커밋 히스토리 확인                      |
+| `git branch`                | 현재 브랜치 목록 확인                   |
+| `git checkout <이름>`       | 해당 브랜치로 이동                      |
+| `git checkout -b <이름>`    | 새 브랜치 생성 + 이동                   |
+| `git push` ⭐               | 현재 브랜치 내용을 원격 `main`에 푸시   |
+| `git pull origin main` ⭐   | 원격 `main` 브랜치 내용 가져오기 (병합) |
