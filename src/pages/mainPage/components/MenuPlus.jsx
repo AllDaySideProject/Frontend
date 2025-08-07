@@ -13,10 +13,10 @@ export const MenuPlus = () => {
                     <p className = "subTitleText">내 주변 매물을 똑똑하게 연결해 드려요.</p>
                 </div>
                 <div className = "imageContainer">
-                    <img src = { MENUPLUS } />
+                    <img src = { MENUPLUS } alt = "내 밥상 추가 아이콘" />
                 </div>
                 <div className = "plusButton">
-                    <img src = { PLUS } />
+                    <img src = { PLUS } alt = "내 밥상 추가 버튼" />
                     <p className = "buttonText">내 밥상 추가하기</p>
                 </div>
             </div>            
