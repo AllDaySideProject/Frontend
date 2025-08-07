@@ -1,0 +1,39 @@
+.HeaderContainer {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.81rem;
+    padding-bottom: 0.81rem;
+}
+
+.HeaderLeft {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+
+    img {
+        width: 1.875rem;
+        height: 1.875rem;
+    }
+
+    p {
+        color: #3E3E3E;
+        text-align: center;
+        font-size: 0.875rem;
+        line-height: 140%;
+    }
+}
+
+.HeaderRight {
+    display: flex;
+    align-items: center;
+
+    img {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+.logoName {
+    font-family: Aggro-Light;
+}
