@@ -1,0 +1,14 @@
+.screenContainer {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 390px;
+
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  margin: 0 auto;
+  
+  min-height: 100vh;
+}
