@@ -1,0 +1,69 @@
+.menuPlusContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 8.87rem;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    gap: 0.38rem;
+
+    .titleText {
+        color: #111;
+        text-align: center;
+        font-family: Pretendard;
+        font-size: 1.125rem;
+        font-weight: 700;
+        line-height: 140%;
+        letter-spacing: -0.02813rem;
+    }
+
+    .subTitleText {
+        color: #B0B0B0;
+        text-align: center;
+        font-family: Pretendard;
+        font-size: 0.8125rem;
+        font-weight: 400;
+        line-height: 140%;
+        letter-spacing: -0.02031rem;
+    }
+}
+
+.imageContainer {
+    padding-top: 2rem;
+    padding-bottom: 1.81rem;
+
+    img {
+        width: 13.19rem;
+        height: 13.19rem;
+    }
+}
+
+.plusButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #8FB88B;
+    border-radius: 0.75rem;
+    padding: 0.625rem 0.75rem;
+    align-items: center;
+    gap: 0.25rem;
+
+    img {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+    .buttonText {
+        color: #FFFFFF;
+        text-align: center;
+        font-family: Pretendard;
+        font-size: 0.75rem;
+        font-weight: 600;
+        line-height: 140%;
+        letter-spacing: -0.01875rem;
+    }
+}
