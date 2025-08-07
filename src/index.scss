@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "Aggro-Light";
+  font-weight: normal;
+  src: url("../public/fonts/Aggro-Light.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Aggro-Medium";
+  font-weight: normal;
+  src: url("../public/fonts/Aggro-Medium.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Aggro-Bold";
+  font-weight: normal;
+  src: url("../public/fonts/Aggro-Bold.otf") format("truetype");
+}
+
+body {
+    margin: 0;
+}
