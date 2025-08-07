@@ -1,0 +1,68 @@
+.modalContainer {
+    display: flex;
+    flex-direction: column;
+    width: 20.375rem;
+    padding: 1.5rem 1.4375rem;
+    border-radius: 1.25rem;
+    background: #FAFAFA;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.modalText {
+    color: #111111;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: -0.03125rem;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 1.25rem;
+
+    .cancelButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 8.125rem;
+        padding: 0.56rem 0;
+        border-radius: 0.625rem;
+        border: 1px solid #D9D9D9;
+        background: #FAFAFA;
+
+        p {
+            color: #000000;
+            text-align: right;
+            font-family: Pretendard;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 140%;
+            letter-spacing: -0.025rem;
+        }
+    }
+
+    .deleteButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 8.125rem;
+        padding: 0.56rem 0;
+        border-radius: 0.625rem;
+        border: 1px solid #D9D9D9;
+        background: #8FB88B;
+
+        p {
+            color: #FFFFFF;
+            text-align: right;
+            font-family: Pretendard;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 140%;
+            letter-spacing: -0.025rem;
+        }
+    }
+}
