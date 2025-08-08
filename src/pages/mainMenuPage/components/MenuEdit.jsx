@@ -6,6 +6,10 @@ import { MenuBox } from "./MenuBox";
 import { PriceText } from "./PriceText";
 
 export const MenuEdit = () => {
+    const handleDeleteClick = () => {
+        console.log("삭제하기 버튼 클릭");
+    }
+
     return (
         <ScreenContainer>
             <div className = "menuEditContainer">
@@ -13,7 +17,12 @@ export const MenuEdit = () => {
                     오늘은 어떤 메뉴로{ "\n" }밥상을 채워 볼까요?
                 </p>
                 <div className = "menuContainer">
-                    <p className = "deleteText">삭제하기</p>    
+                    <p 
+                        className = "deleteText"
+                        onClick = { handleDeleteClick }
+                    >
+                        삭제하기
+                    </p>    
                     <div className = "menuBoxList">
                         <MenuBox 
                             menuName = "진미채볶음"
