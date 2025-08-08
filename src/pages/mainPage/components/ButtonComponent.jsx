@@ -1,6 +1,6 @@
-import "./ModalButton.scss";
+import "./ButtonComponent.scss";
 
-export const ModalButton = ({ bgColor, textColor, buttonText }) => {
+export const ButtonComponent = ({ bgColor, textColor, buttonText }) => {
     return (
         <div 
             className = "buttonBox"
