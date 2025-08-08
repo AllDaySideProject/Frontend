@@ -1,14 +1,19 @@
 import "./ButtonComponent.scss";
 
-export const ButtonComponent = ({ bgColor, textColor, buttonText }) => {
+export const ButtonComponent = ({ width, bgColor, textSize, textColor, buttonText }) => {
     return (
         <div 
             className = "buttonBox"
-            style = {{ backgroundColor: bgColor }}
+            style = {{ 
+                width: width,
+                backgroundColor: bgColor }}
         >
             <p 
                 className = "buttonText"
-                style = {{ color: textColor }}
+                style = {{ 
+                    fontSize: textSize,
+                    color: textColor
+                }}
             >
                 { buttonText }
             </p>
