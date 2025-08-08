@@ -1,14 +1,29 @@
-.screenContainer {
-  display: flex;
-  flex-direction: column;
+// .screenContainer {
+//   display: flex;
+//   flex-direction: column;
 
+//   width: 100%;
+//   max-width: 390px;
+
+//   padding-left: 2rem;
+//   padding-right: 2rem;
+//   background-color: tan;
+//   margin: 0 auto;
+  
+// }
+//개발 전용 코드 양쪽 마진 보여주는 용도
+
+.screenContainer {
+  width: 100%;
+  background-color: #F5F5DC; //마진 영역
+  display: flex;
+  justify-content: center;
+}
+
+.screenContent {
   width: 100%;
   max-width: 390px;
-
-  padding-left: 2rem;
-  padding-right: 2rem;
-
-  margin: 0 auto;
-  
-  min-height: 100vh;
+  background-color: white; //실제 콘텐츠 영역
+  // padding-left: 2rem;//자식요소에게 2rem씩 부여 ->  필요없을 것으로 예상
+  // padding-right: 2rem;
 }
