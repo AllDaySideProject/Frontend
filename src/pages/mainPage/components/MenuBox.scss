@@ -1,0 +1,71 @@
+.menuBoxContainer {
+    display: flex;
+    width: 17.88rem;
+    padding: 0.75rem 1.25rem;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 0.44rem;
+    background: #FFFFFF;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.08);
+
+    .menuImage {
+        width: 3.44rem;
+        height: 3.44rem;    
+        border-radius: 0.625rem;
+        background: #DBDBDB;
+    }
+}
+
+.infoBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+}
+
+.menuInfo {
+    display: flex;
+    flex-direction: column;
+    
+    .menuName {
+        color: #111111;
+        font-family: Pretendard;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 140%;
+        letter-spacing: -0.025rem;
+    }
+
+    .storeInfo {
+        display: flex;
+        gap: 0.19rem;
+
+        img {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        p {
+            color: #B0B0B0;
+            font-family: Pretendard;
+            font-size: 0.75rem;
+            font-weight: 500;
+            line-height: 140%;
+            letter-spacing: -0.01875rem;
+        }
+    }
+}
+
+.priceInfo {
+    display: flex;
+    gap: 0.25rem;
+
+    p {
+        color: #DC2626;
+        font-family: Pretendard;
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 140%;
+        letter-spacing: -0.03125rem;        
+    }
+}
