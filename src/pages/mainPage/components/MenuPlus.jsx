@@ -7,10 +7,10 @@ import PLUS from "../../../assets/main/plus.svg";
 import { useNavigate } from "react-router-dom";
 
 export const MenuPlus = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const handlePlusClick = () => {
-        navigate(``); // 내 밥상 추가 화면으로 이동
+        // navigate(``); // 내 밥상 추가 화면으로 이동
     }
 
     return (
