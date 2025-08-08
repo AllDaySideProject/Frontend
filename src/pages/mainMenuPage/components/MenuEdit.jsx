@@ -2,7 +2,7 @@ import "./MenuEdit.scss";
 
 import ScreenContainer from "../../../components/ScreenContainer";
 import { ButtonComponent } from "../../../components/ButtonComponent";
-import { MenuBox } from "../../mainPage/components/MenuBox";
+import { MenuBox } from "./MenuBox";
 import { PriceText } from "./PriceText";
 
 export const MenuEdit = () => {
@@ -15,7 +15,12 @@ export const MenuEdit = () => {
                 <div className = "menuContainer">
                     <p className = "deleteText">삭제하기</p>    
                     <div className = "menuBoxList">
-                        <MenuBox />
+                        <MenuBox 
+                            menuName = "진미채볶음"
+                            storeName = "희망식당"
+                            count = "1"
+                            price = "4,500"
+                        />
                     </div>
                 </div>
                 <div className = "detailPrice">
