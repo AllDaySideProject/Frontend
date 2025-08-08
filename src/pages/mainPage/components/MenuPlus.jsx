@@ -4,7 +4,15 @@ import ScreenContainer from "../../../components/ScreenContainer";
 import MENUPLUS from "../../../assets/main/menuPlus.svg";
 import PLUS from "../../../assets/main/plus.svg";
 
+import { useNavigate } from "react-router-dom";
+
 export const MenuPlus = () => {
+    const navigate = useNavigate();
+
+    const handlePlusClick = () => {
+        navigate(``); // 내 밥상 추가 화면으로 이동
+    }
+
     return (
         <ScreenContainer>
             <div className = "menuPlusContainer">
@@ -15,7 +23,10 @@ export const MenuPlus = () => {
                 <div className = "imageContainer">
                     <img src = { MENUPLUS } alt = "내 밥상 추가 아이콘" />
                 </div>
-                <div className = "plusButton">
+                <div 
+                    className = "plusButton"
+                    onClick = { handlePlusClick }
+                >
                     <img src = { PLUS } alt = "내 밥상 추가 버튼" />
                     <p className = "buttonText">내 밥상 추가하기</p>
                 </div>
