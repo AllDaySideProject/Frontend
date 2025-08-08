@@ -1,4 +1,4 @@
-import { DeleteModal } from "./components/DeleteModal"
+import { DeleteModal } from "../../components/DeleteModal"
 import { Header } from "./components/Header"
 import { MenuBox } from "./components/MenuBox"
 import { MenuPlus } from "./components/MenuPlus"
