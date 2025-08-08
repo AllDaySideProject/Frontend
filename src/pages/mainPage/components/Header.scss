@@ -16,7 +16,8 @@
         height: 1.875rem;
     }
 
-    p {
+    .logoName {
+        font-family: Aggro-Light;
         color: #3E3E3E;
         text-align: center;
         font-size: 0.875rem;
@@ -32,8 +33,4 @@
         width: 1.5rem;
         height: 1.5rem;
     }
-}
-
-.logoName {
-    font-family: Aggro-Light;
 }
