@@ -9,7 +9,7 @@ export const HeaderArrow = () => {
   return (
     <ScreenContainer> 
       {/* <p onClick={handleClick}>{'<'}</p> */}
-      <div style={{paddingLeft: '1.5rem'}}>{'<'}</div>
+      <div style={{padding: '1rem 0 0 1rem'}}>{'<'}</div>
     </ScreenContainer>
   )
 }
