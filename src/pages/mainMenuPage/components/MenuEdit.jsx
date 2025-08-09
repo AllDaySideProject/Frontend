@@ -24,11 +24,11 @@ export const MenuEdit = ({ mode, setMode, items, selectedIds, toggleSelect }) =>
 
     return (
         <ScreenContainer>
-            <div className = "menuEditContainer">
+            <div className = { `menuEditContainer ${ isDelete ? "deleteMode" : "" }` }>
                 <p className = "mainTitle">
                     오늘은 어떤 메뉴로{ "\n" }밥상을 채워 볼까요?
                 </p>
-                <div className = "menuContainer">
+                <div className = "editContainer">
                     <p 
                         className = "deleteText"
                         onClick = { handleDeleteClick } // 삭제 모드 진입
@@ -50,7 +50,8 @@ export const MenuEdit = ({ mode, setMode, items, selectedIds, toggleSelect }) =>
                         ))}
                     </div>
                 </div>
-                {!isDelete && (
+
+                {!isDelete && ( // 삭제하기 클릭 시 표시 안 함
                 <>
                     <div className = "detailPrice">
                         <PriceText 

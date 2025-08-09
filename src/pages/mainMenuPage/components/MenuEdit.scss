@@ -5,6 +5,10 @@
     gap: 1.25rem;
 }
 
+.menuEditContainer.deleteMode {
+    padding-bottom: 2.5rem;
+}
+
 .mainTitle {
     color: #111111;
     font-family: Pretendard;
@@ -15,7 +19,7 @@
     white-space: pre-line;
 }
 
-.menuContainer {
+.editContainer {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -47,6 +51,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-bottom: 3rem;
 
     p {
         color: #111111;
