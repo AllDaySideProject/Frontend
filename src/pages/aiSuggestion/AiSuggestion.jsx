@@ -27,14 +27,16 @@ export const AiSuggestion = () => {
       <div className='AiSuggestionLayout'>
       <div className='AiSuggestionTitle'>오늘 이런 메뉴는 어떠세요?</div>
       <div className='AiSuggestionContent'>AI가 픽한 테마 별 오늘의 밥상을 만나보세요</div>
-      <div className='SuggestionTypeLayout'>
-        {dummyDataType.map((item, index)=>(
-          <SuggestionType 
-            key={index}
-            img={item.name}
-            name={item.name}
+      <div className='SuggestionTypeMarqueeWrapper'>
+        <div className='SuggestionTypeMarquee'>
+          {dummyDataType.concat(dummyDataType).map((item, index) => (
+            <SuggestionType
+              key={index}
+              img={item.img}
+              name={item.name}
             />
-        ))}
+          ))}
+        </div>
       </div>
       <div className='ManuItemCardLayout'>
         {dummyDataMenu.map((item, index)=>(

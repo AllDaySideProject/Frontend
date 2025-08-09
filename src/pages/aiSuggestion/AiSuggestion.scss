@@ -13,12 +13,29 @@
   font-size: 15px;
   padding-bottom: 0.5rem;
 }
-.SuggestionTypeLayout {
+// .SuggestionTypeLayout {
+//   display: flex;
+//   flex-direction: row;
+//   gap: 1rem; 
+//   justify-content: center; 
+//   align-items: center;
+// }
+
+.SuggestionTypeMarqueeWrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.SuggestionTypeMarquee {
   display: flex;
-  flex-direction: row;
-  gap: 1rem; 
-  justify-content: center; 
-  align-items: center;
+  gap: 1rem;
+  animation: marquee 10s linear infinite;
+  /* 카드가 오른쪽으로 흐르도록 */
+}
+
+@keyframes marquee {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
 }
 .ManuItemCardLayout{
   display: flex;
