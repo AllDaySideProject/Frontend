@@ -1,7 +1,7 @@
 import "./Modal.scss";
-import { ButtonComponent } from "./components/ButtonComponent";
+import { ButtonComponent } from "./ButtonComponent";
 
-export const DeleteModal = ({ modalText, leftButtonText, rightButtonText }) => {
+export const Modal = ({ modalText, leftButtonText, rightButtonText }) => {
     return (
         <div className = "modalContainer">
             <p className = "modalText">{ modalText }</p>
@@ -15,7 +15,7 @@ export const DeleteModal = ({ modalText, leftButtonText, rightButtonText }) => {
                 />
                 <ButtonComponent 
                     width = { '8.125rem' }
-                    bgColor = { '#8FB88B' }
+                    bgColor = { '#0EA64B' }
                     buttonText = { rightButtonText }
                     textSize = { '1rem' }
                     textColor = { '#FFFFFF' }
