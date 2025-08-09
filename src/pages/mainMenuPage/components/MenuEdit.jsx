@@ -1,7 +1,6 @@
 import "./MenuEdit.scss";
 
 import ScreenContainer from "../../../components/ScreenContainer";
-import { ButtonComponent } from "../../../components/ButtonComponent";
 import { MenuBox } from "./MenuBox";
 import { PriceText } from "./PriceText";
 

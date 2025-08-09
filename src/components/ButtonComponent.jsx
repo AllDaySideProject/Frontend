@@ -1,5 +1,4 @@
 import "./ButtonComponent.scss";
-import useNavigate from "react-router-dom";
 
 export const ButtonComponent = ({ width, bgColor, onClick, textSize, textColor, buttonText, disabled = false }) => {
     return (
