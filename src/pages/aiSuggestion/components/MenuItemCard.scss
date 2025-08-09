@@ -1,0 +1,35 @@
+.MenuItemCardLayout{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+.MenuItemCardLeft{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.MenuItemCardContent{
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem;
+}
+.MenuItemCardContent p{
+  margin : 0;
+}
+.MenuItemCardImg{
+  width: 59px;
+  height: 59px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid black;
+}
+.MenuItemCardName{
+  font-size: 17px;
+  font-weight: bold;
+}
+.MenuItemCardPrice{
+  font-size: 14px;
+  font-weight: lighter;
+}
