@@ -1,7 +1,7 @@
 import "./Modal.scss";
 import { ButtonComponent } from "./ButtonComponent";
 
-export const Modal = ({ modalText, leftButtonText, rightButtonText }) => {
+export const Modal = ({ modalText, leftButtonText, rightButtonText, onLeftClick }) => {
     return (
         <div className = "modalContainer">
             <p className = "modalText">{ modalText }</p>
@@ -12,6 +12,7 @@ export const Modal = ({ modalText, leftButtonText, rightButtonText }) => {
                     buttonText = { leftButtonText }
                     textSize = { '1rem' }
                     textColor = { '#000000' }
+                    onClick = { onLeftClick }
                 />
                 <ButtonComponent 
                     width = { '8.125rem' }

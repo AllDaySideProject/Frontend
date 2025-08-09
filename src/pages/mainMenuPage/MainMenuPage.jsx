@@ -53,6 +53,7 @@ export const MainMenuPage = () => {
                     <Modal 
                         modalText = "선택한 메뉴를 삭제하겠습니까?"
                         leftButtonText = "취소"
+                        onLeftClick = { () => setIsModalOpen(false) }
                         rightButtonText = "삭제하기"
                     />                    
                 </div>
