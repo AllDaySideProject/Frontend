@@ -1,22 +1,22 @@
-import "./DeleteModal.scss";
-import { ButtonComponent } from "./ButtonComponent";
+import "./Modal.scss";
+import { ButtonComponent } from "./components/ButtonComponent";
 
-export const DeleteModal = () => {
+export const DeleteModal = ({ modalText, leftButtonText, rightButtonText }) => {
     return (
         <div className = "modalContainer">
-            <p className = "modalText">선택하신 메뉴를 삭제하겠습니까?</p>
+            <p className = "modalText">{ modalText }</p>
             <div className = "buttonContainer">
                 <ButtonComponent 
                     width = { '8.125rem' }
                     bgColor = { '#FAFAFA' }
-                    buttonText = "취소"
+                    buttonText = { leftButtonText }
                     textSize = { '1rem' }
                     textColor = { '#000000' }
                 />
                 <ButtonComponent 
                     width = { '8.125rem' }
                     bgColor = { '#8FB88B' }
-                    buttonText = "삭제하기"
+                    buttonText = { rightButtonText }
                     textSize = { '1rem' }
                     textColor = { '#FFFFFF' }
                 />
