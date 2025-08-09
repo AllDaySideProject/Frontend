@@ -6,6 +6,16 @@ import { PriceText } from "./PriceText";
 
 export const MenuEdit = ({ mode, setMode, items, selectedIds, toggleSelect }) => {
     const isDelete = mode === "delete"; // 삭제 모드 여부
+
+    const fmt = (n) => n.toLocaleString("ko-KR"); // 숫자 12,345 형식
+
+    const subtotal = items.reduce((sum, it) => { // 총 상품 금액
+        return sum + (it.price * (it.count ?? 1)); 
+    }, 0);
+
+    const discount = 9000; // 할인 금액
+
+    const total = Math.max(subtotal - discount, 0); // 최종 결제 금액
     
     const handleDeleteClick = () => {
         setMode("delete"); // 삭제하기 버튼 클릭 시 delete 모드로 변경
@@ -28,6 +38,7 @@ export const MenuEdit = ({ mode, setMode, items, selectedIds, toggleSelect }) =>
                     <div className = "menuBoxList">
                         { items.map(m => (
                             <MenuBox
+                            key = { m.id }
                             mode = { mode }
                             menuName = { m.name }
                             storeName = { m.store }
@@ -45,20 +56,22 @@ export const MenuEdit = ({ mode, setMode, items, selectedIds, toggleSelect }) =>
                         <PriceText 
                             priceTitle = "상품 금액"
                             fontColor = { '#111111' }
-                            price = "30,000"
+                            price = { fmt(subtotal) }
                         />
                         <PriceText
                             tone = "discount"
                             priceTitle = "할인 금액"
                             fontColor = { '#DC2626' }
-                            price = "9,000"
+                            price = { fmt(discount) }
                         />
                     </div>
                     <div className = "finalPrice">
                         <p>총 구매 금액</p>
                         <div className = "priceInfo">
-                            <p className = "percentInfo">20%</p>
-                            <p>21,000원</p>
+                            <p className = "percentInfo">
+                                {subtotal > 0 ? Math.round((discount / subtotal) * 100) : 0}%
+                            </p>
+                            <p>{ fmt(total) }원</p>
                         </div>
                     </div>                
                 </>

@@ -6,18 +6,20 @@ import CHECKEDBOX from "../../../assets/main/checkedBox.svg";
 export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, menuName, storeName, count, price }) => {
     const isDelete = mode === "delete";
 
+    const fmt = (n) => Number(n).toLocaleString("ko-KR"); // 금액 12,345 형식으로
+
     if (isDelete) {
         return (
             <div className = "menuBoxContainer deleteMode">
                 <img 
-                    alt = "메뉴 아이콘"
+                    // alt = "메뉴 아이콘"
                     // src = { 추가 에정 }
                     className = "menuImage"
                 />
                 <div className = "menuContainer">
                     <div className = "infoBox">
                         <div className = "menuInfo">
-                            <p className = "priceText">{ price }원</p>
+                            <p className = "priceText">{ fmt(price) }원</p>
                             <p className = "section">l</p>
                             <div className = "priceInfo">
                                 <p>{ menuName } { count }개</p>
@@ -47,7 +49,7 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
     return (
         <div className = "menuBoxContainer normalMode">
             <img 
-                alt = "메뉴 아이콘"
+                // alt = "메뉴 아이콘"
                 className = "menuImage" 
             />
             <div className = "infoBox">
@@ -64,7 +66,7 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
                 </div>
                 <div className = "priceInfo">
                     <p>{ count }개</p>
-                    <p>{ price }원</p>
+                    <p>{ fmt(price) }원</p>
                 </div>
             </div>
         </div>

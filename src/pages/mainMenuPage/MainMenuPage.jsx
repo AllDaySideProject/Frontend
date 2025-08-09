@@ -7,8 +7,8 @@ export const MainMenuPage = () => {
     const [mode, setMode] = useState("normal"); // 모드 상태 추가
 
     const [items, setItems] = useState([
-        { id: 1, name: "진미채볶음", store: "희망식당", count: 1, price: "4,500" },
-        { id: 2, name: "멸치볶음", store: "우진이네 밥상", count: 1, price: "5,500" },
+        { id: 1, name: "진미채볶음", store: "희망식당", count: 1, price: 4500 },
+        { id: 2, name: "멸치볶음", store: "우진이네 밥상", count: 2, price: 5500 },
     ]);
 
     const [selectedIds, setSelectedIds] = useState(new Set()); // 삭제 모드에서 선택된 메뉴 id 저장
