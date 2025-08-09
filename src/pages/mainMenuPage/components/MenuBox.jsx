@@ -9,7 +9,11 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
     if (isDelete) {
         return (
             <div className = "menuBoxContainer deleteMode">
-                <img className = "menuImage" />
+                <img 
+                    alt = "메뉴 아이콘"
+                    // src = { 추가 에정 }
+                    className = "menuImage"
+                />
                 <div className = "menuContainer">
                     <div className = "infoBox">
                         <div className = "menuInfo">
@@ -21,6 +25,7 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
                         </div>    
                         <div className = "storeInfo">
                             <img 
+                                alt = "위치 아이콘"
                                 src = { LOCATION } 
                                 className = "locationImage"
                             />
@@ -41,12 +46,16 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
 
     return (
         <div className = "menuBoxContainer normalMode">
-            <img className = "menuImage" />
+            <img 
+                alt = "메뉴 아이콘"
+                className = "menuImage" 
+            />
             <div className = "infoBox">
                 <div className = "menuInfo">
                     <p className = "menuName">{ menuName }</p>
                     <div className = "storeInfo">
                         <img 
+                            alt = "위치 아이콘"
                             src = { LOCATION } 
                             className = "locationImage"
                         />
