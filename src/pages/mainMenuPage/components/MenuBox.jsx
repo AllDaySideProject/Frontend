@@ -1,6 +1,7 @@
 import "./MenuBox.scss";
 import LOCATION from "../../../assets/main/storeLocation.svg";
-import CHECKBOX from "../../../assets/main/checkbox.svg";
+import CHECKBOX from "../../../assets/main/checkBox.svg";
+import CHECKEDBOX from "../../../assets/main/checkedBox.svg";
 
 export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, menuName, storeName, count, price }) => {
     const isDelete = mode === "delete";
