@@ -28,8 +28,10 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
                         </div>    
                     </div>
                     <img 
-                        src = { CHECKBOX }
+                        src = { isSelected ? CHECKEDBOX : CHECKBOX } 
                         className = "checkBoxImage"
+                        alt = { isSelected ? "선택 완료" : "미선택" }
+                        onClick = { (e) => onToggleSelect?.() }
                     />       
                 </div> 
             </div>

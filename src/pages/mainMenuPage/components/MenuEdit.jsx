@@ -28,19 +28,15 @@ export const MenuEdit = ({ mode, setMode, items, selectedIds, toggleSelect }) =>
                     </p>    
                     <div className = "menuBoxList">
                         { items.map(m => (
-                            <div
-                                key = { m.id }
-                                style = {{ cursor: isDelete ? "pointer" : "default" }}
-                                onClick = { () => isDelete && toggleSelect(m.id) } // 삭제 모드에서만 카드 전체 클릭으로 삭제 토글
-                            >
-                                <MenuBox
-                                mode = { mode }
-                                menuName = { m.name }
-                                storeName = { m.store }
-                                count = { m.count }
-                                price = { m.price }
-                                />
-                            </div>
+                            <MenuBox
+                            mode = { mode }
+                            menuName = { m.name }
+                            storeName = { m.store }
+                            count = { m.count }
+                            price = { m.price }
+                            isSelected = { selectedIds.has(m.id) }
+                            onToggleSelect = { () => toggleSelect(m.id) }
+                            />
                         ))}
                     </div>
                 </div>
