@@ -31,6 +31,14 @@ export const MainMenuPage = () => {
         console.log("삭제 모달 열기");
     };
 
+    const onRightBtnClick = () => { // 삭제하기 버튼 클릭
+        setItems(prevItems => prevItems.filter(item => !selectedIds.has(item.id))); // 선택되지 않은 메뉴 정보 저장
+        setSelectedIds(new Set()); // 선택 상태 초기화
+        setMode("normal"); // 모드 초기화
+        setIsModalOpen(false); // 모달 닫기
+        console.log("선택한 메뉴 삭제 완료");
+    }
+
     return (
         <>
             <Header />  
@@ -55,6 +63,7 @@ export const MainMenuPage = () => {
                         leftButtonText = "취소"
                         onLeftClick = { () => setIsModalOpen(false) }
                         rightButtonText = "삭제하기"
+                        onRightClick = { onRightBtnClick }
                     />                    
                 </div>
             )}
