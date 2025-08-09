@@ -5,8 +5,10 @@ import { ButtonComponent } from "../../../components/ButtonComponent";
 import { MenuBox } from "./MenuBox";
 import { PriceText } from "./PriceText";
 
-export const MenuEdit = () => {
+export const MenuEdit = ({ mode, setMode }) => {
     const handleDeleteClick = () => {
+        setMode("delete"); // 삭제하기 버튼 클릭 시 delete 모드로 변경
+        console.log("mode: ", mode);
         console.log("삭제하기 버튼 클릭");
     }
 
