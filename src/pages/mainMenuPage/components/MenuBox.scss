@@ -16,14 +16,14 @@
     }
 }
 
-.infoBox {
+.normalMode .infoBox {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex: 1;
 }
 
-.menuInfo {
+.normalMode .menuInfo {
     display: flex;
     flex-direction: column;
     
@@ -35,28 +35,9 @@
         line-height: 140%;
         letter-spacing: -0.025rem;
     }
-
-    .storeInfo {
-        display: flex;
-        gap: 0.19rem;
-
-        img {
-            width: 1rem;
-            height: 1rem;
-        }
-
-        p {
-            color: #B0B0B0;
-            font-family: Pretendard;
-            font-size: 0.75rem;
-            font-weight: 500;
-            line-height: 140%;
-            letter-spacing: -0.01875rem;
-        }
-    }
 }
 
-.priceInfo {
+.normalMode .priceInfo {
     display: flex;
     gap: 0.25rem;
 
@@ -67,5 +48,80 @@
         font-weight: 700;
         line-height: 140%;
         letter-spacing: -0.03125rem;        
+    }
+}
+
+
+.storeInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.19rem;
+
+    .locaionImage {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    p {
+        color: #B0B0B0;
+        font-family: Pretendard;
+        font-size: 0.75rem;
+        font-weight: 500;
+        line-height: 140%;
+        letter-spacing: -0.01875rem;
+    }
+}
+
+
+
+.deleteMode .menuContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+
+    .infoBox {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .checkBoxImage {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+.deleteMode .menuInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+
+    .priceText {
+        color: #DC2626;
+        font-family: Pretendard;
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 140%;
+        letter-spacing: -0.03rem;
+    }
+
+    .section {
+        color: #7A7A7A;
+        font-family: Pretendard;
+        font-size: 0.75rem;
+        font-weight: 600;
+        line-height: 140%;
+        letter-spacing: -0.01875rem;
+    }
+
+    .priceInfo {
+        color: #3E3E3E;
+        font-family: Pretendard;
+        font-size: 0.75rem;
+        font-weight: 400;
+        line-height: 140%;
+        letter-spacing: -0.01875rem;
     }
 }
