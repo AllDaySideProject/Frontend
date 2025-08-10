@@ -2,6 +2,7 @@ import "./Header.scss";
 
 import LOGO from "../../../assets/logo.svg";
 import LOCATION from "../../../assets/main/location.svg";
+import NOLOCATION from "../../../assets/main/noLocation.svg"
 
 import ScreenContainer from "../../../components/ScreenContainer";
 
