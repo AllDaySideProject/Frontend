@@ -1,7 +1,15 @@
+import { useEffect } from "react";
+import { useLocationPermission } from "../../components/LocationPermissionContext"
 import { Header } from "./components/Header"
 import { MenuPlus } from "./components/MenuPlus"
 
 export const MainPage = () => {
+    const { decided, requestLocation} = useLocationPermission();
+
+    useEffect(() => {
+        if (!decided) requestLocation(); // 사용자가 결정하지 않았을 때 권한 요청
+    }, [decided, requestLocation]);
+
     return (
         <>
             <Header />
