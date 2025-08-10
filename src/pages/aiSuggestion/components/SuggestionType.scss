@@ -1,0 +1,17 @@
+.SuggestionTypeCard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 59px;
+  height: 87px;
+}
+.SuggestionTypeCardImg{
+    width: 59px;
+    height: 59px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid black;
+}
+.SuggestionTypeCardContent{
+  font-size: 12px;
+}
