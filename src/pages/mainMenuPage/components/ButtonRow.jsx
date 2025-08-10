@@ -25,7 +25,6 @@ export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDelet
             if (selectedCount === 0) return; // 메뉴 선택되지 않았을 경우
             onDeleteClick?.();
             console.log("선택한 메뉴 삭제")
-            setMode("normal");
         } else {
             navigate(``);
             console.log("픽업 예약으로 이동"); 
