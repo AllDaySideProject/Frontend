@@ -20,6 +20,7 @@ export const Header = () => {
                 <div className = "HeaderRight">
                     <img 
                         src = { agreed ? LOCATION_ON : LOCATION_OFF } 
+                        onClick = { requestLocation } // 아이콘 클릭 시 재요청
                         alt = { agreed ? "위치 동의" : "위치 미동의" }
                     />
                     <p>{ agreed ? address : "" }</p>
