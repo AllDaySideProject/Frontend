@@ -14,7 +14,6 @@ export const LocationPermissionProvider = ({ children }) => {
 
     const fetchAddressKakao = async (lat, lng) => { // 카카오 사용 좌표 > 주소 역지오코딩
         const REST_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
-        console.log("REST_KEY:", REST_KEY);
 
         const url = `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lng}&y=${lat}`; // 경도: x = lng, 위도: y = lat
 
@@ -44,6 +43,8 @@ export const LocationPermissionProvider = ({ children }) => {
                 setAgreed(true); 
                 setDecided(true); 
 
+                console.log("위치 정보 동의 상태: 허용");
+
                 const { latitude, longitude } = pos.coords;
                 const addr = await fetchAddressKakao(latitude, longitude);
 
@@ -53,6 +54,8 @@ export const LocationPermissionProvider = ({ children }) => {
                 setAgreed(false); 
                 setDecided(true);
                 setAddress("");
+
+                console.log("위치 정보 동의 상태: 거부");
             },
             { timeout: 8000 }
         );
