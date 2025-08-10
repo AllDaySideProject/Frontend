@@ -5,7 +5,7 @@ const LocationPermissionCtx = createContext(null); // 전역 상태
 export const LocationPermissionProvider = ({ children }) => {
     const [agreed, setAgreed] = useState(() => localStorage.getItem("localAgreed") === "true"); // 허용 여부
     const [decided, setDecided] = useState(() => localStorage.getItem("localDecided") === "true"); // 결정 여부
-    const [address, setAdress] = useState(() => localStorage.getItem("localAddress") || ""); // 한글 주소 문자열
+    const [address, setAddress] = useState(() => localStorage.getItem("localAddress") || ""); // 한글 주소 문자열
 
     // 새로고침 시에도 유지
     useEffect(() => localStorage.setItem("localAgreed", String(agreed)), [agreed]);
@@ -17,7 +17,7 @@ export const LocationPermissionProvider = ({ children }) => {
         const url = `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lng}&y=${lat}`; // 경도: x = lng, 위도: y = lat
 
         const res = await fetch(url, {
-            headers: { Authorization: `KakaoAK${REST_KEY}`} // 카카오 API 인증 방식
+            headers: { Authorization: `KakaoAK ${REST_KEY}`} // 카카오 API 인증 방식
         });
 
         if (!res.ok) return ""; // 호출 실패 시 빈 문자열 반환
@@ -33,7 +33,7 @@ export const LocationPermissionProvider = ({ children }) => {
         if (!("geolocation" in navigator)) {
             setAgreed(false);
             setDecided(true);
-            setAdress("");
+            setAddress("");
             return;
         }
 
@@ -45,12 +45,12 @@ export const LocationPermissionProvider = ({ children }) => {
                 const { latitude, longitude } = pos.coords;
                 const addr = await fetchAddressKakao(latitude, longitude);
 
-                setAdress(addr || "");
+                setAddress(addr || "");
             }, 
             () => { // 거부 또는 오류
                 setAgreed(false); 
                 setDecided(true);
-                setAdress("");
+                setAddress("");
             },
             { timeout: 8000 }
         );
