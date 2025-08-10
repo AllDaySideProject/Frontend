@@ -22,6 +22,7 @@ export const Header = () => {
                         src = { agreed ? LOCATION_ON : LOCATION_OFF } 
                         alt = { agreed ? "위치 동의" : "위치 미동의" }
                     />
+                    <p>{ agreed ? address : "" }</p>
                 </div>                
             </div>
         </ScreenContainer>
