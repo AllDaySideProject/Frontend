@@ -1,12 +1,15 @@
 import "./Header.scss";
 
 import LOGO from "../../../assets/logo.svg";
-import LOCATION from "../../../assets/main/location.svg";
+import LOCATION_ON from "../../../assets/main/location.svg";
 import LOCATION_OFF from "../../../assets/main/offLocation.svg"
 
 import ScreenContainer from "../../../components/ScreenContainer";
+import { useLocationPermission } from "../../../components/LocationPermissionContext";
 
 export const Header = () => {
+    const { agreed, requestLocation } = useLocationPermission();
+
     return (
         <ScreenContainer>
             <div className = "HeaderContainer">
@@ -15,7 +18,10 @@ export const Header = () => {
                     <p className = "logoName">잔반플러팅</p>
                 </div>
                 <div className = "HeaderRight">
-                    <img src = { LOCATION } alt = "위치 정보 활용 동의" />
+                    <img 
+                        src = { agreed ? LOCATION_ON : LOCATION_OFF } 
+                        alt = { agreed ? "위치 동의" : "위치 미동의" }
+                    />
                 </div>                
             </div>
         </ScreenContainer>
