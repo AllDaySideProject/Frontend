@@ -8,7 +8,7 @@ import ScreenContainer from "../../../components/ScreenContainer";
 import { useLocationPermission } from "../../../components/LocationPermissionContext";
 
 export const Header = () => {
-    const { agreed, requestLocation } = useLocationPermission();
+    const { agreed, address, requestLocation } = useLocationPermission();
 
     return (
         <ScreenContainer>
