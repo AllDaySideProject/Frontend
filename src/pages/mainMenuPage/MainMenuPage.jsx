@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../mainPage/components/Header";
 import { ButtonRow } from "./components/ButtonRow";
 import { MenuEdit } from "./components/MenuEdit";
@@ -15,8 +15,12 @@ export const MainMenuPage = () => {
 
     const [selectedIds, setSelectedIds] = useState(new Set()); // 삭제 모드에서 선택된 메뉴 id 저장
 
+    useEffect(() => {
+        if (mode !== "delete") setSelectedIds(new Set()); // 모드 변경 시 선택 초기화
+    }, [mode]);
+
     const toggleSelect = (id) => {
-        if (mode !== "delete") return;
+        if (mode !== "delete") return; // 삭제 모드에서만 선택 가능
         setSelectedIds(prev => {
             const next = new Set(prev);
             next.has(id) ? next.delete(id) : next.add(id);

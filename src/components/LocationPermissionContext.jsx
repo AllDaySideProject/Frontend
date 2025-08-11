@@ -10,24 +10,36 @@ export const LocationPermissionProvider = ({ children }) => {
     // 새로고침 시에도 유지
     useEffect(() => localStorage.setItem("localAgreed", String(agreed)), [agreed]);
     useEffect(() => localStorage.setItem("localDecided", String(decided)), [decided]);
-    useEffect(() => localStorage.setItem("localAdress", address || ""), [address]);
+    useEffect(() => localStorage.setItem("localAddress", address || ""), [address]);
 
     const fetchAddressKakao = async (lat, lng) => { // 카카오 사용 좌표 > 주소 역지오코딩
         const REST_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
+        if (!REST_KEY) {
+            console.warn("REST API KEY 누락");
+            return "";
+        };
 
         const url = `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lng}&y=${lat}`; // 경도: x = lng, 위도: y = lat
 
-        const res = await fetch(url, {
-            headers: { Authorization: `KakaoAK ${REST_KEY}`} // 카카오 API 인증 방식
-        });
+        try {
+            const res = await fetch(url, {
+                headers: { Authorization: `KakaoAK ${REST_KEY}`} // 카카오 API 인증 방식
+            });
 
-        if (!res.ok) return ""; // 호출 실패 시 빈 문자열 반환
+            if (!res.ok) {
+                console.warn("REST API KEY 실패");
+                return ""; // 호출 실패 시 빈 문자열 반환
+            }
 
-        const json = await res.json();
-        const fullAddress = json.documents?.[0]?.address?.address_name || ""; // 전체 지번 주소
+            const json = await res.json();
+            const fullAddress = json.documents?.[0]?.address?.address_name || ""; // 전체 지번 주소
 
-        const parts = fullAddress.split(" "); // 시, 구 공백으로 분리
-        return parts.length >= 2 ? `${ parts[0] } ${ parts[1] }` : fullAddress;
+            const parts = fullAddress.split(" "); // 시, 구 공백으로 분리
+            return parts.length >= 2 ? `${ parts[0] } ${ parts[1] }` : fullAddress;
+        } catch (err) {
+            console.log("예외 에러: ", err);
+            return "";
+        };
     }
 
     const requestLocation = useCallback(() => { // 위치 권한 요청
@@ -59,11 +71,11 @@ export const LocationPermissionProvider = ({ children }) => {
             },
             { timeout: 8000 }
         );
-    }, []);
+    }, [fetchAddressKakao]);
 
-    useEffect(() => {
-        requestLocation();
-    }, [agreed, requestLocation]);
+    // useEffect(() => {
+    //     requestLocation();
+    // }, [agreed, requestLocation]);
 
     return (
         <LocationPermissionCtx.Provider value = {{ agreed, decided, address, requestLocation }}>
@@ -72,4 +84,8 @@ export const LocationPermissionProvider = ({ children }) => {
     );
 };
 
-export const useLocationPermission = () => useContext(LocationPermissionCtx);
+export const useLocationPermission = () => {
+    const ctx = useContext(LocationPermissionCtx);
+    if (!ctx) throw new Error("프로바이더 누락");
+    return ctx;
+}

@@ -6,8 +6,8 @@ import { MenuPlus } from "./components/MenuPlus"
 export const MainPage = () => {
     const { decided, requestLocation} = useLocationPermission();
 
-    useEffect(() => {
-        if (!decided) requestLocation(); // 사용자가 결정하지 않았을 때 권한 요청
+    useEffect(() => { // 최초 접속 또는 사용자가 결정하지 않았을 때 권한 요청
+        if (!decided) requestLocation();
     }, [decided, requestLocation]);
 
     return (
