@@ -2,12 +2,11 @@ import "./ScreenContainer.scss";
 
 const ScreenContainer = ({ children }) => {
     return (
-        <div className="screenContainer">
-            <div className = "screenContent">
-                { children }                
-            </div>
-        </div>
+
+    <div className="screenContainer">
+      <div className="screenContent">{children}</div>
+    </div>
     )
 }
 
-export default ScreenContainer;
+export default ScreenContainer; 

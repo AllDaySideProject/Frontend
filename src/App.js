@@ -15,7 +15,3 @@ function App() {
         </Routes>    
       </BrowserRouter>      
     </LocationPermissionProvider>
-  );
-}
-
-export default App;

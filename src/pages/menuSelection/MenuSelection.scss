@@ -1,0 +1,10 @@
+.MenuSelectionLayout {
+  padding: 1rem;
+}
+
+.MenuCard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);//3개씩 배치
+  gap: 12px;
+  justify-content: center;
+}
