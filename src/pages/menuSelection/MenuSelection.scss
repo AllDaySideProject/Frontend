@@ -2,9 +2,13 @@
   padding: 1rem;
 }
 
+.MenuSelectionTitle{
+  font-size: 24px;
+  font-weight: bold ;
+}
 .MenuCard {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);//3개씩 배치
+  display: flex;
+  flex-direction: column;
   gap: 12px;
   justify-content: center;
 }

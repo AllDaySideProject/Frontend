@@ -1,32 +1,35 @@
-.MenuWrapper {
+.MenuLayout{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+.MenuLeft{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.MenuContent{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: #f2f2f2;
-  border-radius: 8px;
-  padding: 8px 0 0 0;
-  text-align: center;
-  width: 91px;
-  height: 68px;
-  border: 2px solid #ffffff;
-  transition: transform 0.2s ease;
-  .img{  
-    width: 39px;
-    height: 19px;
-    background-color: red;
-  } 
-  .p{
-    font-size: 10px;
-    margin:0;
-  }
-  //transform 속성애 대해 0.2초 동안 ease 형식으로 커지겠다. - 부드럽게
-  &:hover {
-    transform: scale(1.1); 
-    // 10% 확대
-  }
- 
+  padding-left: 1rem;
 }
-.MenuWrapper.selected{//선택한 경우
-    border: 2px solid #000000;
+.MenuContent p{
+  margin : 0;
 }
-
+.MenuImg{
+  width: 59px;
+  height: 59px;
+  border-radius: 20%;
+  object-fit: cover;
+  border: 1px solid black;
+}
+.MenuName{
+  font-size: 17px;
+  font-weight: bold;
+}
+.MenuPrice{
+  font-size: 14px;
+  font-weight: lighter;
+}

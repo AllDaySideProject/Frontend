@@ -1,11 +1,17 @@
 import React from 'react'
 import './Menu.scss'
-export const Menu = ({key, img, name, isSelected, onClick}) => {
-  
+import { AddButton } from './AddButton'
+export const Menu = ({img, name, price}) => {
   return (
-     <div className={`MenuWrapper ${isSelected ? 'selected': ''}`} onClick={onClick}>
-      <img src={img} />
-      <p>{name}</p>
+    <div className='MenuLayout'>
+      <div className='MenuLeft'>
+        <img className='MenuImg' src={img}/>
+        <div className='MenuContent'>
+          <p className='MenuName'>{name}</p>
+          <p className='MenuPrice'>{price}</p>
+        </div>
+      </div>
+      <AddButton/>
     </div>
   )
 }
