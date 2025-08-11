@@ -3,7 +3,9 @@ import "./ScreenContainer.scss";
 const ScreenContainer = ({ children }) => {
     return (
         <div className="screenContainer">
-            { children }
+            <div className = "screenContent">
+                { children }                
+            </div>
         </div>
     )
 }

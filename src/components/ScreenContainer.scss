@@ -1,4 +1,8 @@
 .screenContainer {
+  background-color: #FFFFFF;
+}
+
+.screenContent {
   display: flex;
   flex-direction: column;
 
@@ -9,4 +13,6 @@
   padding-right: 2rem;
 
   margin: 0 auto;
+
+  background-color: #FAFAFA;
 }
