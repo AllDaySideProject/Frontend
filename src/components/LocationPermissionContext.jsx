@@ -61,6 +61,10 @@ export const LocationPermissionProvider = ({ children }) => {
         );
     }, []);
 
+    useEffect(() => {
+        requestLocation();
+    }, [agreed, requestLocation]);
+
     return (
         <LocationPermissionCtx.Provider value = {{ agreed, decided, address, requestLocation }}>
             { children }
