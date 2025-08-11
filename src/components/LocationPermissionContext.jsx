@@ -40,7 +40,7 @@ export const LocationPermissionProvider = ({ children }) => {
             console.log("예외 에러: ", err);
             return "";
         };
-    }
+    };
 
     const requestLocation = useCallback(() => { // 위치 권한 요청
         if (!("geolocation" in navigator)) {
@@ -73,9 +73,9 @@ export const LocationPermissionProvider = ({ children }) => {
         );
     }, [fetchAddressKakao]);
 
-    // useEffect(() => {
-    //     requestLocation();
-    // }, [agreed, requestLocation]);
+    useEffect(() => {
+        requestLocation();
+    }, [agreed, requestLocation]);
 
     return (
         <LocationPermissionCtx.Provider value = {{ agreed, decided, address, requestLocation }}>
