@@ -1,0 +1,40 @@
+.modalOverlay {
+  position: fixed; // 모달 위치 고정
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.40);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; // 가장 위에 배치
+}
+
+.modalContainer {
+    display: flex;
+    flex-direction: column;
+    width: 17.5rem;
+    padding: 1.5rem 1.4375rem;
+    border-radius: 1.25rem;
+    background: #FAFAFA;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.modalText {
+    color: #111111;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: -0.03125rem;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 1.25rem;
+}
