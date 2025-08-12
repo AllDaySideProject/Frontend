@@ -4,7 +4,7 @@ import "./HeaderToggle.scss";
 export default function HeaderToggle({
   options,
   value,
-  onChange = () => {},
+  onChange = () => {},      
   name = "header-toggle",
 }) {
   return (
