@@ -5,6 +5,8 @@ import { ButtonComponent } from "../../../components/ButtonComponent";
 import { useState } from "react";
 
 export const Code = () => {
+    const code = "JF0527";
+    
     const [pressed, setPressed] = useState(false);
 
     const handleEndCick = () => {
@@ -14,7 +16,7 @@ export const Code = () => {
     return (
         <ScreenContainer>
             <div className = "codeContainer">
-                <p className = "codeText">JF0527</p>
+                <p className = "codeText">{ code }</p>
                 <p className = "description">
                     매장에 방문 후 계산대(카운터) 또는 지정된 픽업 장소에서<br />
                     직원의 안내에 따라 위의 픽업 코드를 보여 주시면<br />
