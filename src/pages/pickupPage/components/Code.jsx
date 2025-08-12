@@ -21,7 +21,7 @@ export const Code = () => {
 
     const onEndBtnClick = () => {
         setIsModalOpen(false);
-        // navigate(``);
+        navigate(`/pickup/complete`);
         console.log("픽업 완료 화면 이동");
     }
 
