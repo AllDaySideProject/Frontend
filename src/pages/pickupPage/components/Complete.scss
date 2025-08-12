@@ -1,0 +1,58 @@
+.completeContainer {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+
+.completeContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    .completeText {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .puTitle {
+            color: #111111;
+            text-align: center;
+            font-family: Pretendard;
+            font-size: 1.75rem;
+            font-weight: 600;
+            line-height: 140%;
+            letter-spacing: -0.04375rem;
+        }
+
+        .puDescription {
+            color: #848484;
+            text-align: center;
+            font-family: Pretendard;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            line-height: 140%;
+            letter-spacing: -0.02031rem;
+        }
+    }
+
+    .leftTime {
+        display: flex;
+        gap: 0.25em;
+        
+        p {
+            color: #B0B0B0;
+            text-align: center;
+            font-family: Pretendard;
+            font-size: 0.75rem;
+            font-weight: 400;
+            line-height: 140%;
+            letter-spacing: -0.01875rem;
+        }
+    }
+
+}
