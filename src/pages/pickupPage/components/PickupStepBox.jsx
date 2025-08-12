@@ -1,10 +1,11 @@
 import "./PickupStepBox.scss";
 
-import ScreenContainer from "../../../components/ScreenContainer";
-
-export const PickupStepBox = ({ stepText }) => {
+export const PickupStepBox = ({ stepText, active, onClick }) => {
     return (
-        <div className = "stepContainer">
+        <div 
+            className = { `stepContainer ${ active ? "active" : "" }` }
+            onClick = { onClick }
+        >
             <p>{ stepText }</p>
         </div>
     )

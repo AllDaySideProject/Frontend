@@ -8,7 +8,12 @@ import STEP from "../../../assets/pickup/step.svg";
 import PICKUP_GN from "../../../assets/pickup/pickup-green.svg";
 import PICKUP_GY from "../../../assets/pickup/pickup-grey.svg";
 
-export const PickupIntro = () => {
+export const PickupIntro = ({ view }) => {
+    const isLocation = view === "location";
+    
+    const checkIcon = isLocation ? CHECK_GN : CHECK_GY;
+    const pickupIcon = isLocation ? PICKUP_GY : PICKUP_GN;
+    
     return (
         <ScreenContainer>
             <div className = "pickupIntroContainer">
@@ -18,12 +23,12 @@ export const PickupIntro = () => {
                 </div>
                 <div className = "pickupStep">
                     <div className = "stepBox">
-                        <img src = { CHECK_GN } />
+                        <img src = { checkIcon } />
                         <p>예약</p>
                     </div>
                     <img src = { STEP } />
                     <div className = "stepBox">
-                        <img src = { PICKUP_GY } />
+                        <img src = { pickupIcon } />
                         <p>픽업</p>
                     </div>
                 </div>
