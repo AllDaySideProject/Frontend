@@ -1,6 +1,11 @@
+import "./HeaderArrow.scss";
+
 import React from 'react'
 import ScreenContainer from './ScreenContainer'
 import { useNavigate } from 'react-router-dom'
+
+import BACK from "../assets/back.svg";
+
 export const HeaderArrow = () => {
   // const navigate=useNavigate();
   // const handleClick=()=>{
@@ -9,7 +14,9 @@ export const HeaderArrow = () => {
   return (
     <ScreenContainer> 
       {/* <p onClick={handleClick}>{'<'}</p> */}
-      <div style={{padding: '1rem 0 0 1rem'}}>{'<'}</div>
+      <div className = "arrowContainer">
+        <img src = { BACK } />
+      </div>
     </ScreenContainer>
   )
 }
