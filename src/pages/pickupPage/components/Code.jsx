@@ -2,8 +2,15 @@ import "./Code.scss";
 
 import ScreenContainer from "../../../components/ScreenContainer"
 import { ButtonComponent } from "../../../components/ButtonComponent";
+import { useState } from "react";
 
 export const Code = () => {
+    const [pressed, setPressed] = useState(false);
+
+    const handleEndCick = () => {
+        setPressed(prev => !prev);
+    }
+
     return (
         <ScreenContainer>
             <div className = "codeContainer">
@@ -16,9 +23,10 @@ export const Code = () => {
             </div>
             <ButtonComponent 
                 buttonText = "픽업 완료"
-                bgColor = { '#FAFAFA' }
+                bgColor = { pressed ? '#0EA64B' : '#FAFAFA' }
                 bdColor = { '#0EA64B' }
-                textColor = { '#0EA64B' }
+                textColor = { pressed ? '#FAFAFA' : '#0EA64B' }
+                onClick = { handleEndCick }
             />
         </ScreenContainer>
     )
