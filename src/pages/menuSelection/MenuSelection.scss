@@ -1,14 +1,15 @@
-.MenuSelectionLayout {
-  padding: 1rem;
-}
+
 
 .MenuSelectionTitle{
   font-size: 24px;
   font-weight: bold ;
+  padding-bottom: 20px;
 }
+
 .MenuCard {
   display: flex;
   flex-direction: column;
   gap: 12px;
   justify-content: center;
+  padding-bottom: 120px; /* 완료 버튼 높이만큼 하단 여백 추가 */
 }
