@@ -24,7 +24,7 @@ export const Header = () => {
                         onClick = { requestLocation } // 아이콘 클릭 시 재요청
                         alt = { agreed ? "위치 동의" : "위치 미동의" }
                     />
-                    <p>{ agreed ? "서울 성북구" : "" }</p>
+                    <p>{ agreed ? address : "" }</p>
                 </div>                
             </div>
         </ScreenContainer>
