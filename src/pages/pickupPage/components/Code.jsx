@@ -3,14 +3,26 @@ import "./Code.scss";
 import ScreenContainer from "../../../components/ScreenContainer"
 import { ButtonComponent } from "../../../components/ButtonComponent";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Modal } from "../../../components/Modal";
 
 export const Code = () => {
     const code = "JF0527";
-    
+
+    const navigate = useNavigate();
+
     const [pressed, setPressed] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleEndCick = () => {
         setPressed(prev => !prev);
+        setIsModalOpen(true); // 완료 버튼 누를 때 모달 열기
+    }
+
+    const onEndBtnClick = () => {
+        setIsModalOpen(false);
+        // navigate(``);
+        console.log("픽업 완료 화면 이동");
     }
 
     return (
@@ -30,6 +42,19 @@ export const Code = () => {
                 textColor = { pressed ? '#FAFAFA' : '#0EA64B' }
                 onClick = { handleEndCick }
             />
+
+            { isModalOpen && (
+                <div className = "modalOverlay">
+                    <Modal 
+                        modalText = "픽업을 완료하셨나요?"
+                        leftButtonText = "취소"
+                        onLeftClick = { () => setIsModalOpen(false) }
+                        rightButtonText = "확인"
+                        onRightClick = { onEndBtnClick }
+                    />
+                </div>
+            )}
+
         </ScreenContainer>
     )
 }
