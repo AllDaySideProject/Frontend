@@ -1,13 +1,14 @@
 import "./ButtonComponent.scss";
 
-export const ButtonComponent = ({ width, bgColor, onClick, textSize, textColor, buttonText, disabled = false }) => {
+export const ButtonComponent = ({ width, bgColor, bdColor, onClick, textSize, textColor, buttonText, disabled = false }) => {
     return (
         <div 
             className = "buttonBox"
             style = {{ 
                 width: width,
                 backgroundColor: disabled ? "#B0B0B0" : bgColor,
-                pointerEvents: disabled ? "none" : "auto"
+                pointerEvents: disabled ? "none" : "auto",
+                borderColor: disabled ? "#D9D9D9" : bdColor
             }}
             onClick = { disabled ? undefined : onClick } // 버튼 비활성화 시 onClick: undefined
         >
