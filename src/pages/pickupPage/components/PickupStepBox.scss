@@ -9,12 +9,20 @@
     flex-shrink: 0;
 
     p {
-        color: #0EA64B;
+        color: #B0B0B0;
         text-align: center;
         font-family: Pretendard;
         font-size: 1.125rem;
         font-weight: 600;
         line-height: 140%;
         letter-spacing: -0.02813rem;
+    }
+
+    &.active {
+        border-bottom: 0.2rem solid #0EA64B; 
+
+        p {
+            color: #0EA64B;
+        }
     }
 }
