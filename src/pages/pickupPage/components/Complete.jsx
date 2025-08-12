@@ -4,8 +4,22 @@ import ScreenContainer from "../../../components/ScreenContainer";
 
 import PICKUP from "../../../assets/pickup/pickupComplete.svg";
 import TIME from "../../../assets/pickup/second.svg";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Complete = () => {
+    const [sec, setSec] = useState(2);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const t = setInterval(() => setSec(s => s - 1), 1000);
+        return () => clearInterval(t);
+    }, []);
+
+    useEffect(() => {
+        if (sec <= 0) navigate(`/tips`);
+    })
+
     return (
         <ScreenContainer>
             <div className = "completeContainer">
@@ -20,7 +34,7 @@ export const Complete = () => {
                     </div>
                     <div className = "leftTime">
                         <img src = { TIME } />
-                        <p>1초 뒤 이동</p>
+                        <p>{ sec }초 뒤 이동</p>
                     </div>
                 </div>
             </div>
