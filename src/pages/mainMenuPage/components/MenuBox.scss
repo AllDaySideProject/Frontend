@@ -1,7 +1,9 @@
 .menuBoxContainer {
     display: flex;
-    width: 17.88rem;
-    padding: 0.75rem 1.25rem;
+    justify-content: space-between;
+    width: 18.88rem;
+    height: 3.43rem;
+    padding: 1.4rem 0.75rem;
     align-items: center;
     gap: 0.75rem;
     border-radius: 0.44rem;
@@ -16,53 +18,24 @@
     }
 }
 
-.normalMode .infoBox {
+.menuBoxLeft {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+}
+
+.infoBox {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex: 1;
 }
 
-.normalMode .menuInfo {
+.menuInfo {
     display: flex;
     flex-direction: column;
-    
-    .menuName {
-        color: #111111;
-        font-family: Pretendard;
-        font-size: 1rem;
-        font-weight: 600;
-        line-height: 140%;
-        letter-spacing: -0.025rem;
-    }
-}
 
-.normalMode .priceInfo {
-    display: flex;
-    gap: 0.25rem;
-
-    p {
-        color: #DC2626;
-        font-family: Pretendard;
-        font-size: 1.25rem;
-        font-weight: 700;
-        line-height: 140%;
-        letter-spacing: -0.03125rem;        
-    }
-}
-
-
-.storeInfo {
-    display: flex;
-    align-items: center;
-    gap: 0.19rem;
-
-    .locaionImage {
-        width: 1rem;
-        height: 1rem;
-    }
-
-    p {
+    .storeName {
         color: #B0B0B0;
         font-family: Pretendard;
         font-size: 0.75rem;
@@ -70,58 +43,83 @@
         line-height: 140%;
         letter-spacing: -0.01875rem;
     }
-}
-
-
-
-.deleteMode .menuContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex: 1;
-
-    .infoBox {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .checkBoxImage {
-        width: 1.5rem;
-        height: 1.5rem;
-    }
-}
-
-.deleteMode .menuInfo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-
-    .priceText {
-        color: #DC2626;
+    
+    .menuName {
+        color: #111111;
         font-family: Pretendard;
-        font-size: 1.25rem;
+        font-size: 0.875rem;
         font-weight: 600;
         line-height: 140%;
-        letter-spacing: -0.03rem;
+        letter-spacing: -0.02188rem;
     }
 
-    .section {
-        color: #7A7A7A;
-        font-family: Pretendard;
-        font-size: 0.75rem;
-        font-weight: 600;
-        line-height: 140%;
-        letter-spacing: -0.01875rem;
-    }
-
-    .priceInfo {
-        color: #3E3E3E;
+    .menuCount {
+        color: #848484;
         font-family: Pretendard;
         font-size: 0.75rem;
         font-weight: 400;
         line-height: 140%;
         letter-spacing: -0.01875rem;
+    }
+}
+
+.menuBoxRight {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    .originText {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+
+        .originalPrice {
+            color: #B0B0B0;
+            text-align: right;
+            font-family: Pretendard;
+            font-size: 0.75rem;
+            font-weight: 400;
+            line-height: 140%;
+            letter-spacing: -0.01875rem;
+            text-decoration-line: line-through;
+        }
+
+        .originWon {
+            color: #B0B0B0;
+            font-family: Pretendard;
+            font-size: 0.75rem;
+            font-weight: 400;
+            line-height: 140%;
+            letter-spacing: -0.01875rem;
+        }        
+    }
+
+
+
+    .finalInfo {
+        display: flex;
+        align-items: center;
+        gap: 0.38rem;
+
+        .discountRate {
+            color: #DC2626;
+            text-align: right;
+            font-family: Pretendard;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 140%;
+            letter-spacing: -0.01875rem;
+        }
+
+        .finalPrice {
+            padding: 0;
+            color: #111111;
+            text-align: right;
+            font-family: Pretendard;
+            font-size: 1.125rem;
+            font-weight: 600;
+            line-height: 140%;
+            letter-spacing: -0.02813rem;
+        }
     }
 }
