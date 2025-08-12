@@ -1,0 +1,55 @@
+.pickupIntroContainer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1.25rem;
+}
+
+.introText {
+    display: flex;
+    width: 15.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+
+    .titleText {
+        color: #111111;
+        font-family: Pretendard;
+        font-size: 1.75rem;
+        font-weight: 600;
+        line-height: 140%;
+        letter-spacing: -0.04375rem;
+    }
+
+    .subtitleText {
+        color: #666666;
+        font-family: Pretendard;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 140%;
+        letter-spacing: -0.02188rem;
+    }
+}
+
+.pickupStep {
+    display: inline-flex;
+    padding: 1.75rem 3.25rem;
+    gap: 2.0625rem;
+
+    .stepBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+        p {
+            color: #0EA64B;
+            text-align: center;
+            font-family: Pretendard;
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 140%;
+            letter-spacing: -0.025rem;
+        }
+    }
+}
