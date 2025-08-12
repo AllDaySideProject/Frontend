@@ -1,11 +1,13 @@
 import { HeaderArrow } from "../../components/HeaderArrow";
-import { PickupIntroText } from "./components/PickupIntroText";
+import { PickupIntro } from "./components/PickupIntro";
+import { PickupState } from "./components/PickupState";
 
 export const PickupPage = () => {
     return (
         <>
             <HeaderArrow />
-            <PickupIntroText />
-        </>
+            <PickupIntro />
+            <PickupState />
+        </> 
     )
 }
