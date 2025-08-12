@@ -4,7 +4,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { MainPage } from "./pages/mainPage/MainPage";
 import { MainMenuPage } from "./pages/mainMenuPage/MainMenuPage";
 import { LocationPermissionProvider } from "./components/LocationPermissionContext";
-
+import { MenuSelection } from "./pages/menuSelection/MenuSelection";
 function App() {
   return (
     <LocationPermissionProvider>
@@ -12,6 +12,11 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/main/menu" element={<MainMenuPage />} />
+          <Route path="/menuselect" element={<MenuSelection />} />
         </Routes>    
       </BrowserRouter>      
     </LocationPermissionProvider>
+  )
+}
+
+export default App;
