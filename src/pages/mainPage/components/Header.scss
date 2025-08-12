@@ -8,7 +8,7 @@
 .HeaderLeft {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.25rem;
 
     img {
@@ -22,6 +22,9 @@
         text-align: center;
         font-size: 0.875rem;
         line-height: 140%;
+        letter-spacing: -0.02188rem;
+        margin-top: 0.44rem;
+        margin-bottom: 0.19rem;
     }
 }
 
