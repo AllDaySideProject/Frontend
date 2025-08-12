@@ -32,7 +32,9 @@ export const LocationPermissionProvider = ({ children }) => {
             }
 
             const json = await res.json();
-            const fullAddress = json.documents?.[0]?.address?.address_name || ""; // 전체 지번 주소
+            // const fullAddress = json.documents?.[0]?.address?.address_name || ""; // 전체 지번 주소
+            const d = json.documents?.[0];
+            const fullAddress = d?.address?.address_name || d?.road_address?.address_name || "";
 
             const parts = fullAddress.split(" "); // 시, 구 공백으로 분리
             return parts.length >= 2 ? `${ parts[0] } ${ parts[1] }` : fullAddress;
@@ -69,13 +71,13 @@ export const LocationPermissionProvider = ({ children }) => {
 
                 console.log("위치 정보 동의 상태: 거부");
             },
-            { timeout: 8000 }
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
         );
     }, [fetchAddressKakao]);
 
     useEffect(() => {
-        requestLocation();
-    }, [agreed, requestLocation]);
+        if (!decided) requestLocation();
+    }, [decided, requestLocation]);
 
     return (
         <LocationPermissionCtx.Provider value = {{ agreed, decided, address, requestLocation }}>
