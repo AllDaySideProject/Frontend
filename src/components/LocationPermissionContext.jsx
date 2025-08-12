@@ -47,7 +47,7 @@ export const LocationPermissionProvider = ({ children }) => {
     const fetchAddressKakao = async (lat, lng) => {
         const REST_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
         if (!REST_KEY) {
-            alert("REST API KEY 누락");
+            console.warn("REST API KEY 누락");
             return "";
         }
 
@@ -57,15 +57,11 @@ export const LocationPermissionProvider = ({ children }) => {
                 headers: { Authorization: `KakaoAK ${REST_KEY}` }
             });
 
-            // 응답 상태 확인
-            const rawText = await res.text();
-            alert(`응답 상태: ${res.status}\n응답 본문: ${rawText}`);
-
             if (!res.ok) {
                 return "";
             }
 
-            const json = JSON.parse(rawText);
+            const json = await res.json();
             const d = json.documents?.[0];
             const fullAddress =
                 d?.address?.address_name ||
@@ -78,7 +74,7 @@ export const LocationPermissionProvider = ({ children }) => {
                 ? `${parts[0]} ${parts[1]}`
                 : fullAddress;
         } catch (err) {
-            alert(`예외 에러: ${err}`);
+            console.log("예외 에러: ", err);
             return "";
         }
     };
