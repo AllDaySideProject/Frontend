@@ -27,7 +27,7 @@ export const PickupIntro = ({ view }) => {
                         <p>예약</p>
                     </div>
                     <img src = { STEP } />
-                    <div className = { `stepBox ${ isLocation ? "active" : "" }` }>
+                    <div className = { `stepBox ${ isLocation ? "" : "active" }` }>
                         <img src = { pickupIcon } />
                         <p>픽업</p>
                     </div>
