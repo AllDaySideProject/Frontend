@@ -1,0 +1,20 @@
+.stepContainer {
+    display: flex;
+    width: 10.1875rem;
+    height: 3.75rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.875rem;
+    flex-shrink: 0;
+
+    p {
+        color: #0EA64B;
+        text-align: center;
+        font-family: Pretendard;
+        font-size: 1.125rem;
+        font-weight: 600;
+        line-height: 140%;
+        letter-spacing: -0.02813rem;
+    }
+}
