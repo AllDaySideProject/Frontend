@@ -44,23 +44,6 @@ export const LocationPermissionProvider = ({ children }) => {
     //     };
     // };
 
-    const fetchRegionKakao = async (lat, lng) => {
-        const REST_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
-        if (!REST_KEY) return "";
-        const url = `https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x=${lng}&y=${lat}`;
-        try {
-            const res = await fetch(url, {
-                headers: { Authorization: `KakaoAK ${REST_KEY}` }
-            });
-            if (!res.ok) return "";
-            const json = await res.json();
-            const r = json.documents?.[0];
-            return r ? `${r.region_1depth_name} ${r.region_2depth_name}` : "";
-        } catch {
-            return "";
-        }
-    };
-
     const fetchAddressKakao = async (lat, lng) => {
         const REST_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
         if (!REST_KEY) {
@@ -88,10 +71,7 @@ export const LocationPermissionProvider = ({ children }) => {
                 d?.address?.address_name ||
                 d?.road_address?.address_name || "";
 
-            if (!fullAddress) {
-                alert("주소 없음 — regioncode fallback 시도");
-                return await fetchRegionKakao(lat, lng);
-            }
+            if (!fullAddress) return "";
 
             const parts = fullAddress.split(" ");
             return parts.length >= 2
