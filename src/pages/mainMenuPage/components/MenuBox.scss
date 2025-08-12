@@ -1,11 +1,14 @@
 .menuBoxContainer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
     width: 18.88rem;
     height: 3.43rem;
     padding: 1.4rem 0.75rem;
-    align-items: center;
+
     gap: 0.75rem;
+
     border-radius: 0.44rem;
     background: #FFFFFF;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.08);
@@ -15,6 +18,7 @@
         height: 3.44rem;    
         border-radius: 0.625rem;
         background: #DBDBDB;
+        flex-shrink: 0;
     }
 }
 
@@ -24,23 +28,7 @@
 }
 
 .menuBoxContainer.deleteMode {
-    display: flex;
-    justify-content: space-between;
     width: 16.68rem;
-    height: 3.43rem;
-    padding: 1.4rem 0.75rem;
-    align-items: center;
-    gap: 0.75rem;
-    border-radius: 0.44rem;
-    background: #FFFFFF;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.08);
-
-    .menuImage {
-        width: 3.44rem;
-        height: 3.44rem;    
-        border-radius: 0.625rem;
-        background: #DBDBDB;
-    }
 }
 
 .menuBoxLeft {
