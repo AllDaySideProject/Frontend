@@ -3,19 +3,12 @@ import "./MenuEdit.scss";
 import ScreenContainer from "../../../components/ScreenContainer";
 import { MenuBox } from "./MenuBox";
 import { PriceText } from "./PriceText";
+import usePricing from "../../../hooks/usePricing";
 
 export const MenuEdit = ({ mode, setMode, items, selectedIds, toggleSelect }) => {
     const isDelete = mode === "delete"; // 삭제 모드 여부
 
-    const fmt = (n) => n.toLocaleString("ko-KR"); // 숫자 12,345 형식
-
-    const subtotal = items.reduce((sum, it) => { // 총 상품 금액
-        return sum + (it.price * (it.count ?? 1)); 
-    }, 0);
-
-    const discount = 9000; // 할인 금액
-
-    const total = Math.max(subtotal - discount, 0); // 최종 결제 금액
+    const { subtotal, discount, total, fmt } = usePricing(items, 9000);
     
     const handleDeleteClick = () => {
         setMode("delete"); // 삭제하기 버튼 클릭 시 delete 모드로 변경
@@ -44,6 +37,7 @@ export const MenuEdit = ({ mode, setMode, items, selectedIds, toggleSelect }) =>
                             storeName = { m.store }
                             count = { m.count }
                             price = { m.price }
+                            originalPrice = { m.originalPrice }
                             isSelected = { selectedIds.has(m.id) }
                             onToggleSelect = { () => toggleSelect(m.id) }
                             />
@@ -70,7 +64,7 @@ export const MenuEdit = ({ mode, setMode, items, selectedIds, toggleSelect }) =>
                         <p>총 구매 금액</p>
                         <div className = "priceInfo">
                             <p className = "percentInfo">
-                                {subtotal > 0 ? Math.round((discount / subtotal) * 100) : 0}%
+                                { subtotal > 0 ? Math.round((discount / subtotal) * 100) : 0 }%
                             </p>
                             <p>{ fmt(total) }원</p>
                         </div>

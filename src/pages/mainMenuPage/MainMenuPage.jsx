@@ -9,8 +9,10 @@ export const MainMenuPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 여는 상태 추가
 
     const [items, setItems] = useState([
-        { id: 1, name: "진미채볶음", store: "희망식당", count: 1, price: 4500 },
-        { id: 2, name: "멸치볶음", store: "우진이네 밥상", count: 2, price: 5500 },
+        { id: 1, name: "진미채볶음", store: "희망식당", count: 1, price: 4500, originalPrice: 7000 },
+        { id: 2, name: "멸치볶음", store: "우진이네 밥상", count: 1, price: 5500, originalPrice: 7500 },
+        { id: 3, name: "두부조림", store: "정신식당", count: 1, price: 8000, originalPrice: 9000 },
+        { id: 4, name: "콩나물무침", store: "백씨네쌈밥", count: 1, price: 3000, originalPrice: 6500 },
     ]);
 
     const [selectedIds, setSelectedIds] = useState(new Set()); // 삭제 모드에서 선택된 메뉴 id 저장
