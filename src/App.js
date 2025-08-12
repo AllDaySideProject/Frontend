@@ -6,6 +6,7 @@ import { MainMenuPage } from "./pages/mainMenuPage/MainMenuPage";
 import { LocationPermissionProvider } from "./components/LocationPermissionContext";
 import { PickupPage } from "./pages/pickupPage/PickupPage";
 import { PickupCompletePage } from "./pages/pickupPage/PickupCompletePage";
+import { TipsPage } from "./pages/tipPage/TipsPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/main/menu" element={<MainMenuPage />} />
           <Route path="/pickup" element={<PickupPage />} />
           <Route path="/pickup/complete" element={<PickupCompletePage />} />
+          <Route path="/tips" element={<TipsPage />} />
         </Routes>    
       </BrowserRouter>      
     </LocationPermissionProvider>
