@@ -1,5 +1,4 @@
 import "./MenuBox.scss";
-import LOCATION from "../../../assets/main/location.svg";
 import CHECKBOX from "../../../assets/main/checkBox.svg";
 import CHECKEDBOX from "../../../assets/main/checkedBox.svg";
 import usePricing from "../../../hooks/usePricing";
@@ -8,15 +7,13 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
     const isDelete = mode === "delete";
 
     const unitOriginal = typeof originalPrice === "number" ? originalPrice : price;
-    const discountAmount = Math.max(unitOriginal - price, 0) * (count ?? 1);
+    const discountAmount = Math.max(unitOriginal - price, 0) * (count);
 
     const { subtotal, discount, total, fmt } = usePricing(
-    { price, count: count ?? 1 },
-    discountAmount
+    { price, count }, discountAmount
     );
 
-    const discountRate = subtotal > 0 ? Math.round((discount / subtotal) * 100) : 0;
-
+    const unitDiscountRate = unitOriginal > 0 ? Math.round(((unitOriginal - price) / unitOriginal) * 100) : 0;
     // if (isDelete) {
     //     return (
     //         <div className = "menuBoxContainer deleteMode">
@@ -73,12 +70,12 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
 
             <div className = "menuBoxRight">
                 <div className = "originText">
-                    { discount > 0 && <p className = "originalPrice">{ fmt(originalPrice) }</p> }
+                    { discount > 0 && <p className = "originalPrice">{ fmt(unitOriginal) }</p> }
                     <p className = "originWon">원</p>                    
                 </div>
                 <div className = "finalInfo">
-                    { discount > 0 && <p className = "discountRate">{ discountRate }%</p> }
-                    <p className = "finalPrice">{ fmt(price) }원</p>                    
+                    { discount > 0 && <p className = "discountRate">-{ unitDiscountRate }%</p> }
+                    <p className = "finalPrice">{ fmt(price * count) }원</p>                    
                 </div>
 
             </div>
