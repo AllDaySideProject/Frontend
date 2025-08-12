@@ -22,12 +22,12 @@ export const PickupIntro = ({ view }) => {
                     <p className = "subtitleText">예약 시간에 맞춰 픽업해 주세요.</p>
                 </div>
                 <div className = "pickupStep">
-                    <div className = "stepBox">
+                    <div className = { `stepBox ${ isLocation ? "active" : "" }` }>
                         <img src = { checkIcon } />
                         <p>예약</p>
                     </div>
                     <img src = { STEP } />
-                    <div className = "stepBox">
+                    <div className = { `stepBox ${ isLocation ? "active" : "" }` }>
                         <img src = { pickupIcon } />
                         <p>픽업</p>
                     </div>

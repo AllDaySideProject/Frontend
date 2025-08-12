@@ -43,13 +43,18 @@
         gap: 0.5rem;
 
         p {
-            color: #0EA64B;
+            color: #B0B0B0;
             text-align: center;
             font-family: Pretendard;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 400;
             line-height: 140%;
             letter-spacing: -0.025rem;
+        }
+
+        &.active.p { 
+            color: #0EA64B;
+            font-weight: 600;
         }
     }
 }
