@@ -1,0 +1,183 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  width: 90%;
+  max-width: 400px;
+  max-height: 60vh;
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease-out;
+}
+
+.completionContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.completionMessage {
+  font-size: 18px;
+  font-weight: bold;
+  color: #0EA64B;
+  text-align: center;
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.basketContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.basketIcon {
+  width: 150px;
+  height: 157px;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pageIndicator {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
+.indicator.active {
+  background-color: #0EA64B;
+}
+
+.menuName {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.storeSelectionTitle {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.storeList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.storeItem {
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.storeItem:hover {
+  border-color: #0EA64B;
+  background-color: #f8fff8;
+}
+
+.storeItem.selected {
+  border: 1px solid #0EA64B;
+  background-color: #f0fff0;
+}
+
+.storeInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.storeName {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.storeDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.distance {
+  font-size: 14px;
+  color: #666;
+}
+
+.price {
+  font-size: 14px;
+  font-weight: bold;
+  color: #0EA64B;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: center;
+}
+
+.completeButton {
+  background-color: #0EA64B;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.completeButton:hover {
+  background-color: #0d9544;
+}
