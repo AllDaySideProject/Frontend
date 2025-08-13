@@ -41,7 +41,6 @@ export const AddButton = ({ isSelected, onClick, onAddClick, onDelete }) => {
     <button 
       className="AddButton"
       onClick={handleAddClick}
-      aria-label="추가"
     >
       +
     </button>
