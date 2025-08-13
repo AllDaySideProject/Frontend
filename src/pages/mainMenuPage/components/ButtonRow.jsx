@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ButtonComponent } from "../../../components/ButtonComponent"
 import ScreenContainer from "../../../components/ScreenContainer"
 
-export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDeleteClick }) => {
+export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDeleteClick, paddingTop, paddingBottom }) => {
     const navigate = useNavigate();
     const isDelete = mode === "delete"; // 삭제 모드 여부
     const rightDisabled = isDelete && selectedCount === 0; // 삭제 모드 + 선택 0 = 오른쪽 버튼 비활성화
@@ -33,7 +33,10 @@ export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDelet
 
     return (
         <ScreenContainer>
-            <div className = "buttonContainer">
+            <div 
+                className = "buttonContainer"
+                style = {{ paddingTop: paddingTop, paddingBottom: paddingBottom }}
+            >
                 <ButtonComponent 
                     width = { '6.88rem' }
                     bgColor = { '#FFFFFF' }
