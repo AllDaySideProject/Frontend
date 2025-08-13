@@ -14,7 +14,7 @@
 
 //개발 전용 코드 양쪽 마진 보여주는 용도
 .screenContainer {
-  background-color: #e1f2d6;
+  background-color: #FAFAFA;
 }
 
 .screenContent {
@@ -29,7 +29,8 @@
 
   margin: 0 auto;
 
-  background-color: #FAFAFA;
+  // background-color: #FAFAFA;
+  background-color: inherit;
 } //실제 콘텐츠 영역
   // padding-left: 2rem;//자식요소에게 2rem씩 부여 ->  vl
   // padding-right: 2rem;

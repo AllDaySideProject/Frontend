@@ -1,0 +1,31 @@
+.tipContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+}
+
+.tipText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    .tipTitle {
+        color: #111111;
+        font-family: Pretendard;
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 140%;
+        letter-spacing: -0.0375rem;
+        white-space: pre-line;
+    }
+
+    .tipDescription {
+        color: #848484;
+        font-family: Pretendard;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 140%;
+        letter-spacing: -0.02188rem;
+        white-space: pre-line;
+    }
+}

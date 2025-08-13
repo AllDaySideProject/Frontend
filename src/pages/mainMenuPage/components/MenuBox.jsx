@@ -2,73 +2,53 @@ import "./MenuBox.scss";
 import LOCATION from "../../../assets/main/location.svg";
 import CHECKBOX from "../../../assets/main/checkbox.svg";
 import CHECKEDBOX from "../../../assets/main/checkedBox.svg";
+import usePricing from "../../../hooks/usePricing";
 
-export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, menuName, storeName, count, price }) => {
+export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, menuName, storeName, count = 1, price, originalPrice }) => {
     const isDelete = mode === "delete";
 
-    const fmt = (n) => Number(n).toLocaleString("ko-KR"); // 금액 12,345 형식으로
+    const unitOriginal = typeof originalPrice === "number" ? originalPrice : price;
+    const finalPrice = price * count; // 최종 금액
+    const discountAmount = (unitOriginal - price) * count;
 
-    if (isDelete) {
-        return (
-            <div className = "menuBoxContainer deleteMode">
-                <img 
-                    // alt = "메뉴 아이콘"
-                    // src = { 추가 에정 }
-                    className = "menuImage"
-                />
-                <div className = "menuContainer">
-                    <div className = "infoBox">
-                        <div className = "menuInfo">
-                            <p className = "priceText">{ fmt(price) }원</p>
-                            <p className = "section">l</p>
-                            <div className = "priceInfo">
-                                <p>{ menuName } { count }개</p>
-                            </div>
-                        </div>    
-                        <div className = "storeInfo">
-                            <img 
-                                alt = "위치 아이콘"
-                                src = { LOCATION } 
-                                className = "locationImage"
-                            />
-                            <p>{ storeName }</p>
-                        </div>    
-                    </div>
-                    <img 
-                        src = { isSelected ? CHECKEDBOX : CHECKBOX } 
-                        className = "checkBoxImage"
-                        alt = { isSelected ? "선택 완료" : "미선택" }
-                        onClick = { (e) => onToggleSelect?.() }
-                    />       
-                </div> 
-            </div>
+    const { fmt } = usePricing({ price, count }, discountAmount);
 
-        )
-    }
+    const discountRate = Math.round(((unitOriginal - price) / unitOriginal) * 100);
 
     return (
-        <div className = "menuBoxContainer normalMode">
-            <img 
-                // alt = "메뉴 아이콘"
-                className = "menuImage" 
-            />
-            <div className = "infoBox">
-                <div className = "menuInfo">
-                    <p className = "menuName">{ menuName }</p>
-                    <div className = "storeInfo">
-                        <img 
-                            alt = "위치 아이콘"
-                            src = { LOCATION } 
-                            className = "locationImage"
-                        />
-                        <p>{ storeName }</p>
+        <div className = { isDelete ? "deleteContainer" : undefined }>
+            <div className = { `menuBoxContainer ${isDelete ? "deleteMode" : "normalMode"}` }>
+                <div className = "menuBoxLeft">
+                    <img 
+                        // alt = "메뉴 아이콘"
+                        className = "menuImage" 
+                    />
+                    <div className = "infoBox">
+                        <div className = "menuInfo">
+                            <p className = "storeName">{ storeName }</p>
+                            <p className = "menuName">{ menuName }</p>
+                            <p className = "menuCount">수량: { count }개</p>
+                        </div>
                     </div>
                 </div>
-                <div className = "priceInfo">
-                    <p>{ count }개</p>
-                    <p>{ fmt(price) }원</p>
+                <div className = "menuBoxRight">
+                    <div className = "originText">
+                        <p className = "originalPrice">{ fmt(unitOriginal) }</p>
+                        <p className = "originWon">원</p>                    
+                    </div>
+                    <div className = "finalInfo">
+                        <p className = "discountRate">-{ discountRate }%</p>
+                        <p className = "finalPrice">{ fmt(finalPrice) }원</p>                    
+                    </div>
                 </div>
-            </div>
+            </div>   
+
+            { isDelete && (
+                <img 
+                    src = { isSelected ? CHECKEDBOX : CHECKBOX }
+                    onClick = { () => onToggleSelect?.() }
+                />
+            )}         
         </div>
     )
 }
