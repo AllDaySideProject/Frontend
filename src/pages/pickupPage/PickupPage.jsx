@@ -6,15 +6,26 @@ import { Code } from "./components/Code";
 import { Location } from "./components/Location";
 
 export const PickupPage = () => {
-    const [view, setView] = useState("location");
+    const [phase, setPhase] = useState("check");
+
+
+    const handlePhaseChange = (next) => {
+        if (phase === "check" && next === "pickup") {
+        setPhase("step"); // 중간 step
+        setTimeout(() => setPhase("pickup"), 300);
+        } else {
+        setPhase(next);
+        }
+    };
 
     return (
         <>
             <HeaderArrow />
-            <PickupIntro view = { view } />
-            <PickupState view = { view } onChange = { setView } />
+            <PickupIntro phase = { phase } />
+            <PickupState phase = { phase } onChange = { handlePhaseChange } />
 
-            { view === "location" ? <Location /> : <Code /> }     
+            { phase === "check" && <Location /> }
+            { phase === "pickup" && <Code /> }     
         </> 
     )
 }

@@ -3,19 +3,19 @@ import "./PickupState.scss";
 import ScreenContainer from "../../../components/ScreenContainer"
 import { PickupStepBox } from "./PickupStepBox"
 
-export const PickupState = ({ view, onChange }) => {
+export const PickupState = ({ phase, onChange }) => {
     return (
         <ScreenContainer>
             <div className = "stepTouchBox">
                 <PickupStepBox 
                     stepText = "픽업경로" 
-                    active = { view === "location" }
-                    onClick = { () => onChange("location") }
+                    active = { phase === "check" }
+                    onClick = { () => onChange("check") }
                 />
                 <PickupStepBox 
                     stepText = "픽업코드" 
-                    active = { view === "code" }
-                    onClick = { () => onChange("code") }
+                    active = { phase === "pickup" }
+                    onClick = { () => onChange("pickup") }
                 />                
             </div>
         </ScreenContainer>
