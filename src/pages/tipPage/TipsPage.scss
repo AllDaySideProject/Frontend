@@ -1,0 +1,29 @@
+// 버튼 + 화살표 위치 정의
+:root {
+  --btn-bottom: 2.75rem;   // .fixedBtn bottom 값
+  --btn-h: 3.245rem;       // 버튼 전체 높이
+  --btn-gap: 1.69rem;     // 버튼과 화살표 간격
+}
+
+// 버튼 고정
+.fixedBtn {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--btn-bottom) + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  z-index: 1000;
+  pointer-events: auto;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+// 화살표 고정
+.fixedArrowOverlay {
+  position: fixed;
+  left: 50%;
+  bottom: calc(
+    var(--btn-bottom) + var(--btn-h) + var(--btn-gap) + env(safe-area-inset-bottom, 0px)
+  );
+  transform: translateX(-50%);
+  z-index: 1001; // 버튼보다 위
+  pointer-events: none; // 버튼 클릭 막지 않도촉
+}

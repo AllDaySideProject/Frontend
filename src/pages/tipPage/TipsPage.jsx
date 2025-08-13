@@ -1,3 +1,5 @@
+import "./TipsPage.scss";
+
 import { TipHeader } from "./components/TipHeader";
 
 import { useState } from "react";
@@ -8,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import TIP2 from "../../assets/tips/tip-2.svg";
 import TIP3 from "../../assets/tips/tip-3.svg";
 import TIP4 from "../../assets/tips/tip-4.svg";
+import SCROLL from "../../assets/tips/tipScroll.svg";
 
 export const TipsPage = () => {
     const navigate = useNavigate();
@@ -42,13 +45,16 @@ export const TipsPage = () => {
             { tipsData.map((tip, index) => (
                 <TipComponent key = { index } { ...tip } />
             ))}
-            
+
+            <img src={SCROLL} alt="" className="fixedArrowOverlay" />
             <ButtonComponent 
                 width = "20.38rem"
                 bgColor = { '#0EA64B' }
                 bdColor = { '#0EA64B' }
                 textColor = { '#F1F1F1' }
                 buttonText = "메인으로"
+                textSize = { '1.125rem' }
+                textWeight = '700'
                 className = "fixedBtn"
                 onClick = { () => navigate("/") }
             />
