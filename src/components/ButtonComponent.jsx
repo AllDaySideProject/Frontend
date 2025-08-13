@@ -1,9 +1,9 @@
 import "./ButtonComponent.scss";
 
-export const ButtonComponent = ({ width, bgColor, bdColor, onClick, textSize, textColor, buttonText, disabled = false }) => {
+export const ButtonComponent = ({ className, width, bgColor, bdColor, onClick, textSize, textColor, buttonText, disabled = false }) => {
     return (
         <div 
-            className = "buttonBox"
+            className = { `buttonBox ${ className ?? "" }` }
             style = {{ 
                 width: width,
                 backgroundColor: disabled ? "#B0B0B0" : bgColor,

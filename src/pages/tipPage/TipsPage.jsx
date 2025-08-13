@@ -1,12 +1,17 @@
 import { TipHeader } from "./components/TipHeader";
 
+import { useState } from "react";
+import { TipComponent } from "./components/TipComponent";
+import { ButtonComponent } from "../../components/ButtonComponent"
+import { useNavigate } from "react-router-dom";
+
 import TIP2 from "../../assets/tips/tip-2.svg";
 import TIP3 from "../../assets/tips/tip-3.svg";
 import TIP4 from "../../assets/tips/tip-4.svg";
-import { useState } from "react";
-import { TipComponent } from "./components/TipComponent";
 
 export const TipsPage = () => {
+    const navigate = useNavigate();
+
     const [tipsData, setTipsData] = useState([
         {
             title: "두부조림은\n자투리 채소 활용에 좋아요",
@@ -37,6 +42,16 @@ export const TipsPage = () => {
             { tipsData.map((tip, index) => (
                 <TipComponent key = { index } { ...tip } />
             ))}
+            
+            <ButtonComponent 
+                width = "20.38rem"
+                bgColor = { '#0EA64B' }
+                bdColor = { '#0EA64B' }
+                textColor = { '#F1F1F1' }
+                buttonText = "메인으로"
+                className = "fixedBtn"
+                onClick = { () => navigate("/") }
+            />
         </>
     )
 }
