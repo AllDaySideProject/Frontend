@@ -1,7 +1,7 @@
 import "./MenuPlus.scss";
 import ScreenContainer from "../../../components/ScreenContainer";
 
-import MAIN from "../../../assets/main/main.png";
+import MAIN from "../../../assets/main/main.svg";
 import PLUS from "../../../assets/main/plus.svg";
 
 import { useNavigate } from "react-router-dom";
