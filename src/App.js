@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import "./index.scss";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
@@ -23,7 +24,7 @@ function App() {
         </Routes>    
       </BrowserRouter>      
     </LocationPermissionProvider>
-  );
+  )
 }
 
 export default App;
