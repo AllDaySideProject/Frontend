@@ -1,0 +1,33 @@
+.firstContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 4.25rem 2rem 4.5rem;
+    background-color: #EDF8F8;
+    gap: 2.5rem;
+    
+    .tipText {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+
+        .pageTitle {
+            color: #0EA64B;
+            text-align: center;
+            font-family: Pretendard;
+            font-size: 0.75rem;
+            font-weight: 400;
+            line-height: 140%;
+            letter-spacing: -0.01875rem;
+        }
+
+        .titleText {
+            color: #111111;
+            text-align: center;
+            font-family: Pretendard;
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 140%;
+            letter-spacing: -0.0375rem;
+        }
+    }
+}
