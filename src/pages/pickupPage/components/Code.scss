@@ -1,0 +1,27 @@
+.codeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6.62rem 0;
+    gap: 2.5rem;
+
+    .codeText {
+        color: #DC2626;
+        text-align: center;
+        font-family: Pretendard;
+        font-size: 3.125rem;
+        font-weight: 700;
+        line-height: 140%;
+        letter-spacing: 0.78125rem;
+    }
+
+    .description {
+        color: #3E3E3E;
+        text-align: center;
+        font-family: Pretendard;
+        font-size: 0.75rem;
+        font-weight: 400;
+        line-height: 140%;
+        letter-spacing: -0.01875rem;
+    }
+}

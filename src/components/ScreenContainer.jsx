@@ -1,10 +1,14 @@
 import "./ScreenContainer.scss";
 
-const ScreenContainer = ({ children }) => {
+const ScreenContainer = ({ children, bgColor = "#FAFAFA" }) => {
     return (
 
     <div className="screenContainer">
-      <div className="screenContent">{children}</div>
+      <div 
+        className="screenContent"
+        style = {{ backgroundColor: bgColor }}
+      >{children}
+      </div>
     </div>
     )
 }
