@@ -4,7 +4,7 @@ import ScreenContainer from "../../../components/ScreenContainer"
 
 import TIP1 from "../../../assets/tips/tip-1.svg";
 
-export const FirstTip = () => {
+export const TipHeader = () => {
     return (
         <div className = "firstContainer">
             <div className = "tipText">
