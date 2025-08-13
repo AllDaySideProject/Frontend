@@ -12,7 +12,7 @@ export const PickupPage = () => {
     const handlePhaseChange = (next) => {
         if (phase === "check" && next === "pickup") {
         setPhase("step"); // 중간 step
-        setTimeout(() => setPhase("pickup"), 300);
+        setTimeout(() => setPhase("pickup"), 500);
         } else {
         setPhase(next);
         }
