@@ -26,7 +26,7 @@ export const Complete = () => {
                 <img src = { PICKUP } />
                 <div className = "completeContent">
                     <div className = "completeText">
-                        <p className = "puTitle">픽업 완료 !</p>
+                        <p className = "puTitle">픽업 완료!</p>
                         <p className = "puDescription">
                             픽업하실 메뉴를 더 알차게 즐길 수 있는<br />
                             알뜰식사TIP이 기다리고 있어요

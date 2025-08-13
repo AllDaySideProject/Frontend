@@ -25,7 +25,7 @@ export const TipsPage = () => {
         },
         {
             title: "버섯볶음,\n든든한 한 그릇 덮밥으로!",
-            description: "따뜻한 밥 위에 남은 버섯볶음 듬뿍 얹어 주세요.\n참기름 살짝 두르고, 김가루나 깨를 솔솔 뿌리면\n근사한 버섯덮밥이 뚝딱 완성돼요 !",
+            description: "따뜻한 밥 위에 남은 버섯볶음 듬뿍 얹어 주세요.\n참기름 살짝 두르고, 김가루나 깨를 솔솔 뿌리면\n근사한 버섯덮밥이 뚝딱 완성돼요!",
             image: TIP3,
             bgColor: "#EDEDF8",
             imgPadding: "0 2.38rem 1.63rem 2.38rem",
@@ -33,7 +33,7 @@ export const TipsPage = () => {
         },
         {
             title: "남은 콩나물 무침,\n최고의 비빔밥 재료로 변신!",
-            description: "남은 콩나물 무침은\n밥, 계란 프라이, 고추장과 함께\n비벼먹으면 최고의 비빔밥이 돼요 !",
+            description: "남은 콩나물 무침은\n밥, 계란 프라이, 고추장과 함께\n비벼 먹으면 최고의 비빔밥이 돼요!",
             image: TIP4,
             imgPadding: "0 2.38rem 2.12rem 2.38rem",
             gap: "0.75rem"
