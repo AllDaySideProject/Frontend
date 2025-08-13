@@ -1,11 +1,7 @@
-import "./MainPage.scss";
-
 import { useEffect } from "react";
 import { useLocationPermission } from "../../components/LocationPermissionContext"
 import { Header } from "./components/Header"
 import { MenuPlus } from "./components/MenuPlus"
-
-import BGIMG from "../../assets/main/bgImage.svg";
 
 export const MainPage = () => {
     const { decided, requestLocation} = useLocationPermission();
@@ -17,18 +13,7 @@ export const MainPage = () => {
     return (
         <>
             <Header />
-            <div 
-                className = "mainBg"
-                style = {{ 
-                    backgroundImage: `url(${ BGIMG })`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    minHeight: "100vh",
-                }}
-            >
-                <MenuPlus />
-            </div>
+            <MenuPlus />        
         </>
     )
 }
