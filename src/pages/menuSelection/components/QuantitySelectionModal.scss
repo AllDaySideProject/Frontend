@@ -46,7 +46,6 @@
   font-size: 18px;
   font-weight: 600;
   color: #0EA64B;
-  text-align: center;
   margin-bottom: 8px;
 }
 
@@ -54,14 +53,12 @@
   font-size: 16px;
   font-weight: 500;
   color: #333;
-  text-align: center;
   margin-bottom: 24px;
 }
 
 .quantityList {
   display: flex;
   flex-direction: column;
-  gap: 12px;
   margin-bottom: 32px;
 }
 
@@ -71,13 +68,9 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
   
-  &:hover {
-    background-color: #f8f8f8;
-  }
-  
+
   &.selected {
-    background-color: #f0f0f0;
-    border: 1px solid #0EA64B;
+    background-color: #E4E4E4;
   }
 }
 
@@ -89,7 +82,7 @@
 
 .quantityText {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: bold;
   color: #333;
 }
 

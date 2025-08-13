@@ -8,16 +8,6 @@ const GreenBasketIcon = () => (
   <img 
     src={greenBasketIcon} 
     alt="장바구니" 
-    style={{
-      width: '80px',
-      height: '80px',
-      objectFit: 'contain'
-    }}
-    onError={(e) => {
-      console.error('이미지 로딩 실패:', e);
-      // 이미지 로딩 실패 시 기본 텍스트 표시
-      e.target.style.display = 'none';
-    }}
   />
 );
 

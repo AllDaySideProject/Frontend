@@ -1,9 +1,9 @@
 .MenuLayout{
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #B0B0B0;
   align-items: center;
-  padding-bottom: 1rem;
+  padding: 0 1rem 1rem 1rem;
 }
 .MenuLeft{
   display: flex;
@@ -25,16 +25,24 @@
   object-fit: cover;
   border: 1px solid black;
 }
-.MenuName{
-  font-size: 17px;
+.MenuPrice,
+.MenuName {
+  font-size: 18px;
   font-weight: bold;
+  color: #111111;
 }
 .MenuDetails{
-  font-size: 14px;
-  color: #666;
+  font-size: 12px;
+  color: #B0B0B0;
   margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
-.MenuPrice{
-  font-size: 14px;
-  font-weight: lighter;
+
+.locationIcon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
 }
+

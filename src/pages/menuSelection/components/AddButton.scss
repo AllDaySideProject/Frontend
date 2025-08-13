@@ -40,12 +40,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
   padding: 0;
 }
 
 .deleteButton img {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   pointer-events: none;
 }
 
+.deleteButton:hover {
+  border-color: #ff4444;
+}
+
+.deleteButton:hover img {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+}

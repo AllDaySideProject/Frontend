@@ -22,12 +22,12 @@ export const QuantitySelectionModal = ({ isOpen, onClose, selectedMenus, selecte
       onComplete(selectedQuantity);
     }
     
-    // onClose() 제거 - StoreSelectionModal에서 처리하도록 함
   };
 
   return (
     <div className="modalOverlay" onClick={onClose}>
-      <div className="modalContent" onClick={(e) => e.stopPropagation()}>
+      {/* 이벤트 버블링 제거 */}
+      <div className="modalContent" onClick={(e) => e.stopPropagation()}> 
         <div className="pageIndicator">
           <div className="indicator"></div>
           <div className="indicator active"></div>
