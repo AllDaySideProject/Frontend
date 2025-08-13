@@ -1,5 +1,6 @@
 import "./MenuBox.scss";
-import CHECKBOX from "../../../assets/main/checkBox.svg";
+import LOCATION from "../../../assets/main/location.svg";
+import CHECKBOX from "../../../assets/main/checkbox.svg";
 import CHECKEDBOX from "../../../assets/main/checkedBox.svg";
 import usePricing from "../../../hooks/usePricing";
 
