@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react"
 
 export const useCurrentPosition = () => {
-    const [pos, setPos] = useState(); // 현재 위치 좌표 상태
+    const [pos, setPos] = useState(null); // 현재 위치 좌표 상태
     const [loading, setLoading] = useState(false); // 로딩 상태
 
     const request = useCallback(() => {
