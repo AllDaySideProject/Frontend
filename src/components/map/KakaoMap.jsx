@@ -20,21 +20,18 @@ function KakaoMap(props) {
   
   const mapRef = useRef(null); 
 
-  useEffect(() => { // 권한이 허용된 시점 현재 위치
-    if (decided && agreed) request();
-  }, [decided, agreed, request]);
+  useEffect(() => {
+    if (decided && agreed && !userPos) request();
+  }, [decided, agreed, userPos, request]);
 
   if (!userPos) return null; // 위치 못 받으면 렌더링 안 함
 
   return (
     <Map
-      center = { userPos } // onCreat setBounds > 실제 표시 범위에 관여
-
+      center = { userPos }
       style = {{ width: '50rem', height: '50rem' }}
-      level = { 4 }
-
-      onCreate = {(map) => {
-        mapRef.current = map;
+      onCreate = {(map) => { 
+        mapRef.current = map; 
         const { kakao } = window;
 
         const bounds = new kakao.maps.LatLngBounds();
@@ -42,9 +39,14 @@ function KakaoMap(props) {
 
         stores.forEach(store => {
           bounds.extend(new kakao.maps.LatLng(store.lat, store.lng));
-        })
+        });
 
-        map.setBounds(bounds);
+        map.setBounds(bounds, 30, 30, 30, 30);
+
+        setTimeout(() => {
+          if (!map) return;
+          map.setBounds(bounds, 30, 30, 30, 30);
+        }, 0);
       }}
     >
 
