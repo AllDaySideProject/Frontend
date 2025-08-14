@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { Map } from "react-kakao-maps-sdk";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
+
+import STORE_GR from "../../assets/map/storeLocation-green.svg";
+import STORE_WH from "../../assets/map/storeLocation-white.svg";
+import USER from "../../assets/map/userLocation.svg";
 
 function KakaoMap(props) {
   const userPos = { lat: 37.5820, lng: 127.0104 };
@@ -34,7 +38,29 @@ function KakaoMap(props) {
 
         map.setBounds(bounds);
       }}
-    />
+    >
+
+      <MapMarker 
+        position = { userPos }
+        image = {{ 
+          src: USER,
+          size: { width: '3.125rem', height: '3.125rem' },
+          options: { offset: { x: 25, y: 50 } }
+        }}
+      />
+
+      { stores.map((store, idx) => (
+        <MapMarker 
+          key = { idx }
+          position = { store }
+          image = {{ 
+            src: STORE_GR,
+            size: { width: '2.375rem', height: '2.375rem' },
+            options: { offset: { x: 25, y: 50 } }
+          }}
+        />
+      ))}
+    </Map>
   );
 }
 
