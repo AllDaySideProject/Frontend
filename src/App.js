@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import "./index.scss";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
