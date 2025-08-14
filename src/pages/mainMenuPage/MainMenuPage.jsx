@@ -63,7 +63,7 @@ export const MainMenuPage = () => {
             />
 
             { isModalOpen && (
-                <div className = "modalOverlay">
+                <div className = "modalOverLay">
                     <Modal 
                         modalText = "선택한 메뉴를 삭제하겠습니까?"
                         leftButtonText = "취소"

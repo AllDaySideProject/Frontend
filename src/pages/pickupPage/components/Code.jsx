@@ -44,7 +44,7 @@ export const Code = () => {
             />
 
             { isModalOpen && (
-                <div className = "modalOverlay">
+                <div className = "modalOverLay">
                     <Modal 
                         modalText = "픽업을 완료하셨나요?"
                         leftButtonText = "취소"

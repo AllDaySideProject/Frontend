@@ -24,8 +24,7 @@ export const PickupPage = () => {
             <PickupIntro phase = { phase } />
             <PickupState phase = { phase } onChange = { handlePhaseChange } />
 
-            { phase === "check" && <Location /> }
-            { phase === "pickup" && <Code /> }     
-        </> 
+            { (phase === "check") ? <Location /> : <Code /> }
+        </>
     )
 }
