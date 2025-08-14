@@ -4,7 +4,7 @@ import { Map } from "react-kakao-maps-sdk";
 export const BaseKakaoMap = ({ // 지도 기본 래퍼
     center, // 지도 중심 좌표
     boundsPoints = [], // 화면에 보여 줄 모든 좌표
-    style = { width: "100%", height: "100%" }, height,
+    height = "100%", width = "100%",
     children, // 마커 + 경로
 }) => {
     const mapRef = useRef(null);
@@ -26,7 +26,7 @@ export const BaseKakaoMap = ({ // 지도 기본 래퍼
     return (
         <Map
         center = { center }
-        style = {{ ...style, height }}
+        style = {{ height, width }}
         onCreate = { (map) => {
             mapRef.current = map;
             fitBounds();
