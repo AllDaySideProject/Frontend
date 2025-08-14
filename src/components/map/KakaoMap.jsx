@@ -9,6 +9,8 @@ import { useLocationPermission } from '../LocationPermissionContext';
 import { useCurrentPosition } from '../../hooks/useCurrentPosition';
 
 function KakaoMap(props) {
+  const [selectedStoreId, setSelectedStoreId] = useState(null); // 매장 선택 여부
+
   const { decided, agreed } = useLocationPermission(); // 위치 권한 허용 여부
   const { pos: userPos, request } = useCurrentPosition(); // 현재 위치
 
@@ -66,18 +68,26 @@ function KakaoMap(props) {
         }}
       />
 
-      { stores.map((store, idx) => (
-        <MapMarker 
-          key = { store.id }
-          position = { store }
-          image = {{ 
-            src: STORE_GR,
-            size: { width: 40, height: 40 },
-            options: { offset: { x: 20, y: 40 } }
-          }}
-        />
-      ))}
+      { stores.map((store) => {
+        const isSelected = store.id === selectedStoreId;
 
+        return (
+          <MapMarker 
+            key = { store.id }
+            position = { store }
+
+            image = {{ 
+              src: isSelected ? STORE_GR : STORE_WH,
+              size: { width: 40, height: 40 },
+              options: { offset: { x: 20, y: 40 } }
+            }}
+
+            onClick = {(e) => {
+              setSelectedStoreId(prev => (prev === store.id ? null : store.id));
+            }}
+          />          
+        );
+      })}
     </Map>
   );
 }
