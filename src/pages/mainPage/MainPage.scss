@@ -1,0 +1,23 @@
+.mainBg {
+  background-color: #FAFAFA; /* 여백 부분 색상 */
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.mainBgInner {
+  width: 24.375rem;
+  min-height: 100vh;
+
+  background-image: url("../../assets/main/bgImage.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-color: inherit;
+}
+
+.screenContainer,
+.screenContent {
+  background: transparent !important;  /* ← 이걸로 덮어쓰기 */
+}

@@ -56,6 +56,8 @@ export const MainMenuPage = () => {
                 toggleSelect = { toggleSelect }
             />
             <ButtonRow 
+                paddingTop = "1.06rem"
+                paddingBottom = "2rem"
                 mode = { mode }
                 setMode = { setMode } 
                 onDeleteClick = { handleDeleteClick } // 삭제 기능 콘솔
