@@ -36,6 +36,7 @@ export const Code = () => {
                 </p>
             </div>
             <ButtonComponent 
+                className = "btnBox"
                 buttonText = "픽업 완료"
                 bgColor = { pressed ? '#0EA64B' : '#FAFAFA' }
                 bdColor = { '#0EA64B' }

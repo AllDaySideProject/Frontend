@@ -2,17 +2,14 @@ import "./PickupIntro.scss";
 
 import ScreenContainer from "../../../components/ScreenContainer";
 
-import CHECK_GN from "../../../assets/pickup/check-green.svg";
-import CHECK_GY from "../../../assets/pickup/check-grey.svg";
 import STEP_GY from "../../../assets/pickup/step-grey.svg";
 import STEP_GN from "../../../assets/pickup/step-green.svg";
-import PICKUP_GN from "../../../assets/pickup/pickup-green.svg";
-import PICKUP_GY from "../../../assets/pickup/pickup-grey.svg";
+
+import CHECK from "../../../assets/pickup/check.svg";
+import PICKUP from "../../../assets/pickup/pickup.svg";
 
 export const PickupIntro = ({ phase }) => {
-    const checkIcon = phase === "check" ? CHECK_GN : CHECK_GY;
     const stepIcon = phase === "step" ? STEP_GN : STEP_GY;
-    const pickupIcon = phase === "pickup" ? PICKUP_GN : PICKUP_GY;
     
     return (
         <ScreenContainer>
@@ -23,7 +20,9 @@ export const PickupIntro = ({ phase }) => {
                 </div>
                 <div className = "pickupStep">
                     <div className = { `stepBox ${phase === "check" ? "active" : ""}` }>
-                        <img src = { checkIcon } />
+                        <div className = "stateBox">
+                            <img src = { CHECK } />
+                        </div>
                         <p>예약</p>
                     </div>
                     <img 
@@ -31,7 +30,9 @@ export const PickupIntro = ({ phase }) => {
                         className = { phase === "step" ? "active" : "" }
                     />
                     <div className = { `stepBox ${phase === "pickup" ? "active" : ""}` }>
-                        <img src = { pickupIcon } />
+                        <div className = "stateBox">
+                            <img src = { PICKUP } />
+                        </div>
                         <p>픽업</p>
                     </div>
                 </div>
