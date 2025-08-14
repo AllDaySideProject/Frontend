@@ -8,10 +8,13 @@ import STORE_WH from "../../../assets/map/storeLocation-white.svg";
 export default function PickupMap({ userPos, destinations = [], paths = [], height = "50rem", width, useBent = false, selectedId, onDestinationClick }) {
   if (!userPos) return null;
 
+  const sequentialPath = [userPos, ...destinations.map(d => ({ lat: d.lat, lng: d.lng }))];
+
   const boundsPoints = [  // 사용자 위치 + 모든 목적지 + 모든 경로 좌표
-    userPos,
-    ...destinations,
-    ...paths.flat()
+    // userPos,
+    // ...destinations,
+    // ...paths.flat()
+    ...sequentialPath
   ];
 
   return (
@@ -47,16 +50,17 @@ export default function PickupMap({ userPos, destinations = [], paths = [], heig
         )
       })}
 
-      { paths.map((path, idx) => ( // 목적지 있을 때 경로 표시
+      {/* { paths.map((path, idx) => ( // 목적지 있을 때 경로 표시 */}
         <Polyline
-          key = { idx }
-          path = { path }
+          // key = { idx }
+          // path = { path }
+          path = { sequentialPath }
           strokeWeight = { 2 }
           strokeColor = "#0EA64B"
           strokeOpacity = { 1 }
           strokeStyle = "dash"
         />
-      ))}
+      {/* ))} */}
 
     </BaseKakaoMap>
   );
