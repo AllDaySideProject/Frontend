@@ -26,7 +26,7 @@ export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDelet
             onDeleteClick?.();
             console.log("선택한 메뉴 삭제")
         } else {
-            navigate(``);
+            navigate(`/pickup`);
             console.log("픽업 예약으로 이동"); 
         }
     }

@@ -1,5 +1,3 @@
-import "./MainPage.scss";
-
 import { useEffect } from "react";
 import { useLocationPermission } from "../../components/LocationPermissionContext"
 import { Header } from "./components/Header"

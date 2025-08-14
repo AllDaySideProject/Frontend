@@ -1,0 +1,132 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 20px 20px 0 0;
+  width: 90%;
+  max-width: 400px;
+  max-height: 60vh;
+  padding: 24px;
+  box-sizing: border-box;
+  animation: slideUp 0.3s ease;
+  overflow-y: auto;
+}
+
+.pageIndicator {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  
+  .indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    
+    &.active {
+      background-color: #333;
+    }
+  }
+}
+
+.menuName {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0EA64B;
+  margin-bottom: 8px;
+}
+
+.quantitySelectionTitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+.quantityList {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+
+.quantityItem {
+  padding: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  
+
+  &.selected {
+    background-color: #E4E4E4;
+  }
+}
+
+.quantityInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quantityText {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: center;
+}
+
+.completeButton {
+  background-color: #0EA64B;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%;
+  max-width: 200px;
+  
+  &:hover {
+    background-color: #0d9544;
+  }
+  
+  &:active {
+    background-color: #0c8440;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

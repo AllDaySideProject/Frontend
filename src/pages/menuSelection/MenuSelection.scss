@@ -1,10 +1,14 @@
-.MenuSelectionLayout {
-  padding: 1rem;
+// .MenuSelectionLayout {
+//   padding: 1rem;
+// }
+//전체에 padding을 주며 쓸 이유가 사라짐
+.MenuSelectionTitle{
+  font-size: 24px;
+  font-weight: bold ;
 }
-
 .MenuCard {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);//3개씩 배치
+  display: flex;
+  flex-direction: column;
   gap: 12px;
   justify-content: center;
 }

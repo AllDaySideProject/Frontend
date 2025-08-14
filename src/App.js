@@ -4,6 +4,10 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { MainPage } from "./pages/mainPage/MainPage";
 import { MainMenuPage } from "./pages/mainMenuPage/MainMenuPage";
 import { LocationPermissionProvider } from "./components/LocationPermissionContext";
+import { MenuSelection } from "./pages/menuSelection/MenuSelection";
+import { PickupPage } from "./pages/pickupPage/PickupPage";
+import { PickupCompletePage } from "./pages/pickupPage/PickupCompletePage";
+import { TipsPage } from "./pages/tipPage/TipsPage";
 
 function App() {
   return (
@@ -12,6 +16,10 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/main/menu" element={<MainMenuPage />} />
+          <Route path="/pickup" element={<PickupPage />} />
+          <Route path="/pickup/complete" element={<PickupCompletePage />} />
+          <Route path="/tips" element={<TipsPage />} />
+          <Route path="/menuselect" element={<MenuSelection />} />
         </Routes>    
       </BrowserRouter>      
     </LocationPermissionProvider>
