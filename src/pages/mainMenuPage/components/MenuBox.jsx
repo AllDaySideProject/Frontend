@@ -26,7 +26,7 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
                     <div className = "infoBox">
                         <div className = "menuInfo">
                             <p className = "storeName">{ storeName }</p>
-                            <p className = "menuName">{ menuName }</p>
+                            <p className = "menuBoxName">{ menuName }</p>
                             <p className = "menuCount">수량: { count }개</p>
                         </div>
                     </div>

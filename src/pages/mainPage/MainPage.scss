@@ -17,7 +17,7 @@
   background-color: inherit;
 }
 
-.screenContainer,
-.screenContent {
+.mainBg .screenContainer,
+.mainBg .screenContent {
   background: transparent !important;  /* ← 이걸로 덮어쓰기 */
 }
