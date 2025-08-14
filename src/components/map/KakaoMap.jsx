@@ -1,35 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 import STORE_GR from "../../assets/map/storeLocation-green.svg";
 import STORE_WH from "../../assets/map/storeLocation-white.svg";
 import USER from "../../assets/map/userLocation.svg";
 
-function KakaoMap(props) {
-  const userPos = { lat: 37.5820, lng: 127.0104 };
-  const [stores, setStores] = useState([
-    { lat: 37.5700, lng: 127.0204 },
-    { lat: 37.5900, lng: 127.0164 },
-    { lat: 37.5970, lng: 127.0064 }
-  ]);
+import { useLocationPermission } from '../LocationPermissionContext';
+import { useCurrentPosition } from '../../hooks/useCurrentPosition';
 
-  const allPoints = [userPos, ...stores]; // 모든 좌표 배열
-  const centerPos = { // 좌표 중앙 계산
-    lat: allPoints.reduce((sum, p) => sum + p.lat, 0) / allPoints.length,
-    lng: allPoints.reduce((sum, p) => sum + p.lng, 0) / allPoints.length,
-  };
+function KakaoMap(props) {
+  const { decided, agreed } = useLocationPermission();
+  const { pos: userPos, loading, request } = useCurrentPosition();
+
+  const [stores, setStores] = useState([
+    { id: 1, lat: 37.5700, lng: 127.0204 },
+    { id: 2, lat: 37.5900, lng: 127.0164 },
+    { id: 3, lat: 37.5970, lng: 127.0064 }
+  ]);
+  
+  const mapRef = useRef(null); 
+
+  useEffect(() => { // 권한이 허용된 시점 현재 위치
+    if (decided && agreed) request();
+  }, [decided, agreed, request]);
+
+  if (!userPos) return null; // 위치 못 받으면 렌더링 안 함
 
   return (
     <Map
-      center = { centerPos }
+      center = { userPos } // onCreat setBounds > 실제 표시 범위에 관여
 
-      style = {{ width: '24.375rem', height: '50rem' }}
-      level = { 5 }
+      style = {{ width: '50rem', height: '50rem' }}
+      level = { 4 }
 
       onCreate = {(map) => {
+        mapRef.current = map;
         const { kakao } = window;
-        const bounds = new kakao.maps.LatLngBounds();
 
+        const bounds = new kakao.maps.LatLngBounds();
         bounds.extend(new kakao.maps.LatLng(userPos.lat, userPos.lng)); // 사용자 위치
 
         stores.forEach(store => {
@@ -44,7 +52,7 @@ function KakaoMap(props) {
         position = { userPos }
         image = {{ 
           src: USER,
-          size: { width: '3.125rem', height: '3.125rem' },
+          size: { width: 50, height: 50 },
           options: { offset: { x: 25, y: 50 } }
         }}
       />
@@ -55,7 +63,7 @@ function KakaoMap(props) {
           position = { store }
           image = {{ 
             src: STORE_GR,
-            size: { width: '2.375rem', height: '2.375rem' },
+            size: { width: 40, height: 40 },
             options: { offset: { x: 25, y: 50 } }
           }}
         />
