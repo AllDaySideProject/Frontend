@@ -54,6 +54,11 @@
   color: #0EA64B;
   margin-bottom: 8px;
 }
+.q-embeddedPanel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
 
 .quantitySelectionTitle {
   font-size: 20px;

@@ -15,10 +15,11 @@
   padding:24px;
   box-sizing: border-box;
   border-radius: 20px 20px 0 0;
-  
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
   overflow-x: hidden;
   overflow-y: hidden;
-  animation: slideUp 0.3s ease-out;
 }
 
 .s-completionContent {
@@ -62,9 +63,7 @@
   border-radius: 50%;
   background-color: #b0b0b0;
 }
-.s-indicator.active {            
-  background-color: #111111;
-}
+.s-indicator.active {background-color: #111111;}
 
 .s-menuName {
   font-size: 16px;
@@ -176,6 +175,26 @@
   font-weight: 700;
   cursor: pointer;
   appearance: none;
+}
+
+.s-shellEnterFromBottom{//첫 등장 시
+  animation: slideUp 0.3s ease-out;
+}
+//패널 컨테이너
+.s-panel{
+  display: flex;
+  flex-direction: column;
+  flex:1 1 auto;
+  min-height: 0;;
+}
+//단계 전환시
+.s-panelInFromRight{
+  animation: panelInFromRight 0.3s ease-out;
+}
+
+@keyframes panelInFromRight {
+  from { transform: translateX(50%); opacity: 0.0; }
+  to   { transform: translateX(0);    opacity: 1; }
 }
 
 
