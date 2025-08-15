@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { Toast } from "./Toast";
 
 export const BottomSheet = ({ height, setHeight, storeId, stores }) => {
-    const store = stores.find(s => s.id === storeId); // ✅ 선택된 가게 정보
+    const store = stores.find(s => s.id === storeId); // 선택된 가게 정보
 
     const menuData = { // 가게별 메뉴 데이터
         1: [
@@ -96,8 +96,8 @@ export const BottomSheet = ({ height, setHeight, storeId, stores }) => {
                     </div>
                 </div>
                 <div className = "sheetStoreInfo">
-                   <p className = "sheetStoreName">유진이네 밥상</p> 
-                   <p className = "sheetStoreType">한식 전문점</p>
+                   <p className = "sheetStoreName">{ store.name }</p> 
+                   <p className = "sheetStoreType">{ store.type }</p>
                 </div>
 
                 <ScreenContainer bgColor = "#FFFFFF">

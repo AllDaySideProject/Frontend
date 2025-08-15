@@ -28,9 +28,9 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
     }, [decided, agreed, userPos, request]);
 
     const [stores] = useState([
-        { id: 1, name: "유진이네 밥상", lat: 37.5700, lng: 127.0204 },
-        { id: 2, name: "김가네 분식", lat: 37.5900, lng: 127.0164 },
-        { id: 3, name: "할매반찬", lat: 37.5970, lng: 127.0064 },
+        { id: 1, name: "유진이네 밥상", type: "한식 전문점", lat: 37.5700, lng: 127.0204 },
+        { id: 2, name: "김가네 분식", type: "분식 전문점", lat: 37.5900, lng: 127.0164 },
+        { id: 3, name: "할매반찬", type: "한식 전문점", lat: 37.5970, lng: 127.0064 },
     ]);
 
     const [selectedStore, setSelectedStore] = useState(null); // 선택한 가게 정보
@@ -113,12 +113,15 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
             )}
             </BaseKakaoMap>  
 
-            <BottomSheet
-                height = { sheetHeight }
-                setHeight = { setSheetHeight }
-                storeId = { selectedStoreId }
-                stores = { stores }
-            />          
+            { selectedStoreId && (
+                <BottomSheet
+                    height = { sheetHeight }
+                    setHeight = { setSheetHeight }
+                    storeId = { selectedStoreId }
+                    stores = { stores }
+                />                   
+            )}
+       
         </div>
   );
 }
