@@ -1,12 +1,19 @@
-import React from "react";
-import { MapMarker, Polyline } from "react-kakao-maps-sdk";
+import React, { useMemo } from "react";
+import { CustomOverlayMap, MapMarker, Polyline } from "react-kakao-maps-sdk";
 import { BaseKakaoMap } from "../../../components/map/BaseKakaoMap";
 import USER from "../../../assets/map/userLocation.svg";
 import STORE_GR from "../../../assets/map/storeLocation-green.svg";
 import STORE_WH from "../../../assets/map/storeLocation-white.svg";
+import { getDistanceMeters } from "../../../components/map/mapUtils";
+import { DistanceBox } from "../../../components/map/DistanceBox";
 
 export default function PickupMap({ userPos, destinations = [], paths = [], height = "50rem", width, useBent = false, selectedId, onDestinationClick }) {
   if (!userPos) return null;
+
+  const selectedDest = destinations.find(d => d.id === selectedId) || null;
+  const selectedDistance = selectedDest
+    ? getDistanceMeters(userPos, selectedDest)
+    : null;
 
   const sequentialPath = [userPos, ...destinations.map(d => ({ lat: d.lat, lng: d.lng }))];
 
@@ -61,6 +68,19 @@ export default function PickupMap({ userPos, destinations = [], paths = [], heig
           strokeStyle = "dash"
         />
       {/* ))} */}
+
+      { selectedDest && (
+        <CustomOverlayMap
+          position = {{ lat: selectedDest.lat, lng: selectedDest.lng }}
+          xAnchor = { 1 }
+          yAnchor = { -0.2 }
+        >
+          <DistanceBox
+            name = { selectedDest.name ?? "목적지" }
+            distance = { selectedDistance }
+          />
+        </CustomOverlayMap>
+      )}
 
     </BaseKakaoMap>
   );
