@@ -1,9 +1,6 @@
 .q-modalOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -15,10 +12,22 @@
   background: white;
   border-radius: 20px 20px 0 0;
   width: 390px;
+  height: 358px;
   padding: 24px;
   box-sizing: border-box;
-  overflow-y: auto;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
 }
+
+.q-modalPanel {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;//남는 높이 차지 
+  min-height: 0;
+}
+
 .q-modalPanelSlideLeft{ 
   animation: slideLeft 0.3s ease;
 }
@@ -27,45 +36,52 @@
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   
   .q-indicator {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: #e0e0e0;
+    background-color: #b0b0b0;
     
-    &.q-active {
-      background-color: #333;
-    }
+    &.q-active {background-color: #111111;}
   }
 }
 
 .q-menuName {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #0EA64B;
   margin-bottom: 8px;
 }
 
 .quantitySelectionTitle {
-  font-size: 16px;
-  font-weight: 500;
-  color: #333;
-  margin-bottom: 24px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #111111;
+  margin-bottom: 20px;
 }
 
 .quantityList {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 32px;
-  margin-left: -24px;     /* 모달 내부 패딩 상쇄 */
+  margin-left: -24px;     //모달 내부 패딩 상쇄 
   margin-right: -24px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  //스크롤바 숨김
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.quantityList::-webkit-scrollbar{display: none;}
 
 .quantityItem {
-  padding: 16px;
-  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  border-radius: 7px;
   cursor: pointer;
   transition: background-color 0.2s ease;
   
@@ -82,14 +98,21 @@
 }
 
 .quantityText {
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
+  font-size: 20px;
+  font-weight: 500;
+  color: #c9c9c9;
+  &.selected {
+    color: #111111;
+  }
 }
-
+.quantitySpacer{
+  flex:0 0 auto;
+}
 .q-modalFooter {
   display: flex;
   justify-content: center;
+  margin-top:20px;
+  flex:0 0 auto;
 }
 
 .q-completeButton {
@@ -103,11 +126,6 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
   width: 100%;
-  max-width: 200px;
-  
-  &:hover {
-    background-color: #0d9544;
-  }
   
   &:active {
     background-color: #0c8440;

@@ -9,13 +9,12 @@ const GreenBasketIcon = () => (
 );
 // 각 항목 높이 (px) 및 행 규격
 const ITEM_HEIGHT = 40;   
-const GAP=6;
-const PER_ROW= ITEM_HEIGHT + GAP;
+const PER_ROW= ITEM_HEIGHT;
 
 const CONTAINER_ROWS = 3;//가게 개수
 const CONTAINER_HEIGHT = ITEM_HEIGHT * CONTAINER_ROWS;
 // 마지막 아이템이 맨 위까지 올라올 수 있도록 하는 여유 높이
-const BOTTOM_SPACER = CONTAINER_HEIGHT - ITEM_HEIGHT;
+const BOTTOM_SPACER = CONTAINER_HEIGHT - (ITEM_HEIGHT*2);
 
 export const StoreSelectionModal = ({ isOpen, onClose, selectedMenus, onComplete }) => {
   const [selectedStore, setSelectedStore] = useState('희망식당');
