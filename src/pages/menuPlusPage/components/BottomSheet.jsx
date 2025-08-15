@@ -5,7 +5,7 @@ import { SheetBox } from "./SheetBox"
 import { useEffect, useRef, useState } from "react";
 import { Toast } from "./Toast";
 
-export const BottomSheet = ({ height, setHeight, storeId, stores }) => {
+export const BottomSheet = ({ height, setHeight, storeId, stores, setShowToast }) => {
     const store = stores.find(s => s.id === storeId); // 선택된 가게 정보
 
     const menuData = { // 가게별 메뉴 데이터
@@ -24,8 +24,6 @@ export const BottomSheet = ({ height, setHeight, storeId, stores }) => {
     };
 
     const [menus, setMenus] = useState(menuData[storeId] || []); // 선택된 가게의 메뉴 데이터
-
-    const [showToast, setShowToast] = useState(false); // 토스트 메시지 표시 여부
 
     useEffect(() => { // 가게가 변경될 때 메뉴 데이터 업데이트
         if (storeId) {
@@ -109,18 +107,7 @@ export const BottomSheet = ({ height, setHeight, storeId, stores }) => {
                         />
                     ))}                    
                 </ScreenContainer>
-
             </div>
-
-
-            { showToast && (
-                <div className = "toastContainer">
-                    <Toast
-                        duration = { 2000 }
-                        onClose = { () => setShowToast(false) }
-                    />                    
-                </div>
-            )}
         </ScreenContainer>
     )
 }

@@ -13,10 +13,12 @@ import { useLocationPermission } from "../../../components/LocationPermissionCon
 import { useCurrentPosition } from "../../../hooks/useCurrentPosition"; // 현재 위치
 import { DistanceBox } from "../../../components/map/DistanceBox";
 import { BottomSheet } from "./BottomSheet";
+import { Toast } from "./Toast";
 
 export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표시 + 가게 클릭 시 경로
     const [selectedStoreId, setSelectedStoreId] = useState(null);
     const [selectedDistance, setSelectedDistance] = useState(null);
+    const [showToast, setShowToast] = useState(false);
 
     const [sheetHeight, setSheetHeight] = useState(0); // BottomSheet 높이
 
@@ -119,7 +121,17 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                     setHeight = { setSheetHeight }
                     storeId = { selectedStoreId }
                     stores = { stores }
+                    setShowToast = { setShowToast }
                 />                   
+            )}
+
+            { showToast && (
+                <div className = "toastContainer">
+                    <Toast
+                        duration = { 2000 }
+                        onClose = { () => setShowToast(false) }
+                    />                    
+                </div>
             )}
        
         </div>
