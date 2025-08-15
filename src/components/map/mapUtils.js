@@ -17,3 +17,15 @@ export const bentPath = (from, to) => { // 직선이 아닌 조금 꺾인 경로
   const midLng = (from.lng + to.lng) / 2;
   return [from, { lat: from.lat, lng: midLng }, { lat: to.lat, lng: midLng }, to];
 };
+
+export function getDistanceMeters(a, b) { // 거리 계산
+  const R = 6371000;
+  const toRad = (d) => (d * Math.PI) / 180;
+  const dLat = toRad(b.lat - a.lat);
+  const dLng = toRad(b.lng - a.lng);
+  const lat1 = toRad(a.lat), lat2 = toRad(b.lat);
+  const h =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
