@@ -12,7 +12,7 @@ import USER from "../../../assets/map/userLocation.svg";
 import { useLocationPermission } from "../../../components/LocationPermissionContext"; // 위치 권한
 import { useCurrentPosition } from "../../../hooks/useCurrentPosition"; // 현재 위치
 import ScreenContainer from "../../../components/ScreenContainer";
-import { DistanceBox } from "../../../components/map/DistaceBox";
+import { DistanceBox } from "../../../components/map/DistanceBox";
 
 export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표시 + 가게 클릭 시 경로
     const [selectedStoreId, setSelectedStoreId] = useState(null);
@@ -101,7 +101,7 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
             { selectedStore && (
                 <CustomOverlayMap 
                     position = {{ lat: selectedStore.lat, lng: selectedStore.lng }}
-                    xAnchor = { 0.9 }
+                    xAnchor = { 1 }
                     yAnchor = { -0.2 }
                 >
                     <DistanceBox 
