@@ -1,194 +1,173 @@
-  .modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: flex-end;
-    z-index: 1000;
-  }
-
-  .modalContent {
-    background: white;
-    width: 90%;
-    max-width: 400px;
-    max-height: 60vh;
-    border-radius: 20px 20px 0 0;
-    overflow-y: auto;
-    animation: slideUp 0.3s ease-out;
-    padding:20px;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
- .completionContent {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;   
-    justify-content: center;
-    min-height: 200px;
-    padding: 30px 0;       
-    text-align: center;
-}
-  .completionMessage {
-    font-size: 18px;
-    font-weight: bold;
-    color: #0EA64B;
-    text-align: center;
-    margin-bottom: 30px;
-    line-height: 1.4;
-  }
-
-  .basketContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
-  }
-
-  .basketIcon {
-    width: 150px;
-    height: 157px;
-  }
-
-  @keyframes slideUp {
-    from {
-      transform: translateY(100%);
-    }
-    to {
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.8);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  .pageIndicator {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 20px;
-  }
-
-  .indicator {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #ccc;
-  }
-
-  .indicator.active {
-    background-color: #0EA64B;
-  }
-
-  .menuName {
-    font-size: 18px;
-    font-weight: bold;
-    text-align: left;
-    margin-bottom: 20px;
-    color: #333;
-  }
-
-  .storeSelectionTitle {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: left;
-    color: #333;
-  }
-
-  .storeList {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-left: -20px;   /* modalContent의 좌측 패딩 제거 */
-    margin-right: -20px;  /* modalContent의 우측 패딩 제거 */
-    width: calc(100% + 40px);
+.s-modalOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1000;
 }
 
-  .storeItem {
-    width: 100%;
-    box-sizing: border-box;
-    cursor: pointer;
-    padding: 16px 20px;
-    border-radius: 12px;
-    border:1px solid transparent;//선택 시 크기가 안흔들리도록
-    background: transparent;
-  }
+.s-modalContent {
+  background: white;
+  width: 90%;
+  max-width: 390px;
+  max-height: 60vh;
+  border-radius: 20px 20px 0 0;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  animation: slideUp 0.3s ease-out;
+}
 
-  .storeItem.selected {
-    background-color: #E4E4E4;
-  }
+.s-completionContent {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 200px;
+  padding: 24px;
+  text-align: center;
+}
 
-  .storeInfo {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    gap:12px;
-  }
 
-  .storeName {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-  }
+.s-completionMessage {
+  font-size: 18px;
+  font-weight: bold;
+  color: #0EA64B;
+  text-align: center;
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
 
-  .storeItem:not(.selected) .storeName {
-    color: #999;
-  }
+.s-basketContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
 
-  .storeDetails {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    gap: 4px;
-  }
+.s-basketIcon {
+  width: 150px;
+  height: 157px;
+  object-fit: contain;
+}
 
-  .distance {
-    font-size: 14px;
-    color: #666;
-  }
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
 
-  .storeItem:not(.selected) .distance {
-    color: #999;
-  }
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
 
-  .price {
-    font-size: 14px;
-    font-weight: bold;
-    color: #0EA64B;
-  }
+.s-pageIndicator {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
 
-  .storeItem:not(.selected) .price {
-    color: #999;
-  }
+.s-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 7%;
+  background-color: #ccc;
+}
+.s-indicator.active {                /* ← JSX의 active와 일치 */
+  background-color: #0EA64B;
+}
 
-    /* 모달 좌우 패딩(20px)을 상쇄해서 버튼이 양끝까지 차도록 */
-.modalFooter {
+.s-menuName {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+  padding-bottom: 8px;
+  color: #0EA64B;
+}
+
+/* 아래는 전역(접두사 없이) 유지 — JSX도 동일 이름 사용 중 */
+.storeSelectionTitle {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+  padding-bottom: 50px;
+  color: #111111;
+}
+
+.storeList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: -24px;     /* 모달 내부 패딩 상쇄 */
+  margin-right: -24px;
+  width: calc(100% + 48px);
+  gap:6px;
+
+}
+
+.storeItem {
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 7px;
+  border: 1px solid transparent; /* 선택 시 크기 흔들림 방지 */
+  background: transparent;
+}
+
+.storeItem.selected { background-color: #E4E4E4; }
+
+.storeInfo {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.storeName {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111111;
+}
+
+.storeItem:not(.selected) .storeName { color: #c9c9c9; }
+
+.storeDetails {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.distance {
+  font-size: 20px;
+  font-weight: 500;
+  color: #848484;
+}
+.storeItem:not(.selected) .distance { color: #c9c9c9; }
+
+.price {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0EA64B;
+}
+.storeItem:not(.selected) .price { color: #c9c9c9; }
+
+.s-modalFooter {
+  margin-top:20px;
   display: block;
-  margin: 0 -20px;     /* ← 핵심: 부모 padding 상쇄 */
-  padding: 0 20px 0 20px;
 }
 
-/* 버튼 폭을 제한하는 전역 규칙을 무력화 */
-.modalFooter .completeButton {
+/* 버튼 규칙: JSX의 s-completeButton과 일치 */
+.s-modalFooter .s-completeButton {
   display: block;
-  width: 100% !important;      /* 컨테이너 기준 100% */
-  max-width: none !important;  /* ← 전역 max-width(200px 등) 제거 */
-  min-width: 0;                /* flex/min-content 수축 방지 */
-
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0;
   height: 60px;
-  padding: 0 !important;       /* 다른 padding 규칙 덮어쓰기 */
+  padding: 0 !important;
   box-sizing: border-box;
 
   background: #0EA64B;
@@ -198,5 +177,5 @@
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  appearance: none;            /* 브라우저 기본 버튼 스타일 제거 */
-} 
+  appearance: none;
+}

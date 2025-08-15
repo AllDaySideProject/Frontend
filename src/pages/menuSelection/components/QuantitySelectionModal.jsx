@@ -25,44 +25,46 @@ export const QuantitySelectionModal = ({ isOpen, onClose, selectedMenus, selecte
   };
 
   return (
-    <div className="modalOverlay" onClick={onClose}>
+    <div className="q-modalOverlay" onClick={onClose}>
       {/* 이벤트 버블링 제거 */}
-      <div className="modalContent" onClick={(e) => e.stopPropagation()}> 
-        <div className="pageIndicator">
-          <div className="indicator"></div>
-          <div className="indicator active"></div>
-        </div>
-        
-        {/* 메뉴 이름 */}
-        <div className="menuName">
-          {selectedMenus && selectedMenus.length > 0 ? selectedMenus[0] : '진미채볶음'}
-        </div>
-        <div className="quantitySelectionTitle">
-          수량을 선택해 주세요
-        </div>
-        
-        {/* 수량 목록 */}
-        <div className="quantityList">
-          {quantityOptions.map((quantity) => (
-            <div 
-              key={quantity}
-              className={`quantityItem ${selectedQuantity === quantity ? 'selected' : ''}`}
-              onClick={() => handleQuantitySelect(quantity)}
-            >
-              <div className="quantityInfo">
-                <div className="quantityText">{quantity}개</div>
-              </div>
+      <div className="q-modalContent" onClick={(e) => e.stopPropagation()}> 
+          <div className='q-modalPanel q-modalPanelSlideLeft'>
+            <div className="q-pageIndicator">
+              <div className="q-indicator"></div>
+              <div className="q-indicator q-active"></div>
             </div>
-          ))}
+            
+            {/* 메뉴 이름 */}
+            <div className="q-menuName">
+              {selectedMenus && selectedMenus.length > 0 ? selectedMenus[0] : '진미채볶음'}
+            </div>
+            <div className="quantitySelectionTitle">
+              수량을 선택해 주세요
+            </div>
+            
+            {/* 수량 목록 */}
+            <div className="quantityList">
+              {quantityOptions.map((quantity) => (
+                <div 
+                  key={quantity}
+                  className={`quantityItem ${selectedQuantity === quantity ? 'selected' : ''}`}
+                  onClick={() => handleQuantitySelect(quantity)}
+                >
+                  <div className="quantityInfo">
+                    <div className="quantityText">{quantity}개</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* 완료 버튼 */}
+            <div className="q-modalFooter">
+              <button className="q-completeButton" onClick={handleComplete}>
+                완료
+              </button>
+            </div>
+          </div>
         </div>
-        
-        {/* 완료 버튼 */}
-        <div className="modalFooter">
-          <button className="completeButton" onClick={handleComplete}>
-            완료
-          </button>
-        </div>
-      </div>
     </div>
   );
 };
