@@ -1,9 +1,9 @@
 import "./MenuPlusMap.scss";
 
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { CustomOverlayMap, MapMarker, Polyline } from "react-kakao-maps-sdk";
 import { BaseKakaoMap } from "../../../components/map/BaseKakaoMap";
-import { bentPath, getDistanceMeters } from "../../../components/map/mapUtils";
+import { getDistanceMeters } from "../../../components/map/mapUtils";
 
 import STORE_GR from "../../../assets/map/storeLocation-green.svg";
 import STORE_WH from "../../../assets/map/storeLocation-white.svg";
@@ -11,12 +11,14 @@ import USER from "../../../assets/map/userLocation.svg";
 
 import { useLocationPermission } from "../../../components/LocationPermissionContext"; // 위치 권한
 import { useCurrentPosition } from "../../../hooks/useCurrentPosition"; // 현재 위치
-import ScreenContainer from "../../../components/ScreenContainer";
 import { DistanceBox } from "../../../components/map/DistanceBox";
+import { BottomSheet } from "./BottomSheet";
 
 export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표시 + 가게 클릭 시 경로
     const [selectedStoreId, setSelectedStoreId] = useState(null);
     const [selectedDistance, setSelectedDistance] = useState(null);
+
+    const [sheetHeight, setSheetHeight] = useState(0); // BottomSheet 높이
 
     const { decided, agreed } = useLocationPermission();
     const { pos: userPos, request } = useCurrentPosition();
@@ -31,10 +33,13 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
         { id: 3, name: "할매반찬", lat: 37.5970, lng: 127.0064 },
     ]);
 
-    const selectedStore = useMemo( // 선택된 가게
-        () => stores.find((s) => s.id === selectedStoreId) || null,
-        [stores, selectedStoreId]
-    );
+    const [selectedStore, setSelectedStore] = useState(null); // 선택한 가게 정보
+    
+    const handleMarkerClick = (store) => { // 마커 클릭 시
+        setSelectedStore(store);
+        setSheetHeight(24.63); // 처음 열릴 때 높이
+        // setTimeout(() => setSheetHeight(40.19), 200); // 애니메이션 확장 가능
+    };
 
     const [routeCoords, setRouteCoords] = useState([]); // 경로 좌표 배열
 
@@ -71,19 +76,12 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                     options: { offset: { x: 20, y: 20 } },
                     }}
 
-                    onClick = { () =>
-                        setSelectedStoreId(prev => {
-                            const next = prev === s.id ? null : s.id
-                        
-                            if (next === null) {
-                                setRouteCoords([]);
-                                setSelectedDistance(null);
-                            } else {
-                                setRouteCoords([userPos, { lat: s.lat, lng: s.lng }]);
-                                setSelectedDistance(getDistanceMeters(userPos, s));
-                            } return next;
-                        }
-                    )}
+                    onClick = { () => {
+                        setSelectedStoreId(s.id); // 선택한 가게 ID 저장
+                        setRouteCoords([userPos, { lat: s.lat, lng: s.lng }]);
+                        setSelectedDistance(getDistanceMeters(userPos, s));
+                        setSheetHeight(24.63); // BottomSheet 열기
+                    }}
                 />
                 );
             })}
@@ -98,19 +96,29 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                 />
             )}
 
-            { selectedStore && (
+            { stores.find(s => s.id === selectedStoreId) && (
                 <CustomOverlayMap 
-                    position = {{ lat: selectedStore.lat, lng: selectedStore.lng }}
+                    position = {{
+                        lat: stores.find(s => s.id === selectedStoreId)?.lat,
+                        lng: stores.find(s => s.id === selectedStoreId)?.lng
+                    }}                    
                     xAnchor = { 1 }
                     yAnchor = { -0.2 }
                 >
                     <DistanceBox 
-                        name = { selectedStore.name }
+                        name = { stores.find(s => s.id === selectedStoreId)?.name }
                         distance = { selectedDistance }
                     />
                 </CustomOverlayMap>
             )}
-            </BaseKakaoMap>            
+            </BaseKakaoMap>  
+
+            <BottomSheet
+                height = { sheetHeight }
+                setHeight = { setSheetHeight }
+                storeId = { selectedStoreId }
+                stores = { stores }
+            />          
         </div>
   );
 }

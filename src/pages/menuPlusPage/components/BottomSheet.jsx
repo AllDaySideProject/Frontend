@@ -2,25 +2,44 @@ import "./BottomSheet.scss";
 
 import ScreenContainer from "../../../components/ScreenContainer"
 import { SheetBox } from "./SheetBox"
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Toast } from "./Toast";
 
-export const BottomSheet = () => {
-    const [menus, setMenus] = useState([
-        { id: 1, name: "진미채볶음", originalPrice: 4500, price: 3600, count: 0 },
-        { id: 2, name: "계란말이", originalPrice: 5000, price: 4000, count: 0 },
-        { id: 3, name: "멸치볶음", originalPrice: 3000, price: 2500, count: 0 },
-    ]);
+export const BottomSheet = ({ height, setHeight, storeId, stores }) => {
+    const store = stores.find(s => s.id === storeId); // ✅ 선택된 가게 정보
+
+    const menuData = { // 가게별 메뉴 데이터
+        1: [
+            { id: 1, name: "진미채볶음", originalPrice: 4500, price: 3600, count: 0 },
+            { id: 2, name: "계란말이", originalPrice: 5000, price: 4000, count: 0 },
+        ],
+        2: [
+            { id: 1, name: "떡볶이", originalPrice: 6000, price: 5000, count: 0 },
+            { id: 2, name: "순대", originalPrice: 4000, price: 3500, count: 0 },
+        ],
+        3: [
+            { id: 1, name: "멸치볶음", originalPrice: 3000, price: 2500, count: 0 },
+            { id: 2, name: "김치찌개", originalPrice: 7000, price: 6000, count: 0 },
+        ],
+    };
+
+    const [menus, setMenus] = useState(menuData[storeId] || []); // 선택된 가게의 메뉴 데이터
 
     const [showToast, setShowToast] = useState(false); // 토스트 메시지 표시 여부
 
-    const [sheetHeight, setSheetHeight] = useState(24.63); // 초기 높이 24.63rem
+    useEffect(() => { // 가게가 변경될 때 메뉴 데이터 업데이트
+        if (storeId) {
+            setMenus(menuData[storeId] || []);
+        }
+    }, [storeId]);
+
+    // const [sheetHeight, setSheetHeight] = useState(24.63); // 초기 높이 24.63rem
     const startY = useRef(0); // 드래그 시작 위치
     const startHeight = useRef(0); // 드래그 시작 시 높이
 
     const handleDragStart = (e) => { // 드래그 시작
         startY.current = e.touches ? e.touches[0].clientY : e.clientY;
-        startHeight.current = sheetHeight;
+        startHeight.current = height;
         document.addEventListener("mousemove", handleDragMove);
         document.addEventListener("mouseup", handleDragEnd);
         document.addEventListener("touchmove", handleDragMove);
@@ -34,7 +53,7 @@ export const BottomSheet = () => {
         
         // 최소 24.63rem 최대 40.19rem
         newHeight = Math.max(24.63, Math.min(newHeight, 40.19));
-        setSheetHeight(newHeight);
+        setHeight(newHeight);
     };
 
     const handleDragEnd = () => { // 드래그 종료
@@ -57,11 +76,15 @@ export const BottomSheet = () => {
         }
     };
 
+    console.log("storeId:", storeId);
+    console.log("menus:", menus);
+
+
     return (
         <ScreenContainer>
             <div 
                 className = "bottomSheet"
-                style = {{ height: `${sheetHeight}rem` }}
+                style = {{ height: `${ height }rem` }}
             >
                 <div 
                     className = "bottomSheetHeader"
@@ -76,14 +99,17 @@ export const BottomSheet = () => {
                    <p className = "sheetStoreName">유진이네 밥상</p> 
                    <p className = "sheetStoreType">한식 전문점</p>
                 </div>
-                
-                { menus.map(menu => (
-                    <SheetBox
-                    key = { menu.id }
-                    menu = { menu }
-                    onCountChange = { delta => updateCount(menu.id, delta) }
-                    />
-                ))}
+
+                <ScreenContainer bgColor = "#FFFFFF">
+                    { menus.map(menu => (
+                        <SheetBox
+                            key = { menu.id }
+                            menu = { menu }
+                            onCountChange = { delta => updateCount(menu.id, delta) }
+                        />
+                    ))}                    
+                </ScreenContainer>
+
             </div>
 
 
