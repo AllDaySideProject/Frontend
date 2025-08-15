@@ -3,6 +3,7 @@ import "./BottomSheet.scss";
 import ScreenContainer from "../../../components/ScreenContainer"
 import { SheetBox } from "./SheetBox"
 import { useState } from "react";
+import { Toast } from "./Toast";
 
 export const BottomSheet = () => {
     const [menus, setMenus] = useState([
@@ -11,12 +12,19 @@ export const BottomSheet = () => {
         { id: 3, name: "멸치볶음", originalPrice: 3000, price: 2500, count: 0 },
     ]);
 
+    const [showToast, setShowToast] = useState(false);
+
     const updateCount = (id, delta) => {
         setMenus(prev =>
             prev.map(m =>
                 m.id === id ? { ...m, count: Math.max(m.count + delta, 0) } : m
             )
         );
+
+        if (delta > 0) {
+            setShowToast(false);
+            setTimeout(() => setShowToast(true), 0);
+        }
     };
 
     return (
@@ -40,6 +48,16 @@ export const BottomSheet = () => {
                     />
                 ))}
             </div>
+
+
+            { showToast && (
+                <div className = "toastContainer">
+                    <Toast
+                        duration = { 2000 }
+                        onClose = { () => setShowToast(false) }
+                    />                    
+                </div>
+            )}
         </ScreenContainer>
     )
 }
