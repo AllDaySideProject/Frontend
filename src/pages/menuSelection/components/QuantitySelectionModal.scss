@@ -28,9 +28,7 @@
   min-height: 0;
 }
 
-.q-modalPanelSlideLeft{ 
-  animation: slideLeft 0.3s ease;
-}
+
 
 .q-pageIndicator {
   display: flex;
@@ -130,27 +128,11 @@
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  width: 100%;
+  width: 327px;
+  height: 60px;
   
   &:active {
     background-color: #0c8440;
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideLeft {
-  from {
-    transform: translateX(50%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}

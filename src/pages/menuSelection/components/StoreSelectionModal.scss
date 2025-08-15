@@ -33,21 +33,25 @@
 
 
 .s-completionMessage {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 600;
   color: #0EA64B;
   text-align: center;
-  margin-bottom: 30px;
-  line-height: 1.4;
+  margin-bottom: 28px;
+  margin-top: 13px;;
 }
 
 .s-basketContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
+  margin-bottom: 24px;;
 }
 
+.s-basketIcon{
+  width: 149px;
+  height: 149px;
+}
 
 
 .s-pageIndicator {
@@ -74,8 +78,8 @@
 }
 
 .storeSelectionTitle {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 400;
   text-align: left;
   padding-bottom: 50px;
   color: #111111;
@@ -154,18 +158,18 @@
 
 
 .s-modalFooter {
-  margin-top:20px;
-  display: block;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
 }
 
-/* 버튼 규칙: JSX의 s-completeButton과 일치 */
 .s-modalFooter .s-completeButton {
   display: block;
-  width: 100% ;
+  width: 327px ;
   max-width: none ;
   min-width: 0;
   height: 60px;
-  padding: 0 ;
+  padding: 0 ;  
   box-sizing: border-box;
   background: #0EA64B;
   color: #f1f1f1;
@@ -191,6 +195,11 @@
 .s-panelInFromRight{
   animation: panelInFromRight 0.3s ease-out;
 }
+.s-msgRest{
+  color:#111111
+}
+
+
 
 @keyframes panelInFromRight {
   from { transform: translateX(50%); opacity: 0.0; }

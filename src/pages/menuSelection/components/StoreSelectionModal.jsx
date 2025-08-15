@@ -13,7 +13,7 @@ const PER_ROW= ITEM_HEIGHT;
 const CONTAINER_ROWS = 3;//한번에 보여줄 가게 개수
 const CONTAINER_HEIGHT = ITEM_HEIGHT * CONTAINER_ROWS;
 // 마지막 아이템이 맨 위까지 올라올 수 있도록 하는 여유 높이
-const BOTTOM_SPACER = CONTAINER_HEIGHT - (ITEM_HEIGHT*2);
+const BOTTOM_SPACER = CONTAINER_HEIGHT - (ITEM_HEIGHT*1.5);
 
 export const StoreSelectionModal = ({ isOpen, onClose, selectedMenus, onComplete }) => {
   const [selectedStore, setSelectedStore] = useState('희망식당');
@@ -29,6 +29,7 @@ export const StoreSelectionModal = ({ isOpen, onClose, selectedMenus, onComplete
     if(isOpen){
       setStep('store');//열릴 때 항상 첫단계로
       setShellEnter(true);//쉘 slideUp 트리거
+      setSelectedStore('희망식당');
     }
   }, [isOpen]);
   
@@ -135,8 +136,8 @@ export const StoreSelectionModal = ({ isOpen, onClose, selectedMenus, onComplete
         {step === 'basket' && (
           <div className="s-panel s-panelInFromRight">
             <div className="s-completionMessage">
-              {selectedMenus && selectedMenus.length > 0 ? selectedMenus[0] : '진미채볶음'} {selectedQuantity}개가
-              추가되었어요.
+              {selectedMenus && selectedMenus.length > 0 ? selectedMenus[0] : '진미채볶음'} {selectedQuantity}개
+              <span className="s-msgRest">가 추가되었어요.</span>
             </div>
             <div className="s-basketContainer">
               <GreenBasketIcon />
