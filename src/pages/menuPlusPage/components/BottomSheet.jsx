@@ -12,6 +12,10 @@ export const BottomSheet = ({ height, setHeight, storeId, stores, setShowToast }
         1: [
             { id: 1, name: "진미채볶음", originalPrice: 4500, price: 3600, count: 0 },
             { id: 2, name: "계란말이", originalPrice: 5000, price: 4000, count: 0 },
+            { id: 3, name: "겉절이김치", originalPrice: 3000, price: 1500, count: 0 },
+            { id: 4, name: "마늘장아찌", originalPrice: 3500, price: 2500, count: 0 },
+            { id: 5, name: "고구마맛탕", originalPrice: 5000, price: 4000, count: 0 },
+            { id: 6, name: "멸치볶음", originalPrice: 2500, price: 2000, count: 0 },
         ],
         2: [
             { id: 1, name: "떡볶이", originalPrice: 6000, price: 5000, count: 0 },
@@ -98,15 +102,15 @@ export const BottomSheet = ({ height, setHeight, storeId, stores, setShowToast }
                    <p className = "sheetStoreType">{ store.type }</p>
                 </div>
 
-                <ScreenContainer bgColor = "#FFFFFF">
+                <div className = "sheetBoxContainer">
                     { menus.map(menu => (
                         <SheetBox
                             key = { menu.id }
                             menu = { menu }
                             onCountChange = { delta => updateCount(menu.id, delta) }
                         />
-                    ))}                    
-                </ScreenContainer>
+                    ))}     
+                </div>               
             </div>
         </ScreenContainer>
     )
