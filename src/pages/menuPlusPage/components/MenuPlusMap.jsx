@@ -1,9 +1,9 @@
 import "./MenuPlusMap.scss";
 
 import React, { useEffect, useMemo, useState } from "react";
-import { MapMarker, Polyline } from "react-kakao-maps-sdk";
+import { CustomOverlayMap, MapMarker, Polyline } from "react-kakao-maps-sdk";
 import { BaseKakaoMap } from "../../../components/map/BaseKakaoMap";
-import { bentPath } from "../../../components/map/mapUtils";
+import { bentPath, getDistanceMeters } from "../../../components/map/mapUtils";
 
 import STORE_GR from "../../../assets/map/storeLocation-green.svg";
 import STORE_WH from "../../../assets/map/storeLocation-white.svg";
@@ -12,9 +12,11 @@ import USER from "../../../assets/map/userLocation.svg";
 import { useLocationPermission } from "../../../components/LocationPermissionContext"; // 위치 권한
 import { useCurrentPosition } from "../../../hooks/useCurrentPosition"; // 현재 위치
 import ScreenContainer from "../../../components/ScreenContainer";
+import { DistanceBox } from "../../../components/map/DistaceBox";
 
 export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표시 + 가게 클릭 시 경로
     const [selectedStoreId, setSelectedStoreId] = useState(null);
+    const [selectedDistance, setSelectedDistance] = useState(null);
 
     const { decided, agreed } = useLocationPermission();
     const { pos: userPos, request } = useCurrentPosition();
@@ -68,14 +70,20 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                     size: { width: 40, height: 40 },
                     options: { offset: { x: 20, y: 20 } },
                     }}
+
                     onClick = { () =>
-                    setSelectedStoreId(prev => {
-                        const next = prev === s.id ? null : s.id
-                    
-                        if (next === null) setRouteCoords([]);
-                        else setRouteCoords([userPos, { lat: s.lat, lng: s.lng }]);
-                        return next;
-                    })}
+                        setSelectedStoreId(prev => {
+                            const next = prev === s.id ? null : s.id
+                        
+                            if (next === null) {
+                                setRouteCoords([]);
+                                setSelectedDistance(null);
+                            } else {
+                                setRouteCoords([userPos, { lat: s.lat, lng: s.lng }]);
+                                setSelectedDistance(getDistanceMeters(userPos, s));
+                            } return next;
+                        }
+                    )}
                 />
                 );
             })}
@@ -88,6 +96,19 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                     strokeOpacity = { 1 }
                     strokeStyle = "dash"
                 />
+            )}
+
+            { selectedStore && (
+                <CustomOverlayMap 
+                    position = {{ lat: selectedStore.lat, lng: selectedStore.lng }}
+                    xAnchor = { 0.9 }
+                    yAnchor = { -0.2 }
+                >
+                    <DistanceBox 
+                        name = { selectedStore.name }
+                        distance = { selectedDistance }
+                    />
+                </CustomOverlayMap>
             )}
             </BaseKakaoMap>            
         </div>
