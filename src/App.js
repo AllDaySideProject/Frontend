@@ -8,7 +8,7 @@ import { MenuSelection } from "./pages/menuSelection/MenuSelection";
 import { PickupPage } from "./pages/pickupPage/PickupPage";
 import { PickupCompletePage } from "./pages/pickupPage/PickupCompletePage";
 import { TipsPage } from "./pages/tipPage/TipsPage";
-
+import { AiSuggestion } from "./pages/aiSuggestion/AiSuggestion";
 function App() {
   return (
     <LocationPermissionProvider>
@@ -20,6 +20,7 @@ function App() {
           <Route path="/pickup/complete" element={<PickupCompletePage />} />
           <Route path="/tips" element={<TipsPage />} />
           <Route path="/menuselect" element={<MenuSelection />} />
+          <Route path="/aiSuggest" element={<AiSuggestion/>}/>
         </Routes>    
       </BrowserRouter>      
     </LocationPermissionProvider>
