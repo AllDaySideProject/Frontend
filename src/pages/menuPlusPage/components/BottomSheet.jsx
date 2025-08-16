@@ -84,9 +84,16 @@ export const BottomSheet = ({ height, setHeight, storeId, stores, setShowToast }
 
     return (
         <ScreenContainer>
+            { height > 0 && (
+                < div 
+                    className = "bottomSheetBackground" 
+                    onClick = { () => setHeight(0) }
+                />
+            )}
             <div 
                 className = "bottomSheet"
                 style = {{ height: `${ height }rem` }}
+                onClick = { (e) => e.stopPropagation() }
             >
                 <div 
                     className = "bottomSheetHeader"
