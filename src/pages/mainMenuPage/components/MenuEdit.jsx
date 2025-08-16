@@ -32,17 +32,13 @@ export const MenuEdit = ({ mode, setMode, selectedIds, toggleSelect }) => {
                         삭제하기
                     </p>    
                     <div className = "menuBoxList">
-                        { menus.map((m, idx) => (
+                        { menus.map(menu  => (
                             <MenuBox
-                                key = { m.id }
+                                key = { menu.id }
                                 mode = { mode }
-                                menuName = { m.name }
-                                storeName = { m.store }
-                                count = { m.count }
-                                price = { m.price }
-                                originalPrice = { m.originalPrice }
-                                isSelected = { selectedIds.has(m.id) }
-                                onToggleSelect = { () => toggleSelect(m.id) }
+                                menu = { menu }
+                                isSelected = { selectedIds.has(menu.id) }
+                                onToggleSelect = { () => toggleSelect(menu.id) }
                             />
                         ))}
                     </div>

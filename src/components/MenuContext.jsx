@@ -13,9 +13,8 @@ export const MenuProvider = ({ children }) => {
     }, [menus]);
 
     const addMenu = (menu) => { // 메뉴 추가
-        setMenus(prev => [...prev, menu]);
+        setMenus(prev => [...prev, { ...menu, category: menu.category }]);
     };
-
 
     const updateCount = (id, delta) => {
         setMenus(prev =>
