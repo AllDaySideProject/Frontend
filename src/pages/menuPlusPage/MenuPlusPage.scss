@@ -1,0 +1,13 @@
+/* MenuPlusPage.scss */
+.mapBg {
+  background-color: #c9f3bf;   /* 좌우 여백 색 */
+  display: flex;
+  justify-content: center;     /* 가운데 배치 */
+  min-height: 100vh;
+}
+
+.mapInner {
+  width: 390px;                /* 지도 영역 고정 */
+  min-height: 100vh;
+  background-color: #fff;       /* 중앙 지도 박스 배경 (원하는 대로) */
+}
