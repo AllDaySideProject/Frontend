@@ -24,18 +24,20 @@ export const Location = () => {
     if (!userPos) return null; // 위치 잡히기 전엔 안 그림
 
     return (
-        <div className = "locationContainer">
-            <PickupMap 
-                userPos = { userPos } 
-                destinations = { destinations} 
-                selectedId = { selectedId }
-                onDestinationClick = { (id) => {
-                    setSelectedId(prev => prev === id ? null : id);
-                 }}
-                width = "24.375rem"
-                height = "31.81rem"
-                useBent = { false }
-            />
+        <div className = "locationBg">
+            <div className = "locationContainer">
+                <PickupMap 
+                    userPos = { userPos } 
+                    destinations = { destinations} 
+                    selectedId = { selectedId }
+                    onDestinationClick = { (id) => {
+                        setSelectedId(prev => prev === id ? null : id);
+                    }}
+                    width = "24.375rem"
+                    height = "31.81rem"
+                    useBent = { false }
+                />
+            </div>
         </div>
     );
 }
