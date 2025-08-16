@@ -1,8 +1,8 @@
 .HeaderBar {
-  padding: 5px;
+  padding: 12px;
   display: flex;
   align-items:center;
-  height: 56px;;
+  height: 56px;
 }
 
 .BackButton {
@@ -20,7 +20,7 @@
   display: flex;
   align-items: center;
   gap:8px;
-  padding: 10px;
+  padding: 10px 10px ;
   border-radius: 14px;
   border: 1px solid #0EA64B;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);

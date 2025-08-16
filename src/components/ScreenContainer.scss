@@ -15,7 +15,6 @@
 //개발 전용 코드 양쪽 마진 보여주는 용도
 .screenContainer {
   background-color: #c9f3bf;
-  height: 100vh;
 }
 
 .screenContent {
@@ -23,7 +22,6 @@
   flex-direction: column;
 
   width: 100%;
-  height: 100%;
   max-width: 20.38rem;
 
   padding-left: 2rem;
