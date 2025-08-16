@@ -4,18 +4,36 @@ import MINUS from "../../../assets/map/sheet-minus.svg";
 import PLUS from "../../../assets/map/sheet-plus.svg";
 import usePricing from "../../../hooks/usePricing";
 
+import SOUP_ICON from "../../../assets/icons/soup.svg";
+import BRAISED_ICON from "../../../assets/icons/braised.svg";
+import SEASONED_ICON from "../../../assets/icons/seasoned.svg";
+import STIRFRY_ICON from "../../../assets/icons/stirfry.svg";
+import STEAMED_ICON from "../../../assets/icons/steamed.svg";
+
+const categoryIcons = {
+  SOUP: SOUP_ICON,
+  BRAISED: BRAISED_ICON,
+  SEASONED: SEASONED_ICON,
+  STIR_FRY: STIRFRY_ICON,
+  STEAMED: STEAMED_ICON,
+};
+
 export const SheetBox = ({ menu, onCountChange }) => {
-    const { name, originalPrice, price, count } = menu;
+    const { name, originalPrice, price, count, category } = menu;
 
     const discountAmount = (originalPrice - price) * count;
     const discountRate = Math.round(((originalPrice - price) / originalPrice) * 100);
 
     const { fmt } = usePricing({ price, count }, discountAmount);
 
+    const icon = categoryIcons[category]; // 카테고리별 아이콘 고르기
+
     return (
         <div className = "sheetBox">
             <div className = "sheetBoxLeft">
-                <div className = "menuImg" />
+                <div className = "menuImg">
+                    { icon && <img src = { icon } alt = { category } />}
+                </div>
                 <div className ="sheetBoxLeftText">
                     <p className = "sheetMenuName">{ name }</p>
                     <p className = "sheetOriginalPrice">{ fmt(originalPrice) }원</p>

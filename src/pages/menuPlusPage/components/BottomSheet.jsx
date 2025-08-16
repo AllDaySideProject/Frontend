@@ -10,20 +10,20 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, se
 
     const menuData = { // 가게별 메뉴 데이터
         1: [
-            { id: 1, name: "진미채볶음", originalPrice: 4500, price: 3600, count: 0 },
-            { id: 2, name: "계란말이", originalPrice: 5000, price: 4000, count: 0 },
-            { id: 3, name: "겉절이김치", originalPrice: 3000, price: 1500, count: 0 },
-            { id: 4, name: "마늘장아찌", originalPrice: 3500, price: 2500, count: 0 },
-            { id: 5, name: "고구마맛탕", originalPrice: 5000, price: 4000, count: 0 },
-            { id: 6, name: "멸치볶음", originalPrice: 2500, price: 2000, count: 0 },
+            { id: 1, name: "진미채볶음", originalPrice: 4500, price: 3600, count: 0, category: "SEASONED" },
+            { id: 2, name: "계란말이", originalPrice: 5000, price: 4000, count: 0, category: "SEASONED" },
+            { id: 3, name: "겉절이김치", originalPrice: 3000, price: 1500, count: 0, category: "SEASONED" },
+            { id: 4, name: "마늘장아찌", originalPrice: 3500, price: 2500, count: 0, category: "SEASONED" },
+            { id: 5, name: "고구마맛탕", originalPrice: 5000, price: 4000, count: 0, category: "BRAISED" },
+            { id: 6, name: "멸치볶음", originalPrice: 2500, price: 2000, count: 0, category: "STIR_FRY" },
         ],
         2: [
-            { id: 1, name: "떡볶이", originalPrice: 6000, price: 5000, count: 0 },
-            { id: 2, name: "순대", originalPrice: 4000, price: 3500, count: 0 },
+            { id: 1, name: "떡볶이", originalPrice: 6000, price: 5000, count: 0, category: "STIR_FRY" },
+            { id: 2, name: "순대", originalPrice: 4000, price: 3500, count: 0, category: "STIR_FRY" },
         ],
         3: [
-            { id: 1, name: "멸치볶음", originalPrice: 3000, price: 2500, count: 0 },
-            { id: 2, name: "김치찌개", originalPrice: 7000, price: 6000, count: 0 },
+            { id: 1, name: "멸치볶음", originalPrice: 3000, price: 2500, count: 0, category: "STIR_FRY" },
+            { id: 2, name: "김치찌개", originalPrice: 7000, price: 6000, count: 0, category: "SOUP" },
         ],
     };
 
