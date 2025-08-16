@@ -1,7 +1,7 @@
 import React ,{useState}from 'react'
 import {Menu} from './components/Menu'
 import ScreenContainer from '../../components/ScreenContainer';
-import { HeaderArrow } from './components/HeaderArrow';
+import HeaderArrow from '../../components/HeaderArrow';
 import './MenuSelection.scss'
 import { CompleteButton } from './components/CompleteButton';
 import { StoreSelectionModal } from './components/StoreSelectionModal';

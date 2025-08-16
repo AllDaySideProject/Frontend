@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from 'react'
-import { HeaderArrow } from '../../components/HeaderArrow'
 import ScreenContainer from '../../components/ScreenContainer'
 import { Menu } from '../menuSelection/components/Menu'
 import { StoreSelectionModal } from '../menuSelection/components/StoreSelectionModal'
@@ -9,7 +8,7 @@ import diet from '../../assets/aiSuggestion/diet.svg'
 import bulkUp from '../../assets/aiSuggestion/bulk_up.svg'
 import lowBloodSuger from '../../assets/aiSuggestion/low_blood_sugar.svg'
 import lowCarBo from '../../assets/aiSuggestion/low_carbohydrate.svg'
-
+import HeaderArrow from '../../components/HeaderArrow'
 import './AiSuggestion.scss'
 
 const link="https://via.placeholder.com/100"
@@ -77,6 +76,7 @@ export const AiSuggestion = () => {
 
   return (
     <ScreenContainer>
+      <HeaderArrow/>
       <div className='AiSuggestionLayout'>
         <div className='AiSuggestionTitle'>오늘 이런 메뉴는 어떠세요?</div>
         <div className='AiSuggestionContent'>AI가 픽한 테마 별 오늘의 밥상을 만나보세요</div>
