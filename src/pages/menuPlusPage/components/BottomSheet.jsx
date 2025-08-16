@@ -5,7 +5,7 @@ import { SheetBox } from "./SheetBox"
 import { useEffect, useRef, useState } from "react";
 import { Toast } from "./Toast";
 
-export const BottomSheet = ({ height, setHeight, storeId, stores, setShowToast }) => {
+export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, setShowToast }) => {
     const store = stores.find(s => s.id === storeId); // 선택된 가게 정보
 
     const menuData = { // 가게별 메뉴 데이터
@@ -87,7 +87,10 @@ export const BottomSheet = ({ height, setHeight, storeId, stores, setShowToast }
             { height > 0 && (
                 < div 
                     className = "bottomSheetBackground" 
-                    onClick = { () => setHeight(0) }
+                    onClick = { () => {
+                        setHeight(0);
+                        setStoreId(null);
+                    }}
                 />
             )}
             <div 

@@ -120,6 +120,7 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                     height = { sheetHeight }
                     setHeight = { setSheetHeight }
                     storeId = { selectedStoreId }
+                    setStoreId = { setSelectedStoreId }
                     stores = { stores }
                     setShowToast = { setShowToast }
                 />                   
