@@ -56,7 +56,7 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
             <BaseKakaoMap 
                 center = { userPos } 
                 boundsPoints = { boundsPoints }
-                height = "100vh"
+                height = "52.75rem"
             >
 
             <MapMarker // 내 위치 마커
