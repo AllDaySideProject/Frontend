@@ -1,0 +1,36 @@
+.AiSuggestionLayout{
+  display: flex;
+  flex-direction: column;
+}
+.AiSuggestionTitle{
+  font-size: 21px;
+  font-weight: bold;
+  padding-bottom: 4px;
+}
+.AiSuggestionContent{
+  font-size: 15px;
+}
+
+.SuggestionTypeMarqueeWrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.SuggestionTypeMarquee {
+  padding-top: 24px;
+  padding-bottom:24px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.ManuItemCardLayout{
+  display: flex;
+  flex-direction: column;
+}
+
+.MenuList{
+  display: flex;
+  flex-direction: column;
+  gap:12px;
+}

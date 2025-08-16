@@ -1,0 +1,38 @@
+.Toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px;
+  border: 1px solid #cfe6d2;  // 연한 초록 테두리
+  border-radius: 9999px;       // 알약 모양
+  background: #fff;
+}
+
+.Toggle__item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  cursor: pointer;
+  color: #6c7a6f;
+
+  input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:hover { background: #f6fbf7; }
+}
+
+.Toggle__item.is-active {
+  background: #eaf7ed;     // 선택 시 연한 초록 배경
+  border: 1px solid #7ac28a;
+  color: #246b35;
+}
+  
+.Toggle__icon { line-height: 1; }
+.Toggle__label { font-size: 14px; font-weight: 600; }

@@ -1,0 +1,218 @@
+.s-modalOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.s-modalContent {
+  background: white;
+  width: 390px;
+  height: 358px;
+  padding:24px;
+  box-sizing: border-box;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.s-completionContent {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  text-align: center;
+  min-height: 0;
+}
+
+
+.s-completionMessage {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0EA64B;
+  text-align: center;
+  margin-bottom: 28px;
+  margin-top: 13px;;
+}
+
+.s-basketContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;;
+}
+
+.s-basketIcon{
+  width: 149px;
+  height: 149px;
+}
+
+
+.s-pageIndicator {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.s-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #b0b0b0;
+}
+.s-indicator.active {background-color: #111111;}
+
+.s-menuName {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+  padding-bottom: 8px;
+  color: #0EA64B;
+}
+
+.storeSelectionTitle {
+  font-size: 20px;
+  font-weight: 400;
+  text-align: left;
+  padding-bottom: 50px;
+  color: #111111;
+}
+
+.storeList {
+  display: flex;
+  flex-direction: column;
+  margin-left: -24px;     // 모달 내부 패딩 상쇄 
+  margin-right: -24px;
+  width: calc(100% + 48px);
+
+  flex: 1 1 auto;        //남는 공간 차지
+
+  overflow-x:hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  
+
+  min-height: 0;
+  //스크롤바 숨김
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.storeList::-webkit-scrollbar{display: none;}
+
+.storeListSpacer {
+  flex: 0 0 auto;     
+  min-height: 0;      
+}
+
+.storeItem {
+  width: 100%;
+  flex: 0 0 40px;
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 7px;
+  border: 1px solid transparent; /* 선택 시 크기 흔들림 방지 */
+  background: transparent;
+}
+
+.storeItem.selected { background-color: #E4E4E4; }
+
+.storeInfo {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.storeName {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111111;
+}
+.storeDetails {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 4px;
+}
+.distance {
+  font-size: 20px;
+  font-weight: 500;
+  color: #848484;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0EA64B;
+}
+.storeItem:not(.selected) .distance,
+.storeItem:not(.selected) .storeName,
+.storeItem:not(.selected) .price { color: #c9c9c9; }
+
+
+.s-modalFooter {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.s-modalFooter .s-completeButton {
+  display: block;
+  width: 327px ;
+  max-width: none ;
+  min-width: 0;
+  height: 60px;
+  padding: 0 ;  
+  box-sizing: border-box;
+  background: #0EA64B;
+  color: #f1f1f1;
+  border: 0;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  appearance: none;
+}
+
+.s-shellEnterFromBottom{//첫 등장 시
+  animation: slideUp 0.3s ease-out;
+}
+//패널 컨테이너
+.s-panel{
+  display: flex;
+  flex-direction: column;
+  flex:1 1 auto;
+  min-height: 0;;
+}
+//단계 전환시
+.s-panelInFromRight{
+  animation: panelInFromRight 0.3s ease-out;
+}
+.s-msgRest{
+  color:#111111
+}
+
+
+
+@keyframes panelInFromRight {
+  from { transform: translateX(50%); opacity: 0.0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}

@@ -1,0 +1,34 @@
+.buttonLayout {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;//화면 하단에 고정시킴킴
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  background: transparent;//뒤의 배경이 보이도록 함
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.buttonContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 326px;
+  height: 60px;
+  background-color: #0EA64B;
+  color: #F1F1F1;
+  border: 0;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  
+  
+}

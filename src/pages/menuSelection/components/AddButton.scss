@@ -1,0 +1,59 @@
+.AddButton {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background: white;
+  color: #ccc;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.AddButton:hover {
+  border-color: #0EA64B;
+  color: #0EA64B;
+}
+
+.AddButton.is-selected {
+  border-color: #0EA64B;
+  background: #0EA64B;
+  color: white;
+  width: 26px;
+  height: 26px;
+}
+
+.selectedButtons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.deleteButton {
+  border: 0;
+  background: #FAFAFA;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.deleteButton img {
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.deleteButton:hover {
+  border-color: #ff4444;
+}
+
+.deleteButton:hover img {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+}
