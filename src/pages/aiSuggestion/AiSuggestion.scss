@@ -1,25 +1,15 @@
 .AiSuggestionLayout{
-  padding:0 1rem 0 1rem;
   display: flex;
   flex-direction: column;
-  gap:1rem;
 }
 .AiSuggestionTitle{
   font-size: 21px;
   font-weight: bold;
-  padding-bottom: 0.5rem;
+  padding-bottom: 4px;
 }
 .AiSuggestionContent{
   font-size: 15px;
-  padding-bottom: 0.5rem;
 }
-// .SuggestionTypeLayout {
-//   display: flex;
-//   flex-direction: row;
-//   gap: 1rem; 
-//   justify-content: center; 
-//   align-items: center;
-// }
 
 .SuggestionTypeMarqueeWrapper {
   overflow: hidden;
@@ -27,18 +17,20 @@
 }
 
 .SuggestionTypeMarquee {
+  padding-top: 24px;
+  padding-bottom:24px;
   display: flex;
-  gap: 1rem;
-  animation: marquee 10s linear infinite;
-  /* 카드가 오른쪽으로 흐르도록 */
+  gap: 20px;
+  justify-content: center;
 }
 
-@keyframes marquee {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-}
 .ManuItemCardLayout{
   display: flex;
   flex-direction: column;
-  gap:1rem;
+}
+
+.MenuList{
+  display: flex;
+  flex-direction: column;
+  gap:12px;
 }

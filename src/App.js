@@ -8,8 +8,8 @@ import { MenuSelection } from "./pages/menuSelection/MenuSelection";
 import { PickupPage } from "./pages/pickupPage/PickupPage";
 import { PickupCompletePage } from "./pages/pickupPage/PickupCompletePage";
 import { TipsPage } from "./pages/tipPage/TipsPage";
-import KakaoMap from "./components/map/KakaoMap";
 import { MenuPlusPage } from "./pages/menuPlusPage/MenuPlusPage";
+import { AiSuggestion } from "./pages/aiSuggestion/AiSuggestion";
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
           <Route path="/tips" element={<TipsPage />} />
           <Route path="/menuselect" element={<MenuSelection />} />
           <Route path="/menu/map" element={<MenuPlusPage />} />
+          <Route path="/aiSuggest" element={<AiSuggestion/>}/>
         </Routes>    
       </BrowserRouter>      
     </LocationPermissionProvider>

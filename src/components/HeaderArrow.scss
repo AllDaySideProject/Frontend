@@ -1,12 +1,70 @@
-.arrowContainer {
-    display: flex;
-    // width: 24.375rem;
-    padding: 1.125rem 0 1.12rem 0;
-    flex-direction: column;
+.HeaderBar {
+  padding: 5px;
+  display: flex;
+  align-items:center;
+  height: 56px;;
+}
 
-    img {
-        width: 1.25rem;
-        height: 1.25rem;
-        aspect-ratio: 1/1;
-    }
+.BackButton {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.SwitchGroup {
+  display: flex;
+  align-items: center;
+  gap:8px;
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid #0EA64B;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+
+  position: absolute;
+  left:50%;
+  transform: translateX(-50%);
+  
+}
+
+/* 각 버튼: 비활성은 아이콘만, 활성은 초록 pill + 라벨 */
+.SwitchBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;                
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.SwitchBtn .btn-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.SwitchBtn .btn-label {
+  display: none;            /* 비활성일 땐 라벨 숨김 */
+}
+
+.SwitchBtn.active {
+  padding: 7px 14px;               
+  border-color: #0EA64B;
+  background: #fff;
+}
+
+.SwitchBtn.active .btn-icon {
+  display: none;   /* 라벨이 보일 때 아이콘 숨김 */
+  filter: none;                     
+}
+
+.SwitchBtn.active .btn-label {
+  display: inline;                  
+  color: #0EA64B;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1;
 }
