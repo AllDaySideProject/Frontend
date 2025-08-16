@@ -6,11 +6,11 @@ export const MenuProvider = ({ children }) => {
     const [menus, setMenus] = useState([]); // 메뉴 목록 전역 상태
 
     const addMenu = (menu) => { // 메뉴 추가
-        setMenus(prev => [...prev, menu]);
+        setMenus(prev => [...prev, { id: Date.now(), ...menu }]);
     };
 
-    const removeMenu = (menu) => { // 메뉴 제거
-        setMenus(prev => prev.filter(m => m !== menu));
+    const removeMenu = (id) => { // 메뉴 제거
+        setMenus(prev => prev.filter(m => m.id !== id));
     };
 
     return (

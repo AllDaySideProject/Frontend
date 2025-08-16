@@ -3,17 +3,20 @@ import { Header } from "../mainPage/components/Header";
 import { ButtonRow } from "./components/ButtonRow";
 import { MenuEdit } from "./components/MenuEdit";
 import { Modal } from "../../components/Modal";
+import { useMenu } from "../../components/MenuContext";
 
 export const MainMenuPage = () => {
     const [mode, setMode] = useState("normal"); // 모드 상태 추가
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 여는 상태 추가
 
-    const [items, setItems] = useState([
-        { id: 1, name: "진미채볶음", store: "희망식당", count: 1, price: 4500, originalPrice: 7000 },
-        { id: 2, name: "멸치볶음", store: "우진이네 밥상", count: 1, price: 5500, originalPrice: 7500 },
-        { id: 3, name: "두부조림", store: "정신식당", count: 1, price: 8000, originalPrice: 9000 },
-        { id: 4, name: "콩나물무침", store: "백씨네쌈밥", count: 1, price: 3000, originalPrice: 6500 },
-    ]);
+    // const [items, setItems] = useState([
+    //     { id: 1, name: "진미채볶음", store: "희망식당", count: 1, price: 4500, originalPrice: 7000 },
+    //     { id: 2, name: "멸치볶음", store: "우진이네 밥상", count: 1, price: 5500, originalPrice: 7500 },
+    //     { id: 3, name: "두부조림", store: "정신식당", count: 1, price: 8000, originalPrice: 9000 },
+    //     { id: 4, name: "콩나물무침", store: "백씨네쌈밥", count: 1, price: 3000, originalPrice: 6500 },
+    // ]);
+
+    const { menus, removeMenu } = useMenu();
 
     const [selectedIds, setSelectedIds] = useState(new Set()); // 삭제 모드에서 선택된 메뉴 id 저장
 
@@ -38,7 +41,8 @@ export const MainMenuPage = () => {
     };
 
     const onRightBtnClick = () => { // 삭제하기 버튼 클릭
-        setItems(prevItems => prevItems.filter(item => !selectedIds.has(item.id))); // 선택되지 않은 메뉴 정보 저장
+        Array.from(selectedIds).forEach(id => removeMenu(id));
+
         setSelectedIds(new Set()); // 선택 상태 초기화
         setMode("normal"); // 모드 초기화
         setIsModalOpen(false); // 모달 닫기
@@ -51,7 +55,6 @@ export const MainMenuPage = () => {
             <MenuEdit 
                 mode = { mode }
                 setMode = { setMode } 
-                items = { items }             
                 selectedIds = { selectedIds } // 선택된 메뉴 판단
                 toggleSelect = { toggleSelect }
             />
