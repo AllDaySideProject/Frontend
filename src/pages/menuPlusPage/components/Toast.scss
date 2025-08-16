@@ -1,6 +1,8 @@
 .toast {
+    width: 20.375rem;
+    height: 2.375rem;
     display: inline-flex;
-    padding: 0.5rem 5.625rem;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     border-radius: 0.4375rem;
