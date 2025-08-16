@@ -17,6 +17,11 @@ export const MainMenuPage = () => {
     // ]);
 
     const { menus, removeMenu } = useMenu();
+    useEffect(() => {
+        console.log("전역 menus:", menus);
+    }, [menus]);
+    console.log("메뉴 목록:", menus); // 메뉴 목록 콘솔 메시지
+    
 
     const [selectedIds, setSelectedIds] = useState(new Set()); // 삭제 모드에서 선택된 메뉴 id 저장
 
