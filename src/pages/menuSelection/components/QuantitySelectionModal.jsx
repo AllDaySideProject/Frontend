@@ -1,68 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './QuantitySelectionModal.scss';
 
-export const QuantitySelectionModal = ({ isOpen, onClose, selectedMenus, selectedStore, onComplete }) => {
+const ITEM_HEIGHT=40;
+const CONTAINER_ROWS=3;//한번에 보일 줄 수 
+const CONTAINER_HEIGHT=ITEM_HEIGHT*CONTAINER_ROWS;
+const BOTTOM_SPACER=CONTAINER_HEIGHT-ITEM_HEIGHT;
+export const QuantitySelectionModal = ({ 
+  isOpen, 
+  onClose, 
+  selectedMenus, 
+  selectedStore, 
+  onComplete,
+  embedded=false,
+}) => {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
-  
+  const listRef=useRef(null);
+
   if (!isOpen) return null;
 
   const quantityOptions = [1, 2, 3, 4, 5];
 
-  const handleQuantitySelect = (quantity) => {
-    setSelectedQuantity(quantity);
+  const handleQuantityScroll=()=>{
+    const el = listRef.current;
+    if(!el) return;
+    const st=el.scrollTop;
+    const idx=Math.round(st/ITEM_HEIGHT);
+    const clamped=Math.min(Math.max(idx, 0), quantityOptions.length-1);
+    const q = quantityOptions[clamped];
+    if(q!==selectedQuantity) setSelectedQuantity(q);
   };
 
   const handleComplete = () => {
-    // 완료 처리 로직
-    console.log('선택된 수량:', selectedQuantity);
-    console.log('선택된 가게:', selectedStore);
-    
-    // onComplete 콜백 호출
-    if (onComplete) {
-      onComplete(selectedQuantity);
-    }
-    
+   onComplete?.(selectedQuantity);
   };
 
-  return (
-    <div className="modalOverlay" onClick={onClose}>
-      {/* 이벤트 버블링 제거 */}
-      <div className="modalContent" onClick={(e) => e.stopPropagation()}> 
-        <div className="pageIndicator">
-          <div className="indicator"></div>
-          <div className="indicator active"></div>
+  if (embedded) {
+    return (
+      <div className="q-embeddedPanel">
+        <div className="q-pageIndicator">
+          <div className="q-indicator"></div>
+          <div className="q-indicator q-active"></div>
         </div>
-        
-        {/* 메뉴 이름 */}
-        <div className="menuName">
+
+        <div className="q-menuName">
           {selectedMenus && selectedMenus.length > 0 ? selectedMenus[0] : '진미채볶음'}
         </div>
-        <div className="quantitySelectionTitle">
-          수량을 선택해 주세요
-        </div>
-        
-        {/* 수량 목록 */}
-        <div className="quantityList">
+        <div className="quantitySelectionTitle">수량을 선택해 주세요</div>
+
+        <div className="quantityList" ref={listRef} onScroll={handleQuantityScroll} style={{ height: CONTAINER_HEIGHT }}>
           {quantityOptions.map((quantity) => (
-            <div 
+            <div
               key={quantity}
               className={`quantityItem ${selectedQuantity === quantity ? 'selected' : ''}`}
-              onClick={() => handleQuantitySelect(quantity)}
+              style={{ height: ITEM_HEIGHT }}
             >
               <div className="quantityInfo">
-                <div className="quantityText">{quantity}개</div>
+                <div className={`quantityText ${selectedQuantity === quantity ? 'selected' : ''}`}>{quantity}개</div>
               </div>
             </div>
           ))}
+          <div className="quantitySpacer" style={{ height: BOTTOM_SPACER, flex: `0 0 ${BOTTOM_SPACER}px`, minHeight: BOTTOM_SPACER }} />
         </div>
-        
-        {/* 완료 버튼 */}
-        <div className="modalFooter">
-          <button className="completeButton" onClick={handleComplete}>
-            완료
-          </button>
+
+        <div className="q-modalFooter">
+          <button className="q-completeButton" onClick={handleComplete}>완료</button>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
