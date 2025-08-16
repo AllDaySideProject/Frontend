@@ -14,6 +14,7 @@ import { useCurrentPosition } from "../../../hooks/useCurrentPosition"; // 현�
 import { DistanceBox } from "../../../components/map/DistanceBox";
 import { BottomSheet } from "./BottomSheet";
 import { Toast } from "./Toast";
+import HeaderArrow from "../../../components/HeaderArrow";
 
 export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표시 + 가게 클릭 시 경로
     const [selectedStoreId, setSelectedStoreId] = useState(null);
@@ -51,10 +52,11 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
 
     return (
         <div className = "exploreMapContainer"> 
+            <HeaderArrow initialMode = "map" />
             <BaseKakaoMap 
                 center = { userPos } 
                 boundsPoints = { boundsPoints }
-                height = "52.75rem"
+                height = "100vh"
             >
 
             <MapMarker // 내 위치 마커

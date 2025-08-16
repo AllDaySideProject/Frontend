@@ -28,7 +28,7 @@ export default function PickupMap({ userPos, destinations = [], paths = [], heig
     <BaseKakaoMap 
       center = { userPos}  
       boundsPoints = { boundsPoints }  
-      height = { height } 
+      height = { '100vh' } 
       width = { width }
     >
       
