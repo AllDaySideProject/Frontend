@@ -27,7 +27,7 @@ export const HeaderArrow = ({ initialMode = "suggestion" }) => {
     setMode(nextMode);
     if (nextMode === "suggestion") navigate("/menuselect");
     else if (nextMode === "ai") navigate("/aiSuggest");
-    else if (nextMode === "map") navigate("/Map");
+    else if (nextMode === "map") navigate("/menu/map");
   };
 
   return (
