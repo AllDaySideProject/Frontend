@@ -8,10 +8,18 @@ import { MenuSelection } from "./pages/menuSelection/MenuSelection";
 import { PickupPage } from "./pages/pickupPage/PickupPage";
 import { PickupCompletePage } from "./pages/pickupPage/PickupCompletePage";
 import { TipsPage } from "./pages/tipPage/TipsPage";
-import KakaoMap from "./components/map/KakaoMap";
 import { MenuPlusPage } from "./pages/menuPlusPage/MenuPlusPage";
+import { categoryIcons } from "./assets/icons/categoryIcons";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    Object.values(categoryIcons).forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   return (
     <LocationPermissionProvider>
       <BrowserRouter>
