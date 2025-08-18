@@ -5,7 +5,7 @@ import { SheetBox } from "./SheetBox"
 import { useEffect, useRef, useState } from "react";
 import { Toast } from "./Toast";
 
-export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, setShowToast }) => {
+export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, setShowToast, categoryLabels}) => {
     const store = stores.find(s => s.id === storeId); // 선택된 가게 정보
 
     const menuData = { // 가게별 메뉴 데이터
@@ -109,7 +109,7 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, se
                 </div>
                 <div className = "sheetStoreInfo">
                    <p className = "sheetStoreName">{ store.name }</p> 
-                   <p className = "sheetStoreType">{ store.type }</p>
+                   <p className = "sheetStoreType">{ categoryLabels[store.type] }</p>
                 </div>
 
                 <div className = "sheetBoxContainer">

@@ -30,10 +30,18 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
         if (decided && agreed && !userPos) request();
     }, [decided, agreed, userPos, request]);
 
+    const CATEGORY_LABELS = {
+        KOREAN: "한식 전문점",
+        FUSION_SIDE_DISH: "퓨전 반찬 전문점",
+        VEGAN_SIDE_DISH: "채식/비건 반찬 전문점",
+        PREMIUM_SIDE_DISH: "고급 반찬 전문점",
+        HOME_MADE: "수제 반찬가게",
+    };
+
     const [stores] = useState([
-        { id: 1, name: "유진이네 밥상", type: "한식 전문점", lat: 37.5700, lng: 127.0204 },
-        { id: 2, name: "김가네 분식", type: "분식 전문점", lat: 37.5900, lng: 127.0164 },
-        { id: 3, name: "할매반찬", type: "한식 전문점", lat: 37.5970, lng: 127.0064 },
+        { id: 1, name: "유진이네 밥상", type: "KOREAN", lat: 37.5700, lng: 127.0204 },
+        { id: 2, name: "김가네 분식", type: "FUSION_SIDE_DISH", lat: 37.5900, lng: 127.0164 },
+        { id: 3, name: "할매반찬", type: "HOME_MADE", lat: 37.5970, lng: 127.0064 },
     ]);
 
     const [selectedStore, setSelectedStore] = useState(null); // 선택한 가게 정보
@@ -125,6 +133,7 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                     setStoreId = { setSelectedStoreId }
                     stores = { stores }
                     setShowToast = { setShowToast }
+                    categoryLabels = { CATEGORY_LABELS }
                 />                   
             )}
 
