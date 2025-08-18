@@ -16,21 +16,21 @@ export const pickupCodePutApi = async (code) => {
     switch (status) {
       case 400:
             if (data?.code === "GLOBAL_400_2")
-                console.error("잘못된 요청: ", data?.message);
+                console.error("잘못된 요청: ", data.message);
             else if (data?.code === "ORDER_400_1")
-                console.error("잘못된 요청: ", data?.message);
+                console.error("잘못된 요청: ", data.message);
         break;
 
       case 404:
-        console.error("주문을 찾을 수 없음: ", data?.message);
+        console.error("주문을 찾을 수 없음: ", data.message);
         break;
 
       case 500:
-        console.error("서버 오류: ", data?.message);
+        console.error("서버 오류: ", data.message);
         break;
 
       default:
-        console.error("알 수 없는 오류: ", data?.message ?? error.message);
+        console.error("알 수 없는 오류: ", data.message);
     }
 
     throw error;
