@@ -5,7 +5,7 @@ export const DistanceBox = ({ name, distance }) => {
     return (
         <div className = "distanceBox">
             <img src = { DIS_LOCATION } />
-            <p>{ name } ({ distance.toFixed(2) } km)</p>
+            <p>{ name } ({ distance } km)</p>
         </div>
     )
 }
