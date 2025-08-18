@@ -24,7 +24,7 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, setShowToa
         };
 
         fetchMenus();
-    }, [storeId, userPos]);
+    }, []);
 
     const startY = useRef(0); // 드래그 시작 위치
     const startHeight = useRef(0); // 드래그 시작 시 높이
@@ -109,9 +109,11 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, setShowToa
                             menu = {{
                                 id: menu.menuId,
                                 name: menu.name,
-                                originalPrice: menu.costPrice,
-                                price: menu.salePrice,
-                                count: menu.quantity,
+                                salePrice: menu.costPrice,
+                                originalPrice: menu.salePrice,
+                                availableQuantity: menu.quantity,
+                                count: 0,
+                                salePercent: menu.salePercent,
                                 category: menu.category,
                             }}
                             onCountChange = { delta => updateCount(menu.menuId, delta) }

@@ -19,13 +19,8 @@ const categoryIcons = {
 };
 
 export const SheetBox = ({ menu, onCountChange }) => {
-    const { name, originalPrice, price, count, category } = menu;
-
-    const discountAmount = (originalPrice - price) * count;
-    const discountRate = Math.round(((originalPrice - price) / originalPrice) * 100);
-
-    const { fmt } = usePricing({ price, count }, discountAmount);
-
+    const { name, originalPrice, salePrice, count, category, availableQuantity, salePercent } = menu;
+    const fmt = (n) => Number(n).toLocaleString("ko-KR");
     const icon = categoryIcons[category]; // 카테고리별 아이콘 고르기
 
     return (
@@ -38,8 +33,8 @@ export const SheetBox = ({ menu, onCountChange }) => {
                     <p className = "sheetMenuName">{ name }</p>
                     <p className = "sheetOriginalPrice">{ fmt(originalPrice) }원</p>
                     <div className = "leftMainText">
-                        <p className = "sheetPrice">{ fmt(price) }원</p>
-                        <p className = "sheetDiscount">-{ discountRate }%</p>
+                        <p className = "sheetPrice">{ fmt(salePrice) }원</p>
+                        <p className = "sheetDiscount">{ salePercent }%</p>
                     </div>
                 </div>
             </div>
