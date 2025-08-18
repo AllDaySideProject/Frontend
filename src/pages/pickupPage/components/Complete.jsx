@@ -7,9 +7,21 @@ import TIME from "../../../assets/pickup/second.svg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import TIP2 from "../../../assets/tips/tip-2.svg";
+import TIP3 from "../../../assets/tips/tip-3.svg";
+import TIP4 from "../../../assets/tips/tip-4.svg";
+import SCROLL from "../../../assets/tips/tipScroll.svg";
+
 export const Complete = () => {
     const [sec, setSec] = useState(2);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        [TIP2, TIP3, TIP4, SCROLL].forEach((src) => {
+            const img = new Image();
+            img.src = src;
+        });
+    }, []);
 
     useEffect(() => {
         const t = setInterval(() => setSec(s => s - 1), 1000);
