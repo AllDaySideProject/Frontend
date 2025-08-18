@@ -12,17 +12,22 @@ export const MenuProvider = ({ children }) => {
         localStorage.setItem("menus", JSON.stringify(menus));
     }, [menus]);
 
-    const addMenu = (menu) => { // 메뉴 추가
-        setMenus(prev => {
-            const exists = prev.find(m => m.id === menu.id);
+    const addMenu = (menu) => {
+    setMenus(prev => {
+        const exists = prev.find(m => m.id === menu.id);
 
-            if (exists) {
-                return prev.map(m =>
-                    m.id === menu.id ? { ...m, count: m.count + 1 } : m
-                );
-            }
-        });
+        if (exists) {
+        return prev.map(m =>
+            m.id === menu.id
+            ? { ...m, count: (m.count ?? 0) + 1 }
+            : m
+        );
+        }
+
+        return [...prev, { ...menu, count: menu.count ?? 1 }];
+    });
     };
+
 
     const updateCount = (id, delta) => {
         setMenus(prev =>
