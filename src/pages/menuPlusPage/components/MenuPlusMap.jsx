@@ -17,6 +17,8 @@ import { Toast } from "./Toast";
 import HeaderArrow from "../../../components/HeaderArrow";
 
 export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표시 + 가게 클릭 시 경로
+    const [storeDetail, setStoreDetail] = useState(null); // 선택한 가게 상세 정보
+
     const [selectedStoreId, setSelectedStoreId] = useState(null);
     const [selectedDistance, setSelectedDistance] = useState(null);
     const [showToast, setShowToast] = useState(false);
@@ -108,18 +110,13 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                 />
             )}
 
-            { stores.find(s => s.id === selectedStoreId) && (
+            { storeDetail && (
                 <CustomOverlayMap 
-                    position = {{
-                        lat: stores.find(s => s.id === selectedStoreId)?.lat,
-                        lng: stores.find(s => s.id === selectedStoreId)?.lng
-                    }}                    
-                    xAnchor = { 1 }
-                    yAnchor = { -0.2 }
+                    position = {{ lat: storeDetail.lat, lng: storeDetail.lng }}
                 >
                     <DistanceBox 
-                        name = { stores.find(s => s.id === selectedStoreId)?.name }
-                        distance = { selectedDistance }
+                        name = { storeDetail?.name }
+                        distance = { storeDetail?.distance || 0 }
                     />
                 </CustomOverlayMap>
             )}
@@ -134,6 +131,8 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                     stores = { stores }
                     setShowToast = { setShowToast }
                     categoryLabels = { CATEGORY_LABELS }
+                    userPos = { userPos }
+                    setStoreDetail = { setStoreDetail }
                 />                   
             )}
 
