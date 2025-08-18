@@ -1,3 +1,5 @@
+import defaultInstance from "../utils/defaultInstance";
+
 export const mapMenuListGetApi = async (storeId, lat, lng) => {
     try {
         const response = await defaultInstance.get(`/stores/${storeId}/menus`, {
