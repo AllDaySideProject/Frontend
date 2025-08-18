@@ -1,8 +1,9 @@
 .mainBg {
-  background-color: #FAFAFA; /* 여백 부분 색상 */
+  background-color: #c9f3bf; /* 여백 부분 색상 */
   display: flex;
   justify-content: center;
   min-height: 100vh;
+  // background: transparent !important;
 }
 
 .mainBgInner {
@@ -14,10 +15,14 @@
   background-position: center;
   background-repeat: no-repeat;
 
-  background-color: inherit;
+  // background-color: inherit;
+
+  background-color: #FAFAFA; /* 가운데 콘텐츠 배경색 */
+
 }
 
 .mainBg .screenContainer,
 .mainBg .screenContent {
   background: transparent !important;  /* ← 이걸로 덮어쓰기 */
+  padding: 0 !important; /* ← 패딩 제거 */
 }

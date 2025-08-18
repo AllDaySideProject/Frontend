@@ -15,7 +15,7 @@ export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDelet
             setMode("normal"); // 삭제 취소 시 일반 모드로
             console.log("일반 모드");
         } else {
-            navigate(``);
+            navigate(`/menuselect`);
             console.log("내 밥상 추가로 이동");            
         }
     }
@@ -34,7 +34,7 @@ export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDelet
     return (
         <ScreenContainer>
             <div 
-                className = "buttonContainer"
+                className = "rowButtonContainer"
                 style = {{ paddingTop: paddingTop, paddingBottom: paddingBottom }}
             >
                 <ButtonComponent 

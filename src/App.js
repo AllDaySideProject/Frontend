@@ -12,6 +12,7 @@ import { MenuPlusPage } from "./pages/menuPlusPage/MenuPlusPage";
 import { categoryIcons } from "./assets/icons/categoryIcons";
 import { useEffect } from "react";
 import { useMenu } from "./components/MenuContext";
+import { AiSuggestion } from "./pages/aiSuggestion/AiSuggestion";
 
 function App() {
   const { menus } = useMenu();
@@ -34,6 +35,7 @@ function App() {
           <Route path="/tips" element={<TipsPage />} />
           <Route path="/menuselect" element={<MenuSelection />} />
           <Route path="/menu/map" element={<MenuPlusPage />} />
+          <Route path="/aiSuggest" element={<AiSuggestion/>}/>
         </Routes>    
       </BrowserRouter>      
     </LocationPermissionProvider>
