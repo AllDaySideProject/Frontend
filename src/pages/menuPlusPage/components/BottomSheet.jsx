@@ -66,6 +66,13 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, se
 
     const updateCountLocal = (id, delta) => {
         setMenus(prev => {
+            const target = prev.find(m => m.menuId === id);
+            if (!target) return prev;
+
+            if (delta > 0 && target.count >= target.availableQuantity) { // 재고 초과
+                return prev;
+            }
+
             const next = prev.map(m => {
                 if (m.menuId !== id) return m;
 

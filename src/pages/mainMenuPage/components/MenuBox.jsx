@@ -37,7 +37,7 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
                 </div>
                 <div className = "menuBoxRight">
                     <div className = "originText">
-                        <p className = "originalPrice">{ fmt(unitOriginal) }</p>
+                        <p className = "originalPrice">{ fmt(unitOriginal * count) }</p>
                         <p className = "originWon">원</p>                    
                     </div>
                     <div className = "finalInfo">
