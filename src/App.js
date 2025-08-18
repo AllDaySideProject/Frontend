@@ -1,5 +1,5 @@
 import "./index.scss";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 
 import { MainPage } from "./pages/mainPage/MainPage";
 import { MainMenuPage } from "./pages/mainMenuPage/MainMenuPage";
@@ -11,8 +11,11 @@ import { TipsPage } from "./pages/tipPage/TipsPage";
 import { MenuPlusPage } from "./pages/menuPlusPage/MenuPlusPage";
 import { categoryIcons } from "./assets/icons/categoryIcons";
 import { useEffect } from "react";
+import { useMenu } from "./components/MenuContext";
 
 function App() {
+  const { menus } = useMenu();
+
   useEffect(() => {
     Object.values(categoryIcons).forEach((src) => {
       const img = new Image();
@@ -24,7 +27,7 @@ function App() {
     <LocationPermissionProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={ menus.length > 0 ? <Navigate to="/main/menu" replace /> : <MainPage /> } />
           <Route path="/main/menu" element={<MainMenuPage />} />
           <Route path="/pickup" element={<PickupPage />} />
           <Route path="/pickup/complete" element={<PickupCompletePage />} />
