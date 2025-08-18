@@ -13,7 +13,15 @@ export const MenuProvider = ({ children }) => {
     }, [menus]);
 
     const addMenu = (menu) => { // 메뉴 추가
-        setMenus(prev => [...prev, { ...menu, category: menu.category }]);
+        setMenus(prev => {
+            const exists = prev.find(m => m.id === menu.id);
+
+            if (exists) {
+                return prev.map(m =>
+                    m.id === menu.id ? { ...m, count: m.count + 1 } : m
+                );
+            }
+        });
     };
 
     const updateCount = (id, delta) => {
