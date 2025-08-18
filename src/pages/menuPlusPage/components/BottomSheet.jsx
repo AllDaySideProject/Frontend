@@ -15,9 +15,11 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, setShowToa
         const fetchMenus = async () => {
             try {
                 const data = await mapMenuListGetApi(storeId, userPos.lat, userPos.lng);
+
                 setLocalStoreDetail(data);
                 setStoreDetail(data);
-                setMenus(data.menus || []); // 메뉴 리스트
+
+                setMenus((data.menus || []).map(m => ({ ...m, count: 0, availableQuantity: m.quantity }))); // 메뉴 리스트
             } catch (error) {
                 console.error("메뉴 조회 실패", error);
             }
@@ -55,11 +57,19 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, setShowToa
         document.removeEventListener("touchend", handleDragEnd);
     };
 
-    const updateCount = (id, delta) => { // 수량 변경
+    const updateCount = (id, delta) => { // 메뉴 수량 업데이트
         setMenus(prev =>
-            prev.map(m =>
-                m.menuId === id ? { ...m, quantity: Math.max(m.quantity + delta, 0) } : m
-            )
+            prev.map(m => {
+                if (m.menuId !== id) return m;
+
+                const newCount = Math.max((m.count ?? 0) + delta, 0); // 음수 방지
+
+                if (newCount > m.availableQuantity) { // 재고 초과
+                    return { ...m, count: m.availableQuantity };
+                }
+
+                return { ...m, count: newCount };
+            })
         );
 
         if (delta > 0) {
@@ -109,10 +119,10 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, setShowToa
                             menu = {{
                                 id: menu.menuId,
                                 name: menu.name,
-                                salePrice: menu.costPrice,
-                                originalPrice: menu.salePrice,
+                                originalPrice: menu.costPrice,
+                                salePrice: menu.salePrice,
                                 availableQuantity: menu.quantity,
-                                count: 0,
+                                count: menu.count,
                                 salePercent: menu.salePercent,
                                 category: menu.category,
                             }}

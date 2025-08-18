@@ -2,7 +2,6 @@ import "./SheetBox.scss";
 
 import MINUS from "../../../assets/map/sheet-minus.svg";
 import PLUS from "../../../assets/map/sheet-plus.svg";
-import usePricing from "../../../hooks/usePricing";
 
 import SOUP_ICON from "../../../assets/icons/soup.svg";
 import BRAISED_ICON from "../../../assets/icons/braised.svg";
