@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 2.5rem 2.5rem 0 0;
+    border-radius: 1.25rem 1.25rem 0 0;
     height: 1.5rem;
 
     .grabber {
@@ -27,8 +27,9 @@
     position: fixed;
     bottom: 0;
     left: 50%;
+    border-radius: 1.25rem 1.25rem 0 0;
     transform: translateX(-50%);
-    width: 24.625rem;
+    width: 24.375rem;
     background: white;
     z-index: 2000; /* 지도보다 위로 */
     transition: height 0.3s ease;
