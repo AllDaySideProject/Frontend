@@ -27,7 +27,7 @@ export const pickupCodePutApi = async (code) => {
         break;
 
       default:
-        console.error("알 수 없는 오류: ", data.message);
+        console.error("알 수 없는 오류: ", data.message || error.message);
     }
 
     throw error;
