@@ -75,7 +75,7 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, se
                 return { ...m, count: newCount };
             });
 
-            const menu = next.find(m => m.id === id);
+            const menu = next.find(m => m.menuId === id);
 
             if (delta > 0 && menu) {
                 const uniqueId = `${storeId}-${menu.menuId}`;
