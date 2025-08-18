@@ -4,8 +4,10 @@ import ScreenContainer from "../../../components/ScreenContainer"
 import { SheetBox } from "./SheetBox"
 import { useEffect, useRef, useState } from "react";
 import { Toast } from "./Toast";
+import { useMenu } from "../../../components/MenuContext";
 
 export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, setShowToast }) => {
+    const { addMenu, updateCount } = useMenu(); // 전역 상태에서 메뉴 추가 및 수량 변경 함수
     const store = stores.find(s => s.id === storeId); // 선택된 가게 정보
 
     const menuData = { // 가게별 메뉴 데이터
@@ -65,18 +67,45 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, se
         document.removeEventListener("touchend", handleDragEnd);
     };
 
-    const updateCount = (id, delta) => { // 수량 변경
-        setMenus(prev =>
-            prev.map(m =>
+    const [pendingUpdate, setPendingUpdate] = useState(null); // 수량 변경 대기 상태
+
+    const updateCountLocal = (id, delta) => { // 수량 변경
+        setMenus(prev => {
+            const next = prev.map(m =>
                 m.id === id ? { ...m, count: Math.max(m.count + delta, 0) } : m
-            )
-        );
+            );
+
+        const menu = next.find(m => m.id === id);
+
+        if (delta > 0 && menu) {
+            const uniqueId = `${storeId}-${menu.id}`;
+
+            if (menu.count === 1) {
+                setTimeout(() => {
+                    addMenu({ ...menu, id: uniqueId, store: store.name, price: menu.price, originalPrice: menu.originalPrice });
+                }, 0);
+            } else {
+                setTimeout(() => {
+                    updateCount(uniqueId, delta);
+                }, 0);
+            }
+        }
+
+        return next;
+    });
 
         if (delta > 0) {
             setShowToast(false);
             setTimeout(() => setShowToast(true), 0);
         }
     };
+
+    useEffect(() => {
+        if (pendingUpdate) {
+                pendingUpdate();
+            setPendingUpdate(null);
+        }
+    }, [pendingUpdate]);
 
     console.log("storeId:", storeId);
     console.log("menus:", menus);
@@ -117,7 +146,7 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, se
                         <SheetBox
                             key = { menu.id }
                             menu = { menu }
-                            onCountChange = { delta => updateCount(menu.id, delta) }
+                            onCountChange = { delta => updateCountLocal(menu.id, delta) }
                         />
                     ))}     
                 </div>               

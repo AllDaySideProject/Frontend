@@ -3,8 +3,11 @@ import LOCATION from "../../../assets/main/location.svg";
 import CHECKBOX from "../../../assets/main/checkBox.svg";
 import CHECKEDBOX from "../../../assets/main/checkedBox.svg";
 import usePricing from "../../../hooks/usePricing";
+import { categoryIcons } from "../../../assets/icons/categoryIcons";
 
-export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, menuName, storeName, count = 1, price, originalPrice }) => {
+export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, menu }) => {
+    const { name, storeName, count, price, originalPrice, category } = menu;
+
     const isDelete = mode === "delete";
 
     const unitOriginal = typeof originalPrice === "number" ? originalPrice : price;
@@ -21,12 +24,13 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
                 <div className = "menuBoxLeft">
                     <img 
                         // alt = "메뉴 아이콘"
-                        className = "menuImage" 
+                        className = "menuImage"
+                        src = { categoryIcons[category] } 
                     />
                     <div className = "infoBox">
                         <div className = "menuInfo">
                             <p className = "storeName">{ storeName }</p>
-                            <p className = "menuBoxName">{ menuName }</p>
+                            <p className = "menuBoxName">{ name }</p>
                             <p className = "menuCount">수량: { count }개</p>
                         </div>
                     </div>
