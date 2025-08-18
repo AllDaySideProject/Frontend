@@ -2,10 +2,15 @@ import "./BottomSheet.scss";
 
 import ScreenContainer from "../../../components/ScreenContainer"
 import { SheetBox } from "./SheetBox"
+import { useMenu } from "../../../components/MenuContext";
 import { useEffect, useRef, useState } from "react";
 import { mapMenuListGetApi } from "../../../api/map/mapMenuListGetApi";
 
-export const BottomSheet = ({ height, setHeight, storeId, setStoreId, setShowToast, categoryLabels, userPos, setStoreDetail }) => {
+
+export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, setShowToast, categoryLabels, userPos, setStoreDetail }) => {
+    const { addMenu, updateCount } = useMenu(); // 전역 상태에서 메뉴 추가 및 수량 변경 함수
+    const store = stores.find(s => s.id === storeId); // 선택된 가게 정보
+
     const [storeDetail, setLocalStoreDetail] = useState(null);
     const [menus, setMenus] = useState([]); // 메뉴 리스트
 
@@ -57,26 +62,51 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, setShowToa
         document.removeEventListener("touchend", handleDragEnd);
     };
 
-    const updateCount = (id, delta) => { // 메뉴 수량 업데이트
-        setMenus(prev =>
-            prev.map(m => {
+    const [pendingUpdate, setPendingUpdate] = useState(null); // 수량 변경 대기 상태
+
+    const updateCountLocal = (id, delta) => {
+        setMenus(prev => {
+            const next = prev.map(m => {
                 if (m.menuId !== id) return m;
 
-                const newCount = Math.max((m.count ?? 0) + delta, 0); // 음수 방지
-
-                if (newCount > m.availableQuantity) { // 재고 초과
-                    return { ...m, count: m.availableQuantity };
-                }
+                let newCount = Math.max((m.count ?? 0) + delta, 0);
+                if (newCount > m.availableQuantity) newCount = m.availableQuantity;
 
                 return { ...m, count: newCount };
-            })
-        );
+            });
+
+            const menu = next.find(m => m.id === id);
+
+            if (delta > 0 && menu) {
+                const uniqueId = `${storeId}-${menu.menuId}`;
+                if (menu.count === 1) {
+                    addMenu({
+                        ...menu,
+                        id: uniqueId,
+                        store: storeDetail?.name,
+                        price: menu.salePrice,
+                        originalPrice: menu.costPrice,
+                    });
+                } else {
+                    updateCount(uniqueId, delta);
+                }
+            }
+
+            return next;
+        });
 
         if (delta > 0) {
             setShowToast(false);
             setTimeout(() => setShowToast(true), 0);
         }
     };
+
+    useEffect(() => {
+        if (pendingUpdate) {
+                pendingUpdate();
+            setPendingUpdate(null);
+        }
+    }, [pendingUpdate]);
 
     console.log("storeId:", storeId);
     console.log("menus:", menus);
@@ -126,7 +156,7 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, setShowToa
                                 salePercent: menu.salePercent,
                                 category: menu.category,
                             }}
-                            onCountChange = { delta => updateCount(menu.menuId, delta) }
+                            onCountChange = { delta => updateCountLocal(menu.menuId, delta) }
                         />
                     ))}     
                 </div>               
