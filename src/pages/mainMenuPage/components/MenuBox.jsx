@@ -41,7 +41,7 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
                         <p className = "originWon">원</p>                    
                     </div>
                     <div className = "finalInfo">
-                        <p className = "discountRate">-{ discountRate }%</p>
+                        <p className = "discountRate">{ discountRate }%</p>
                         <p className = "finalPrice">{ fmt(finalPrice) }원</p>                    
                     </div>
                 </div>
