@@ -51,9 +51,10 @@
           const list = raw.map((s, idx) => ({
             id: s.menuId ?? idx,
             name: s.storeName,
-            distance: `${(s.distance ?? 0).toFixed(1)}km`,
-            price: `${(s.salePrice ?? 0).toLocaleString()}원`,
-            quantity: s.quantity ?? 0,
+            distance: `${(s.distance ?? 0).toFixed(2)}km`,
+            unitPrice: s.salePrice ?? 0,             
+            unitPriceText: `${(s.salePrice ?? 0).toLocaleString()}원`,
+            stock: s.quantity ?? 0,             
           }));
           setStores(list);
           setStep('store');//열릴 때 항상 첫단계로
@@ -88,13 +89,20 @@
       setStep('basket');//패널 우->좌로 전환
     };
 
-    const handleBasketDone=()=>{
-      if(onComplete&& selectedMenus?.length>0){//메뉴가 선택된 경우 onComplete 호출
-        onComplete(selectedMenus[0], selectedStore, selectedQuantity);
+    const handleBasketDone = () => {
+      if (onComplete && selectedMenus?.length > 0) {
+        onComplete(
+          selectedMenus[0],
+          selectedStore,
+          selectedQuantity,
+          selectedStoreObj?.unitPrice ?? 0
+        );
       }
-      onClose?.();//onClose가 존재할 때만 모달을 종료
+      onClose?.();
     };
   
+    const selectedStoreObj = stores.find(s => s.name === selectedStore);
+
 
     return (
       <div className="s-modalOverlay" onClick={onClose}>
@@ -128,7 +136,7 @@
                         <div className="storeName">{store.name}</div>
                         <div className="storeDetails">
                           <span className="distance">{store.distance}</span>
-                          <span className="price">{store.price}</span>
+                          <span className="price">{store.unitPriceText}</span>
                         </div>
                       </div>
                     </div>
@@ -148,20 +156,22 @@
             </div>
           )}
 
+          
+
           {step === 'quantity' && (
             <div className="s-panel s-panelInFromRight">
-              {/* 수량 화면을 '임베디드' 모드로 렌더 */}
               <QuantitySelectionModal
                 isOpen={true}
                 embedded
                 selectedMenus={selectedMenus}
                 selectedStore={selectedStore}
+                maxQuantity={Math.max(1, selectedStoreObj?.stock ?? 1)}
+                initialQuantity={1}
                 onClose={onClose}
                 onComplete={handleQuantityComplete}
               />
             </div>
           )}
-
           {step === 'basket' && (
             <div className="s-panel s-panelInFromRight">
               <div className="s-completionMessage">
@@ -179,6 +189,7 @@
             </div>
           )}
         </div>
+        
       </div>
     );
   };

@@ -12,13 +12,16 @@ export const QuantitySelectionModal = ({
   selectedStore, 
   onComplete,
   embedded=false,
+  maxQuantity,      
+  initialQuantity = 1,
 }) => {
-  const [selectedQuantity, setSelectedQuantity] = useState(1);
-  const listRef=useRef(null);
+  
+  const safeMax = Math.max(1, Number(maxQuantity) || 1);
+  const quantityOptions = Array.from({ length: safeMax }, (_, i) => i + 1);
 
-  if (!isOpen) return null;
-
-  const quantityOptions = [1, 2, 3, 4, 5];
+  const clampInit = Math.min(Math.max(1, Number(initialQuantity) || 1), safeMax);
+  const [selectedQuantity, setSelectedQuantity] = useState(clampInit);
+  const listRef = useRef(null);
 
   const handleQuantityScroll=()=>{
     const el = listRef.current;
@@ -34,6 +37,8 @@ export const QuantitySelectionModal = ({
    onComplete?.(selectedQuantity);
   };
 
+  
+  if (!isOpen) return null;
   if (embedded) {
     return (
       <div className="q-embeddedPanel">
