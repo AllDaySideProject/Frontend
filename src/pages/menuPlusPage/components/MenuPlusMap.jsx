@@ -5,9 +5,9 @@ import { CustomOverlayMap, MapMarker, Polyline } from "react-kakao-maps-sdk";
 import { BaseKakaoMap } from "../../../components/map/BaseKakaoMap";
 import { getDistanceMeters } from "../../../components/map/mapUtils";
 
-import STORE_GR from "../../../assets/map/storeLocation-green.svg";
-import STORE_WH from "../../../assets/map/storeLocation-white.svg";
-import USER from "../../../assets/map/userLocation.svg";
+import STORE_GR from "../../../assets/map/storeLocation-green.png";
+import STORE_WH from "../../../assets/map/storeLocation-white.png";
+import USER from "../../../assets/map/userLocation.png";
 
 import { useLocationPermission } from "../../../components/LocationPermissionContext"; // 위치 권한
 import { useCurrentPosition } from "../../../hooks/useCurrentPosition"; // 현재 위치
