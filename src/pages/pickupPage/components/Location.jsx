@@ -7,6 +7,7 @@ import PickupMap from "./PickupMap";
 import { mapRoutePostApi } from "../../../api/map/mapRoutePostApi";
 import { decodePolyline } from "../../../api/utils/decodePolyline";
 import { mapStoreListGetApi } from "../../../api/map/mapStoreListGetApi";
+import { useLocation } from "react-router-dom";
 
 export const Location = () => {
     const { decided, agreed } = useLocationPermission();
@@ -14,6 +15,9 @@ export const Location = () => {
     const [paths, setPaths] = useState([]);
     const [destinations, setDestinations] = useState([]);
     const [selectedId, setSelectedId] = useState(null);
+
+    const location = useLocation();
+    const reservation = location.state;
 
     // useEffect(() => {
     //     if (decided && agreed && !userPos) request();
@@ -25,17 +29,17 @@ export const Location = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const stores = await mapStoreListGetApi(userPos.lat, userPos.lng);
-                console.log("가게 목록:", stores);
+                if (!reservation?.storeList || reservation.storeList.length === 0) {
+                    console.warn("예약한 가게가 없음");
+                    return;
+                }
 
-                if (!stores || stores.length === 0) return;
-                    
-                const limitedStores = stores.slice(0, 8);
                 const routeRes = await mapRoutePostApi(
                     userPos.lat,
                     userPos.lng,
-                    limitedStores.map((s) => s.storeId)
+                    reservation.storeList
                 );
+
                 console.log("경로 응답:", routeRes);
 
                 if (routeRes.polyline) {
@@ -43,14 +47,18 @@ export const Location = () => {
                     setPaths([decoded]);
                 }
 
+                const stores = await mapStoreListGetApi(userPos.lat, userPos.lng);
+                const reservedStores = stores.filter(s => reservation.storeList.includes(s.storeId));
+
                 if (routeRes.optimizedStoreIds) {
                     const filtered = routeRes.optimizedStoreIds
-                        .map((id) => stores.find((s) => s.storeId === id))
+                        .map((id) => reservedStores.find((s) => s.storeId === id))
                         .filter(Boolean);
                     setDestinations(filtered);
                 } else {
-                    setDestinations(stores); 
+                    setDestinations(reservedStores);
                 }
+                            
             } catch (err) {
                 console.error("경로 불러오기 실패:", err);
             }
