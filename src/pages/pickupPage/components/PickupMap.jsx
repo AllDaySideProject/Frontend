@@ -74,8 +74,8 @@ export default function PickupMap({ userPos, destinations = [], paths = [], heig
           yAnchor = { -0.2 }
         >
           <DistanceBox
-            name = { selectedDest.name }
-            distance = { selectedDistance }
+            name = { selectedDest.storeName }
+            distance = { `${selectedDest.distance.toFixed(2)}` }
           />
         </CustomOverlayMap>
       )}
