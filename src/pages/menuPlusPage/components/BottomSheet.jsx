@@ -89,13 +89,13 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, se
                 if (menu.count === 1) {
                     addMenu({
                         ...menu,
-                        id: uniqueId,
+                        id: menu.menuId,
                         store: storeDetail?.name,
                         price: menu.salePrice,
                         originalPrice: menu.costPrice,
                     });
                 } else {
-                    updateCount(uniqueId, delta);
+                    updateCount(menu.menuId, delta);
                 }
             }
 

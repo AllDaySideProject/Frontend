@@ -14,11 +14,11 @@ export const MenuProvider = ({ children }) => {
 
     const addMenu = (menu) => {
         setMenus(prev => {
-            const exists = prev.find(m => m.id === menu.id);
+            const exists = prev.find(m => m.menuId === menu.menuId);
 
             if (exists) {
             return prev.map(m =>
-                m.id === menu.id
+                m.menuId === menu.menuId
                 ? { ...m, count: (m.count ?? 0) + 1 }
                 : m
             );
@@ -29,16 +29,16 @@ export const MenuProvider = ({ children }) => {
     };
 
 
-    const updateCount = (id, delta) => {
+    const updateCount = (menuId, delta) => {
         setMenus(prev =>
         prev.map(m =>
-            m.id === id
+            m.menuId === menuId
             ? { ...m, count: Math.max((m.count ?? 0) + delta, 0) }
             : m
     ))};
 
-    const removeMenu = (id) => { // 메뉴 제거
-        setMenus(prev => prev.filter(m => m.id !== id));
+    const removeMenu = (menuId) => { // 메뉴 제거
+        setMenus(prev => prev.filter(m => m.menuId !== menuId));
     };
 
     const clearMenus = () => {
@@ -49,7 +49,7 @@ export const MenuProvider = ({ children }) => {
     const replaceMenus = (newMenus) => {
         setMenus(prev =>
             newMenus.map(newM => {
-                const old = prev.find(m => m.id === newM.id);
+                const old = prev.find(m => m.menuId === newM.menuId);
                 return { ...newM, count: old?.count ?? 1 }; // 이전 count 유지, 없으면 기본 1
             })
         );

@@ -39,11 +39,11 @@ export const MenuEdit = ({ mode, setMode, selectedIds, toggleSelect, menuIds }) 
                     <div className = "menuBoxList">
                         { menus.map(menu  => (
                             <MenuBox
-                                key = { menu.id }
+                                key = { menu.menuId }
                                 mode = { mode }
                                 menu = { menu }
-                                isSelected = { selectedIds.has(menu.id) }
-                                onToggleSelect = { () => toggleSelect(menu.id) }
+                                isSelected = { selectedIds.has(menu.menuId) }
+                                onToggleSelect = { () => toggleSelect(menu.menuId) }
                             />
                         ))}
                     </div>
