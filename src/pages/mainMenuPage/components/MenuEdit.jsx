@@ -4,11 +4,14 @@ import ScreenContainer from "../../../components/ScreenContainer";
 import { MenuBox } from "./MenuBox";
 import { PriceText } from "./PriceText";
 import usePricing from "../../../hooks/usePricing";
+import { useMenu } from "../../../components/MenuContext";
 
-export const MenuEdit = ({ mode, setMode, items, selectedIds, toggleSelect }) => {
+export const MenuEdit = ({ mode, setMode, selectedIds, toggleSelect }) => {
+    const { menus } = useMenu(); // 전역 상태에서 메뉴 목록 가져오기
+    
     const isDelete = mode === "delete"; // 삭제 모드 여부
 
-    const { subtotal, discount, total, fmt } = usePricing(items, 9000);
+    const { subtotal, discount, total, fmt } = usePricing(menus, 9000);
     
     const handleDeleteClick = () => {
         setMode("delete"); // 삭제하기 버튼 클릭 시 delete 모드로 변경
@@ -29,17 +32,13 @@ export const MenuEdit = ({ mode, setMode, items, selectedIds, toggleSelect }) =>
                         삭제하기
                     </p>    
                     <div className = "menuBoxList">
-                        { items.map(m => (
+                        { menus.map(menu  => (
                             <MenuBox
-                            key = { m.id }
-                            mode = { mode }
-                            menuName = { m.name }
-                            storeName = { m.store }
-                            count = { m.count }
-                            price = { m.price }
-                            originalPrice = { m.originalPrice }
-                            isSelected = { selectedIds.has(m.id) }
-                            onToggleSelect = { () => toggleSelect(m.id) }
+                                key = { menu.id }
+                                mode = { mode }
+                                menu = { menu }
+                                isSelected = { selectedIds.has(menu.id) }
+                                onToggleSelect = { () => toggleSelect(menu.id) }
                             />
                         ))}
                     </div>

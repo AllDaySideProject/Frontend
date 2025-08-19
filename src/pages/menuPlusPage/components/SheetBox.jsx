@@ -3,20 +3,7 @@ import "./SheetBox.scss";
 import MINUS from "../../../assets/map/sheet-minus.svg";
 import PLUS from "../../../assets/map/sheet-plus.svg";
 import usePricing from "../../../hooks/usePricing";
-
-import SOUP_ICON from "../../../assets/icons/soup.svg";
-import BRAISED_ICON from "../../../assets/icons/braised.svg";
-import SEASONED_ICON from "../../../assets/icons/seasoned.svg";
-import STIRFRY_ICON from "../../../assets/icons/stirfry.svg";
-import STEAMED_ICON from "../../../assets/icons/steamed.svg";
-
-const categoryIcons = {
-  SOUP: SOUP_ICON,
-  BRAISED: BRAISED_ICON,
-  SEASONED: SEASONED_ICON,
-  STIR_FRY: STIRFRY_ICON,
-  STEAMED: STEAMED_ICON,
-};
+import { categoryIcons } from "../../../assets/icons/categoryIcons";
 
 export const SheetBox = ({ menu, onCountChange }) => {
     const { name, originalPrice, price, count, category } = menu;
@@ -32,7 +19,7 @@ export const SheetBox = ({ menu, onCountChange }) => {
         <div className = "sheetBox">
             <div className = "sheetBoxLeft">
                 <div className = "menuImg">
-                    { icon && <img src = { icon } alt = { category } />}
+                    { icon && <img src = { categoryIcons[menu.category] } alt = { category } />}
                 </div>
                 <div className ="sheetBoxLeftText">
                     <p className = "sheetMenuName">{ name }</p>
