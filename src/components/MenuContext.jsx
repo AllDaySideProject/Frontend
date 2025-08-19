@@ -13,15 +13,15 @@ export const MenuProvider = ({ children }) => {
     }, [menus]);
 
     const addMenu = (menu) => {
-    setMenus(prev => {
-        const exists = prev.find(m => m.id === menu.id);
+        setMenus(prev => {
+            const exists = prev.find(m => m.id === menu.id);
 
-        if (exists) {
-        return prev.map(m =>
-            m.id === menu.id
-            ? { ...m, count: (m.count ?? 0) + 1 }
-            : m
-        );
+            if (exists) {
+            return prev.map(m =>
+                m.id === menu.id
+                ? { ...m, count: (m.count ?? 0) + 1 }
+                : m
+            );
         }
 
         return [...prev, { ...menu, count: menu.count ?? 1 }];
@@ -46,8 +46,17 @@ export const MenuProvider = ({ children }) => {
         localStorage.removeItem("menus"); // 로컬 스토리지에서 메뉴 데이터 제거
     };
 
+    const replaceMenus = (newMenus) => {
+        setMenus(prev =>
+            newMenus.map(newM => {
+                const old = prev.find(m => m.id === newM.id);
+                return { ...newM, count: old?.count ?? 1 }; // 이전 count 유지, 없으면 기본 1
+            })
+        );
+    };
+
     return (
-        <MenuContext.Provider value = {{ menus, addMenu, updateCount, removeMenu, clearMenus }}> 
+        <MenuContext.Provider value = {{ menus, addMenu, updateCount, removeMenu, clearMenus, replaceMenus }}> 
             { children }
         </MenuContext.Provider>
     )

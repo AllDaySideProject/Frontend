@@ -3,16 +3,21 @@ import "./MenuEdit.scss";
 import ScreenContainer from "../../../components/ScreenContainer";
 import { MenuBox } from "./MenuBox";
 import { PriceText } from "./PriceText";
-import usePricing from "../../../hooks/usePricing";
 import { useMenu } from "../../../components/MenuContext";
+import { useEffect } from "react";
+import { pickupDetailPostApi } from "../../../api/pickup/pickupDetailPostApi";
 
-export const MenuEdit = ({ mode, setMode, selectedIds, toggleSelect }) => {
+export const MenuEdit = ({ mode, setMode, selectedIds, toggleSelect, menuIds }) => {
     const { menus } = useMenu(); // 전역 상태에서 메뉴 목록 가져오기
     
     const isDelete = mode === "delete"; // 삭제 모드 여부
 
-    const { subtotal, discount, total, fmt } = usePricing(menus, 9000);
-    
+    const originalTotal = menus.reduce((sum, m) => sum + (m.costPrice) * (m.count), 0);
+    const discount = menus.reduce((sum, m) => sum + ((m.costPrice) - (m.salePrice)) * (m.count), 0);
+    const saleTotal = menus.reduce((sum, m) => sum + (m.salePrice) * (m.count), 0);
+
+    const fmt = (n) => Number(n).toLocaleString("ko-KR");
+
     const handleDeleteClick = () => {
         setMode("delete"); // 삭제하기 버튼 클릭 시 delete 모드로 변경
         console.log("삭제 모드로 변경");
@@ -50,7 +55,7 @@ export const MenuEdit = ({ mode, setMode, selectedIds, toggleSelect }) => {
                         <PriceText 
                             priceTitle = "상품 금액"
                             fontColor = { '#111111' }
-                            price = { fmt(subtotal) }
+                            price = { fmt(originalTotal) }
                         />
                         <PriceText
                             tone = "discount"
@@ -63,9 +68,9 @@ export const MenuEdit = ({ mode, setMode, selectedIds, toggleSelect }) => {
                         <p>총 구매 금액</p>
                         <div className = "priceInfo">
                             <p className = "percentInfo">
-                                { subtotal > 0 ? Math.round((discount / subtotal) * 100) : 0 }%
+                                { originalTotal > 0 ? Math.round((discount / originalTotal) * 100) : 0 }%
                             </p>
-                            <p>{ fmt(total) }원</p>
+                            <p>{ fmt(saleTotal) }원</p>
                         </div>
                     </div>                
                 </>

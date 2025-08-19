@@ -1,8 +1,8 @@
 import defaultInstance from "../utils/defaultInstance"
 
-export const pickupDetailPostApi = async (menusIds) => { // menuIds menusIds 확인 필요
+export const pickupDetailPostApi = async (menuIds) => { // menuIds menusIds 확인 필요
     try {
-        const response = await defaultInstance.post(`/menus/details`, { menusIds });
+        const response = await defaultInstance.post(`/menus/details`, { menuIds });
 
         if (response.status === 200) {
             console.log("메뉴 상세 조회 성공: ", response.data.message);

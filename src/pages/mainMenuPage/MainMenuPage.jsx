@@ -4,26 +4,29 @@ import { ButtonRow } from "./components/ButtonRow";
 import { MenuEdit } from "./components/MenuEdit";
 import { Modal } from "../../components/Modal";
 import { useMenu } from "../../components/MenuContext";
+import { pickupDetailPostApi } from "../../api/pickup/pickupDetailPostApi";
 
 export const MainMenuPage = () => {
     const [mode, setMode] = useState("normal"); // 모드 상태 추가
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 여는 상태 추가
-
-    // const [items, setItems] = useState([
-    //     { id: 1, name: "진미채볶음", store: "희망식당", count: 1, price: 4500, originalPrice: 7000 },
-    //     { id: 2, name: "멸치볶음", store: "우진이네 밥상", count: 1, price: 5500, originalPrice: 7500 },
-    //     { id: 3, name: "두부조림", store: "정신식당", count: 1, price: 8000, originalPrice: 9000 },
-    //     { id: 4, name: "콩나물무침", store: "백씨네쌈밥", count: 1, price: 3000, originalPrice: 6500 },
-    // ]);
-
-    const { menus, removeMenu } = useMenu();
-    useEffect(() => {
-        console.log("전역 menus:", menus);
-    }, [menus]);
-    console.log("메뉴 목록:", menus); // 메뉴 목록 콘솔 메시지
-    
-
     const [selectedIds, setSelectedIds] = useState(new Set()); // 삭제 모드에서 선택된 메뉴 id 저장
+
+    const { menus, replaceMenus, removeMenu } = useMenu();
+
+    useEffect(() => {
+        const fetchMenus = async () => {
+            const menuIds = menus.map(m => m.menuId); // 전역 상태에 담긴 메뉴 id 배열
+            if (menuIds.length === 0) return;
+
+            try {
+                const data = await pickupDetailPostApi(menuIds);
+                replaceMenus(data); // 응답값을 전역 상태에 저장 (storeName, salePrice 등 업데이트됨)
+            } catch (err) {
+                console.error("메뉴 상세 조회 실패:", err);
+            }
+        };
+        fetchMenus();
+    }, []);
 
     useEffect(() => {
         if (mode !== "delete") setSelectedIds(new Set()); // 모드 변경 시 선택 초기화
@@ -62,6 +65,7 @@ export const MainMenuPage = () => {
                 setMode = { setMode } 
                 selectedIds = { selectedIds } // 선택된 메뉴 판단
                 toggleSelect = { toggleSelect }
+                menuIds = { menus.map(m => m.menuId) }
             />
             <ButtonRow 
                 paddingTop = "1.06rem"
