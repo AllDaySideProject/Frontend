@@ -2,42 +2,37 @@ import "./BottomSheet.scss";
 
 import ScreenContainer from "../../../components/ScreenContainer"
 import { SheetBox } from "./SheetBox"
-import { useEffect, useRef, useState } from "react";
-import { Toast } from "./Toast";
 import { useMenu } from "../../../components/MenuContext";
+import { useEffect, useRef, useState } from "react";
+import { mapMenuListGetApi } from "../../../api/map/mapMenuListGetApi";
 
-export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, setShowToast }) => {
+
+export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, setShowToast, categoryLabels, userPos, setStoreDetail }) => {
     const { addMenu, updateCount } = useMenu(); // 전역 상태에서 메뉴 추가 및 수량 변경 함수
     const store = stores.find(s => s.id === storeId); // 선택된 가게 정보
 
-    const menuData = { // 가게별 메뉴 데이터
-        1: [
-            { id: 1, name: "진미채볶음", originalPrice: 4500, price: 3600, count: 0, category: "SEASONED" },
-            { id: 2, name: "계란말이", originalPrice: 5000, price: 4000, count: 0, category: "SEASONED" },
-            { id: 3, name: "겉절이김치", originalPrice: 3000, price: 1500, count: 0, category: "SEASONED" },
-            { id: 4, name: "마늘장아찌", originalPrice: 3500, price: 2500, count: 0, category: "SEASONED" },
-            { id: 5, name: "고구마맛탕", originalPrice: 5000, price: 4000, count: 0, category: "BRAISED" },
-            { id: 6, name: "멸치볶음", originalPrice: 2500, price: 2000, count: 0, category: "STIR_FRY" },
-        ],
-        2: [
-            { id: 1, name: "떡볶이", originalPrice: 6000, price: 5000, count: 0, category: "STIR_FRY" },
-            { id: 2, name: "순대", originalPrice: 4000, price: 3500, count: 0, category: "STIR_FRY" },
-        ],
-        3: [
-            { id: 1, name: "멸치볶음", originalPrice: 3000, price: 2500, count: 0, category: "STIR_FRY" },
-            { id: 2, name: "김치찌개", originalPrice: 7000, price: 6000, count: 0, category: "SOUP" },
-        ],
-    };
+    const [storeDetail, setLocalStoreDetail] = useState(null);
+    const [menus, setMenus] = useState([]); // 메뉴 리스트
 
-    const [menus, setMenus] = useState(menuData[storeId] || []); // 선택된 가게의 메뉴 데이터
+    useEffect(() => {
+        if (!storeId || !userPos) return;
 
-    useEffect(() => { // 가게가 변경될 때 메뉴 데이터 업데이트
-        if (storeId) {
-            setMenus(menuData[storeId] || []);
-        }
-    }, [storeId]);
+        const fetchMenus = async () => {
+            try {
+                const data = await mapMenuListGetApi(storeId, userPos.lat, userPos.lng);
 
-    // const [sheetHeight, setSheetHeight] = useState(24.63); // 초기 높이 24.63rem
+                setLocalStoreDetail(data);
+                setStoreDetail(data);
+
+                setMenus((data.menus || []).map(m => ({ ...m, count: 0, availableQuantity: m.quantity }))); // 메뉴 리스트
+            } catch (error) {
+                console.error("메뉴 조회 실패", error);
+            }
+        };
+
+        fetchMenus();
+    }, []);
+
     const startY = useRef(0); // 드래그 시작 위치
     const startHeight = useRef(0); // 드래그 시작 시 높이
 
@@ -69,30 +64,43 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, se
 
     const [pendingUpdate, setPendingUpdate] = useState(null); // 수량 변경 대기 상태
 
-    const updateCountLocal = (id, delta) => { // 수량 변경
+    const updateCountLocal = (id, delta) => {
         setMenus(prev => {
-            const next = prev.map(m =>
-                m.id === id ? { ...m, count: Math.max(m.count + delta, 0) } : m
-            );
+            const target = prev.find(m => m.menuId === id);
+            if (!target) return prev;
 
-        const menu = next.find(m => m.id === id);
-
-        if (delta > 0 && menu) {
-            const uniqueId = `${storeId}-${menu.id}`;
-
-            if (menu.count === 1) {
-                setTimeout(() => {
-                    addMenu({ ...menu, id: uniqueId, store: store.name, price: menu.price, originalPrice: menu.originalPrice });
-                }, 0);
-            } else {
-                setTimeout(() => {
-                    updateCount(uniqueId, delta);
-                }, 0);
+            if (delta > 0 && target.count >= target.availableQuantity) { // 재고 초과
+                return prev;
             }
-        }
 
-        return next;
-    });
+            const next = prev.map(m => {
+                if (m.menuId !== id) return m;
+
+                let newCount = Math.max((m.count ?? 0) + delta, 0);
+                if (newCount > m.availableQuantity) newCount = m.availableQuantity;
+
+                return { ...m, count: newCount };
+            });
+
+            const menu = next.find(m => m.menuId === id);
+
+            if (delta > 0 && menu) {
+                const uniqueId = `${storeId}-${menu.menuId}`;
+                if (menu.count === 1) {
+                    addMenu({
+                        ...menu,
+                        id: uniqueId,
+                        store: storeDetail?.name,
+                        price: menu.salePrice,
+                        originalPrice: menu.costPrice,
+                    });
+                } else {
+                    updateCount(uniqueId, delta);
+                }
+            }
+
+            return next;
+        });
 
         if (delta > 0) {
             setShowToast(false);
@@ -137,16 +145,25 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, se
                     </div>
                 </div>
                 <div className = "sheetStoreInfo">
-                   <p className = "sheetStoreName">{ store.name }</p> 
-                   <p className = "sheetStoreType">{ store.type }</p>
+                   <p className = "sheetStoreName">{ storeDetail?.name }</p> 
+                   <p className = "sheetStoreType">{ categoryLabels[storeDetail?.category] }</p>
                 </div>
 
                 <div className = "sheetBoxContainer">
                     { menus.map(menu => (
                         <SheetBox
-                            key = { menu.id }
-                            menu = { menu }
-                            onCountChange = { delta => updateCountLocal(menu.id, delta) }
+                            key = { menu.menuId }
+                            menu = {{
+                                id: menu.menuId,
+                                name: menu.name,
+                                originalPrice: menu.costPrice,
+                                salePrice: menu.salePrice,
+                                availableQuantity: menu.quantity,
+                                count: menu.count,
+                                salePercent: menu.salePercent,
+                                category: menu.category,
+                            }}
+                            onCountChange = { delta => updateCountLocal(menu.menuId, delta) }
                         />
                     ))}     
                 </div>               

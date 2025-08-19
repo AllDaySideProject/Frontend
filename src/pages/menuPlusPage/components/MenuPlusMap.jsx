@@ -5,9 +5,9 @@ import { CustomOverlayMap, MapMarker, Polyline } from "react-kakao-maps-sdk";
 import { BaseKakaoMap } from "../../../components/map/BaseKakaoMap";
 import { getDistanceMeters } from "../../../components/map/mapUtils";
 
-import STORE_GR from "../../../assets/map/storeLocation-green.svg";
-import STORE_WH from "../../../assets/map/storeLocation-white.svg";
-import USER from "../../../assets/map/userLocation.svg";
+import STORE_GR from "../../../assets/map/storeLocation-green.png";
+import STORE_WH from "../../../assets/map/storeLocation-white.png";
+import USER from "../../../assets/map/userLocation.png";
 
 import { useLocationPermission } from "../../../components/LocationPermissionContext"; // 위치 권한
 import { useCurrentPosition } from "../../../hooks/useCurrentPosition"; // 현재 위치
@@ -15,52 +15,66 @@ import { DistanceBox } from "../../../components/map/DistanceBox";
 import { BottomSheet } from "./BottomSheet";
 import { Toast } from "./Toast";
 import HeaderArrow from "../../../components/HeaderArrow";
+import { mapStoreListGetApi } from "../../../api/map/mapStoreListGetApi";
 
 export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표시 + 가게 클릭 시 경로
-    const [selectedStoreId, setSelectedStoreId] = useState(null);
-    const [selectedDistance, setSelectedDistance] = useState(null);
-    const [showToast, setShowToast] = useState(false);
-
+    const [storeDetail, setStoreDetail] = useState(null); // 선택한 가게 상세 정보
+    const [selectedStoreId, setSelectedStoreId] = useState(null); // 선택한 가게 ID
+    const [selectedDistance, setSelectedDistance] = useState(null); // 선택한 가게와의 거리
+    const [routeCoords, setRouteCoords] = useState([]); // 경로 좌표 배열
+    const [showToast, setShowToast] = useState(false); // 토스트 메시지 표시 여부
     const [sheetHeight, setSheetHeight] = useState(0); // BottomSheet 높이
 
-    const { decided, agreed } = useLocationPermission();
-    const { pos: userPos, request } = useCurrentPosition();
+    const { decided, agreed } = useLocationPermission(); // 위치 권한 결정 여부
+    const { pos: userPos, request } = useCurrentPosition(); // 현재 위치
 
-    useEffect(() => {
-        if (decided && agreed && !userPos) request();
-    }, [decided, agreed, userPos, request]);
+    const [stores, setStores] = useState([]); // 가게 목록
 
-    const [stores] = useState([
-        { id: 1, name: "유진이네 밥상", type: "한식 전문점", lat: 37.5700, lng: 127.0204 },
-        { id: 2, name: "김가네 분식", type: "분식 전문점", lat: 37.5900, lng: 127.0164 },
-        { id: 3, name: "할매반찬", type: "한식 전문점", lat: 37.5970, lng: 127.0064 },
-    ]);
+    // useEffect(() => { // 위치 권한이 허용되고, 위치가 결정되면 가게 목록 요청
+    //     if (decided && agreed && !userPos) request();
+    // }, [decided, agreed, userPos, request]);
 
-    const [selectedStore, setSelectedStore] = useState(null); // 선택한 가게 정보
-    
-    const handleMarkerClick = (store) => { // 마커 클릭 시
-        setSelectedStore(store);
-        setSheetHeight(24.63); // 처음 열릴 때 높이
-        // setTimeout(() => setSheetHeight(40.19), 200); // 애니메이션 확장 가능
+    const TEST_POS = { lat: 37.4683, lng: 127.0390 };  // 테스트 용 위치
+    const currentPos = userPos || TEST_POS; 
+
+    useEffect(() => { // 위치가 결정되면 가게 목록 요청
+        const fetchStores = async () => {
+            try {
+                const lat = (userPos?.lat) || TEST_POS.lat;
+                const lng = (userPos?.lng) || TEST_POS.lng;
+                const data = await mapStoreListGetApi(lat, lng); 
+                setStores(data); 
+            } catch (error) {
+                console.error("가게 목록 조회 실패:", error);
+            }
+        };
+
+        fetchStores();
+    }, []);
+
+    const CATEGORY_LABELS = { // 카테고리 라벨
+        KOREAN: "한식 전문점",
+        FUSION_SIDE_DISH: "퓨전 반찬 전문점",
+        VEGAN_SIDE_DISH: "채식/비건 반찬 전문점",
+        PREMIUM_SIDE_DISH: "고급 반찬 전문점",
+        HOME_MADE: "수제 반찬가게",
     };
 
-    const [routeCoords, setRouteCoords] = useState([]); // 경로 좌표 배열
+    const boundsPoints = [currentPos, ...stores, ...routeCoords];
 
-    const boundsPoints = [userPos, ...stores, ...routeCoords];
-
-    if (!userPos) return null;
+    // if (!userPos) return null;
 
     return (
         <div className = "exploreMapContainer"> 
             <HeaderArrow initialMode = "map" />
             <BaseKakaoMap 
-                center = { userPos } 
+                center = { currentPos } 
                 boundsPoints = { boundsPoints }
                 height = "52.75rem"
             >
 
             <MapMarker // 내 위치 마커
-                position = { userPos }
+                position = { currentPos }
                 image = {{
                 src: USER,
                 size: { width: 50, height: 50 },
@@ -69,10 +83,10 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
             />
 
             { stores.map((s) => { // 가게 마커
-                const isSel = s.id === selectedStoreId; // 선택 여부
+                const isSel = s.storeId === selectedStoreId; // 선택 여부
                 return (
                 <MapMarker
-                    key = { s.id }
+                    key = { s.storeId }
                     position = {{ lat: s.lat, lng: s.lng }}
                     image = {{
                     src: isSel ? STORE_GR : STORE_WH,
@@ -81,10 +95,16 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                     }}
 
                     onClick = { () => {
-                        setSelectedStoreId(s.id); // 선택한 가게 ID 저장
-                        setRouteCoords([userPos, { lat: s.lat, lng: s.lng }]);
-                        setSelectedDistance(getDistanceMeters(userPos, s));
+                        const dist = getDistanceMeters(currentPos, s);
+
+                        setSelectedStoreId(s.storeId); // 선택한 가게 ID
+                        setRouteCoords([currentPos, { lat: s.lat, lng: s.lng }]);
+                        setSelectedDistance(dist);
+
+                        setStoreDetail({ ...s, distance: dist });
+
                         setSheetHeight(24.63); // BottomSheet 열기
+
                     }}
                 />
                 );
@@ -100,18 +120,18 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                 />
             )}
 
-            { stores.find(s => s.id === selectedStoreId) && (
+            { selectedStoreId && (
                 <CustomOverlayMap 
-                    position = {{
-                        lat: stores.find(s => s.id === selectedStoreId)?.lat,
-                        lng: stores.find(s => s.id === selectedStoreId)?.lng
-                    }}                    
+                    position = {{ 
+                        lat: stores.find(s => s.storeId === selectedStoreId)?.lat,
+                        lng: stores.find(s => s.storeId === selectedStoreId)?.lng
+                    }}
                     xAnchor = { 1 }
                     yAnchor = { -0.2 }
                 >
                     <DistanceBox 
-                        name = { stores.find(s => s.id === selectedStoreId)?.name }
-                        distance = { selectedDistance }
+                        name = { storeDetail?.name }
+                        distance = { `${ storeDetail.distance.toFixed(1) }` }
                     />
                 </CustomOverlayMap>
             )}
@@ -125,6 +145,9 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                     setStoreId = { setSelectedStoreId }
                     stores = { stores }
                     setShowToast = { setShowToast }
+                    categoryLabels = { CATEGORY_LABELS }
+                    userPos = { currentPos }
+                    setStoreDetail = { setStoreDetail }
                 />                   
             )}
 

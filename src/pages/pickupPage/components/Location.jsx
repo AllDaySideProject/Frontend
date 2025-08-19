@@ -2,40 +2,74 @@ import "./Location.scss";
 
 import { useEffect, useState } from "react";
 import { useLocationPermission } from "../../../components/LocationPermissionContext";
-import ScreenContainer from "../../../components/ScreenContainer";
 import { useCurrentPosition } from "../../../hooks/useCurrentPosition";
 import PickupMap from "./PickupMap";
+import { mapRoutePostApi } from "../../../api/map/mapRoutePostApi";
+import { decodePolyline } from "../../../api/utils/decodePolyline";
+import { mapStoreListGetApi } from "../../../api/map/mapStoreListGetApi";
 
 export const Location = () => {
     const { decided, agreed } = useLocationPermission();
-    const { pos: userPos, request } = useCurrentPosition();
+    // const { pos: userPos, request } = useCurrentPosition();
+    const [paths, setPaths] = useState([]);
+    const [destinations, setDestinations] = useState([]);
     const [selectedId, setSelectedId] = useState(null);
 
+    // useEffect(() => {
+    //     if (decided && agreed && !userPos) request();
+    // }, [decided, agreed, userPos, request]);
+
+    // if (!userPos) return null; // 위치 잡히기 전엔 안 그림
+    const userPos = { lat: 37.4683, lng: 127.0390 };
+
     useEffect(() => {
-        if (decided && agreed && !userPos) request();
-    }, [decided, agreed, userPos, request]);
+        const fetchData = async () => {
+            try {
+                const stores = await mapStoreListGetApi(userPos.lat, userPos.lng);
+                console.log("가게 목록:", stores);
 
-    const destinations = [
-        { id: 1, name: "우찬이네 반찬", lat: 37.5900, lng: 127.0164 },
-        { id: 2, name: "오색퓨전찬", lat: 37.5770, lng: 127.0204 },
-        { id: 3, name: "초록찬 비건키친", lat: 37.5970, lng: 127.0064 },        
-    ];
+                if (!stores || stores.length === 0) return;
+                    
+                const limitedStores = stores.slice(0, 8);
+                const routeRes = await mapRoutePostApi(
+                    userPos.lat,
+                    userPos.lng,
+                    limitedStores.map((s) => s.storeId)
+                );
+                console.log("경로 응답:", routeRes);
 
-    if (!userPos) return null; // 위치 잡히기 전엔 안 그림
+                if (routeRes.polyline) {
+                    const decoded = decodePolyline(routeRes.polyline);
+                    setPaths([decoded]);
+                }
+
+                if (routeRes.optimizedStoreIds) {
+                    const filtered = routeRes.optimizedStoreIds
+                        .map((id) => stores.find((s) => s.storeId === id))
+                        .filter(Boolean);
+                    setDestinations(filtered);
+                } else {
+                    setDestinations(stores); 
+                }
+            } catch (err) {
+                console.error("경로 불러오기 실패:", err);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <div className = "locationBg">
             <div className = "locationContainer">
                 <PickupMap 
-                    userPos = { userPos } 
-                    destinations = { destinations} 
-                    selectedId = { selectedId }
-                    onDestinationClick = { (id) => {
-                        setSelectedId(prev => prev === id ? null : id);
-                    }}
+                    userPos = { userPos }
+                    paths = { paths }
+                    destinations = { destinations }
                     width = "24.375rem"
                     height = "31.81rem"
-                    useBent = { false }
+                    selectedId = { selectedId }
+                    onDestinationClick = { setSelectedId } 
                 />
             </div>
         </div>
