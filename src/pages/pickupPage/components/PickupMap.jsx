@@ -13,7 +13,7 @@ export default function PickupMap({ userPos, destinations = [], paths = [], heig
 
   const selectedDest = destinations.find(d => d.storeId === selectedId) || null;
   const selectedDistance = selectedDest
-    ? getDistanceMeters(userPos, selectedDest)
+    ? (getDistanceMeters(userPos, selectedDest) / 1000).toFixed(2)
     : null;
 
   const boundsPoints = [  // 사용자 위치 + 모든 목적지 + 모든 경로 좌표
@@ -47,7 +47,7 @@ export default function PickupMap({ userPos, destinations = [], paths = [], heig
             key = { dest.storeId }
             position = {{ lat: dest.lat, lng: dest.lng }}
             image = {{
-              src: isSelected ? STORE_GR : STORE_WH,
+              src: dest.storeId === selectedId ? STORE_GR : STORE_WH,
               size: { width: 40, height: 40 },
               options: { offset: { x: 20, y: 20 } }
             }}
@@ -74,7 +74,7 @@ export default function PickupMap({ userPos, destinations = [], paths = [], heig
           yAnchor = { -0.2 }
         >
           <DistanceBox
-            name = { selectedDest.storeName ?? selectedDest.name }
+            name = { selectedDest.name }
             distance = { selectedDistance }
           />
         </CustomOverlayMap>
