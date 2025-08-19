@@ -1,4 +1,5 @@
 import React ,{useEffect, useState}from 'react'
+import { useNavigate } from 'react-router-dom';
 import {Menu} from './components/Menu'
 import ScreenContainer from '../../components/ScreenContainer';
 import HeaderArrow from '../../components/HeaderArrow';
@@ -14,6 +15,8 @@ const FIXED_LNG = 127.0391;
 const FIXED_POS = { lat: FIXED_LAT, lng: FIXED_LNG };
 
 export  const MenuSelection = () => {
+  const navigate=useNavigate();
+
   const [menus, setMenus]=useState([]);
   const [selectMenus, setSelectMenus]=useState([]);//선택된 메뉴의 인덱스를 전달하기 위한 변수
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -149,7 +152,7 @@ export  const MenuSelection = () => {
           ))}
         </div>
       </div>
-      <CompleteButton selectedMenus={selectedMenuNames}/>
+      <CompleteButton onClick={() => navigate('/home')}/>
       
       
       {/* 모달 */}
