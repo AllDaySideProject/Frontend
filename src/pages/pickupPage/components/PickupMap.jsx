@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { CustomOverlayMap, MapMarker, Polyline } from "react-kakao-maps-sdk";
 import { BaseKakaoMap } from "../../../components/map/BaseKakaoMap";
 import USER from "../../../assets/map/userLocation.svg";
@@ -6,22 +6,21 @@ import STORE_GR from "../../../assets/map/storeLocation-green.svg";
 import STORE_WH from "../../../assets/map/storeLocation-white.svg";
 import { getDistanceMeters } from "../../../components/map/mapUtils";
 import { DistanceBox } from "../../../components/map/DistanceBox";
+import { mapRoutePostApi } from "../../../api/map/mapRoutePostApi";
 
 export default function PickupMap({ userPos, destinations = [], paths = [], height = "50rem", width, useBent = false, selectedId, onDestinationClick }) {
-  if (!userPos) return null;
+  // if (!userPos) return null;
 
   const selectedDest = destinations.find(d => d.id === selectedId) || null;
   const selectedDistance = selectedDest
     ? getDistanceMeters(userPos, selectedDest)
     : null;
 
-  const sequentialPath = [userPos, ...destinations.map(d => ({ lat: d.lat, lng: d.lng }))];
-
   const boundsPoints = [  // 사용자 위치 + 모든 목적지 + 모든 경로 좌표
-    // userPos,
-    // ...destinations,
-    // ...paths.flat()
-    ...sequentialPath
+    userPos,
+    ...destinations,
+    ...paths.flat()
+    // ...sequentialPath
   ];
 
   return (
@@ -57,17 +56,16 @@ export default function PickupMap({ userPos, destinations = [], paths = [], heig
         )
       })}
 
-      {/* { paths.map((path, idx) => ( // 목적지 있을 때 경로 표시 */}
+      { paths.map((path, idx) => ( // 목적지 있을 때 경로 표시
         <Polyline
-          // key = { idx }
-          // path = { path }
-          path = { sequentialPath }
+          key = { idx }
+          path = { path }
           strokeWeight = { 2 }
           strokeColor = "#0EA64B"
           strokeOpacity = { 1 }
           strokeStyle = "dash"
         />
-      {/* ))} */}
+      ))}
 
       { selectedDest && (
         <CustomOverlayMap
