@@ -79,23 +79,28 @@ export  const MenuSelection = () => {
     setModalMenuName('');
   };
 
-  const handleModalComplete = (menuName, storeName, quantity) => {
+  
+  const handleModalComplete = (menuName, storeName, quantity, unitPrice) => {
     // 모달 완료 시 선택된 메뉴 정보 저장
+
+    const price = (Number(unitPrice) || 0) * (Number(quantity) || 1);
+
     setSelectedMenuDetails(prev => ({
       ...prev,
       [menuName]: {
         store: storeName,
-        quantity: quantity,
-        price: quantity * 4500 // 예시 가격 계산
+        quantity,
+        unitPrice,//개별 가격  
+        price,//총액
       }
     }));
-    
-    // 해당 메뉴를 선택 상태로 만들기
+      // 해당 메뉴를 선택 상태로 만들기
+
     const menuIndex = menus.findIndex(item => item.name === menuName);
     if (menuIndex !== -1 && !selectMenus.includes(menuIndex)) {
       setSelectMenus(prev => [...prev, menuIndex]);
     }
-    
+
     setIsModalOpen(false);
     setModalMenuName('');
   };
