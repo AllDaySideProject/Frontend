@@ -11,7 +11,7 @@ import { mapRoutePostApi } from "../../../api/map/mapRoutePostApi";
 export default function PickupMap({ userPos, destinations = [], paths = [], height = "50rem", width, useBent = false, selectedId, onDestinationClick }) {
   // if (!userPos) return null;
 
-  const selectedDest = destinations.find(d => d.id === selectedId) || null;
+  const selectedDest = destinations.find(d => d.storeId === selectedId) || null;
   const selectedDistance = selectedDest
     ? getDistanceMeters(userPos, selectedDest)
     : null;
@@ -41,17 +41,17 @@ export default function PickupMap({ userPos, destinations = [], paths = [], heig
       />
 
       { destinations.map(dest => { // 목적지 마커
-        const isSelected = dest.id === selectedId;
+        const isSelected = dest.storeId === selectedId;
         return (
           <MapMarker
-            key = { dest.id }
+            key = { dest.storeId }
             position = {{ lat: dest.lat, lng: dest.lng }}
             image = {{
               src: isSelected ? STORE_GR : STORE_WH,
               size: { width: 40, height: 40 },
               options: { offset: { x: 20, y: 20 } }
             }}
-            onClick = { () => onDestinationClick?.(dest.id) }
+            onClick = { () => onDestinationClick?.(dest.storeId) }
           />          
         )
       })}
@@ -74,7 +74,7 @@ export default function PickupMap({ userPos, destinations = [], paths = [], heig
           yAnchor = { -0.2 }
         >
           <DistanceBox
-            name = { selectedDest.name ?? "목적지" }
+            name = { selectedDest.storeName ?? selectedDest.name }
             distance = { selectedDistance }
           />
         </CustomOverlayMap>
