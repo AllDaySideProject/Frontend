@@ -8,10 +8,10 @@ import { StoreSelectionModal } from './components/StoreSelectionModal';
 import menuSuggestGet from '../../api/menuSelection/menuSuggestGet';
 import {categoryIcons} from '../../assets/icons/categoryIcons';
 import { useCurrentPosition } from '../../hooks/useCurrentPosition';
-
 //양재 at 센터 위경도 
 const FIXED_LAT = 37.4683;
 const FIXED_LNG = 127.0391;
+const FIXED_POS = { lat: FIXED_LAT, lng: FIXED_LNG };
 
 export  const MenuSelection = () => {
   const [menus, setMenus]=useState([]);
@@ -24,7 +24,7 @@ export  const MenuSelection = () => {
   const { pos, loading, request } = useCurrentPosition();
   const [fetching, setFetching] = useState(false);
   const [fetchError, setFetchError] = useState(null);
-
+  //pos=lat, lng
   // 마운트 시 위치 요청
   useEffect(() => {
     request();
@@ -32,32 +32,32 @@ export  const MenuSelection = () => {
 
   //위치가 준비되면 api 호출
   useEffect(() => {
-  if (!pos) return;
-  (async () => {
-    try {
-      setFetching(true);
-      setFetchError(null);
+    if (!pos) return;
+    (async () => {
+      try {
+        setFetching(true);
+        setFetchError(null);
 
-      // const response = await menuSuggestGet(pos.lat, pos.lng);
-      console.log(pos.lat, pos.lng);
-      const response = await menuSuggestGet(FIXED_LAT, FIXED_LNG);
-      // 서버 응답은 { data: [...] } 형태
-      const mapped = Array.isArray(response.data)
-        ? response.data.map((d, idx) => ({
-            id: idx + 1, // 서버에 id 없으니 임시 부여
-            name: d.name,
-            category: d.category,
-            img: categoryIcons[d.category], // 카테고리별 아이콘 
-          }))
-        : [];
+        // const response = await menuSuggestGet(pos.lat, pos.lng);
+        console.log(pos.lat, pos.lng);
+        const response = await menuSuggestGet(FIXED_LAT, FIXED_LNG);
+        // 서버 응답은 { data: [...] } 형태
+        const mapped = Array.isArray(response.data)
+          ? response.data.map((d, idx) => ({
+              id: idx + 1, // 서버에 id 없으니 임시 부여
+              name: d.name,
+              category: d.category,
+              img: categoryIcons[d.category], // 카테고리별 아이콘 
+            }))
+          : [];
 
-      setMenus(mapped);
-    } catch (e) {
-      setFetchError("추천 메뉴를 불러오지 못했습니다.");
-    } finally {
-      setFetching(false);
-    }
-  })();
+        setMenus(mapped);
+      } catch (e) {
+        setFetchError("추천 메뉴를 불러오지 못했습니다.");
+      } finally {
+        setFetching(false);
+      }
+    })();
 }, [pos]);
 
 
@@ -146,12 +146,15 @@ export  const MenuSelection = () => {
       </div>
       <CompleteButton selectedMenus={selectedMenuNames}/>
       
+      
       {/* 모달 */}
       <StoreSelectionModal 
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         selectedMenus={[modalMenuName]}
-        onComplete={handleModalComplete} // 완료 콜백 추가
+        onComplete={handleModalComplete} // 완료 콜백 
+        coord={FIXED_POS}
+        coordsLoading={loading}
       />
     </ScreenContainer>
   )
