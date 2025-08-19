@@ -1,4 +1,4 @@
-import { defaultInstance } from "../utils/defaultInstance";
+import defaultInstance from "../utils/defaultInstance";
 
 export const pickupCodePutApi = async (code) => {
   try {

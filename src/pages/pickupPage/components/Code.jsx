@@ -5,6 +5,7 @@ import { ButtonComponent } from "../../../components/ButtonComponent";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Modal } from "../../../components/Modal";
+import { pickupCodePutApi } from "../../../api/pickup/pickupCodePutApi";
 
 export const Code = () => {
     const navigate = useNavigate();
@@ -16,15 +17,20 @@ export const Code = () => {
     const [pressed, setPressed] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleEndCick = () => {
+    const handleEndClick = () => {
         setPressed(prev => !prev);
         setIsModalOpen(true); // 완료 버튼 누를 때 모달 열기
     }
 
-    const onEndBtnClick = () => {
-        setIsModalOpen(false);
-        navigate(`/pickup/complete`);
-        console.log("픽업 완료 화면 이동");
+    const onEndBtnClick = async () => {
+        try {
+            await pickupCodePutApi(pickupCode);
+            setIsModalOpen(false);
+            navigate(`/pickup/complete`);
+            console.log("픽업 완료 성공 후 화면 이동");            
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
@@ -43,7 +49,7 @@ export const Code = () => {
                 bgColor = { pressed ? '#0EA64B' : '#FAFAFA' }
                 bdColor = { '#0EA64B' }
                 textColor = { pressed ? '#FAFAFA' : '#0EA64B' }
-                onClick = { handleEndCick }
+                onClick = { handleEndClick }
             />
 
             { isModalOpen && (
