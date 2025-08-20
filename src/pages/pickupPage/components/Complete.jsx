@@ -2,7 +2,7 @@ import "./Complete.scss";
 
 import ScreenContainer from "../../../components/ScreenContainer";
 
-import PICKUP from "../../../assets/pickup/pickupComplete.svg";
+import PICKUP from "../../../assets/pickup/pickupComplete.png";
 import TIME from "../../../assets/pickup/second.svg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +35,10 @@ export const Complete = () => {
     return (
         <ScreenContainer>
             <div className = "completeContainer">
-                <img src = { PICKUP } />
+                <img 
+                    style = {{ height: '12.5rem' }}
+                    src = { PICKUP } 
+                />
                 <div className = "completeContent">
                     <div className = "completeText">
                         <p className = "puTitle">픽업 완료!</p>

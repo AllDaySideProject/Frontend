@@ -14,6 +14,8 @@ import { useEffect } from "react";
 import { useMenu } from "./components/MenuContext";
 import { AiSuggestion } from "./pages/aiSuggestion/AiSuggestion";
 
+import PICKUPCOMPLETE from "./assets/pickup/pickupComplete.png";
+
 function App() {
   const { menus } = useMenu();
 
@@ -22,6 +24,9 @@ function App() {
       const img = new Image();
       img.src = src;
     });
+
+    const completeImg = new Image();
+    completeImg.src = PICKUPCOMPLETE;
   }, []);
 
   return (

@@ -5,9 +5,6 @@ import { Code } from "./components/Code";
 import { Location } from "./components/Location";
 import { PickupHeader } from "./components/PickupHeader";
 
-import PICKUP from "../../assets/pickup/pickupComplete.svg";
-import TIME from "../../assets/pickup/second.svg";
-
 export const PickupPage = () => {
     const [phase, setPhase] = useState("check");
 
