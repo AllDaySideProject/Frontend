@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { CustomOverlayMap, MapMarker, Polyline } from "react-kakao-maps-sdk";
 import { BaseKakaoMap } from "../../../components/map/BaseKakaoMap";
 import USER from "../../../assets/map/userLocation.svg";
@@ -8,20 +8,18 @@ import { getDistanceMeters } from "../../../components/map/mapUtils";
 import { DistanceBox } from "../../../components/map/DistanceBox";
 
 export default function PickupMap({ userPos, destinations = [], paths = [], height = "50rem", width, useBent = false, selectedId, onDestinationClick }) {
-  if (!userPos) return null;
+  // if (!userPos) return null;
 
-  const selectedDest = destinations.find(d => d.id === selectedId) || null;
+  const selectedDest = destinations.find(d => d.storeId === selectedId) || null;
   const selectedDistance = selectedDest
-    ? getDistanceMeters(userPos, selectedDest)
+    ? (getDistanceMeters(userPos, selectedDest) / 1000).toFixed(2)
     : null;
 
-  const sequentialPath = [userPos, ...destinations.map(d => ({ lat: d.lat, lng: d.lng }))];
-
   const boundsPoints = [  // 사용자 위치 + 모든 목적지 + 모든 경로 좌표
-    // userPos,
-    // ...destinations,
-    // ...paths.flat()
-    ...sequentialPath
+    userPos,
+    ...destinations,
+    ...paths.flat()
+    // ...sequentialPath
   ];
 
   return (
@@ -42,32 +40,31 @@ export default function PickupMap({ userPos, destinations = [], paths = [], heig
       />
 
       { destinations.map(dest => { // 목적지 마커
-        const isSelected = dest.id === selectedId;
+        const isSelected = dest.storeId === selectedId;
         return (
           <MapMarker
-            key = { dest.id }
+            key = { dest.storeId }
             position = {{ lat: dest.lat, lng: dest.lng }}
             image = {{
-              src: isSelected ? STORE_GR : STORE_WH,
+              src: dest.storeId === selectedId ? STORE_GR : STORE_WH,
               size: { width: 40, height: 40 },
               options: { offset: { x: 20, y: 20 } }
             }}
-            onClick = { () => onDestinationClick?.(dest.id) }
+            onClick = { () => onDestinationClick?.(dest.storeId) }
           />          
         )
       })}
 
-      {/* { paths.map((path, idx) => ( // 목적지 있을 때 경로 표시 */}
+      { paths.map((path, idx) => ( // 목적지 있을 때 경로 표시
         <Polyline
-          // key = { idx }
-          // path = { path }
-          path = { sequentialPath }
+          key = { idx }
+          path = { path }
           strokeWeight = { 2 }
           strokeColor = "#0EA64B"
           strokeOpacity = { 1 }
           strokeStyle = "dash"
         />
-      {/* ))} */}
+      ))}
 
       { selectedDest && (
         <CustomOverlayMap
@@ -76,8 +73,8 @@ export default function PickupMap({ userPos, destinations = [], paths = [], heig
           yAnchor = { -0.2 }
         >
           <DistanceBox
-            name = { selectedDest.name ?? "목적지" }
-            distance = { selectedDistance }
+            name = { selectedDest.storeName }
+            distance = { `${selectedDest.distance.toFixed(2)}` }
           />
         </CustomOverlayMap>
       )}
