@@ -13,6 +13,7 @@ export const BottomSheet = ({
   setStoreId,
   stores,
   setShowToast,
+  setToastMessage,
   categoryLabels,
   userPos,
   setStoreDetail,
@@ -79,22 +80,31 @@ export const BottomSheet = ({
     const currentCount = added?.count ?? 0; 
 
     if (delta > 0) {
-      if (currentCount === 0) {
-        addMenu({
-          ...menu,
-          id: menu.menuId,
-          store: storeDetail?.name,
-          price: menu.salePrice,
-          originalPrice: menu.costPrice,
-        });
-      } else {
-        updateCount(menu.menuId, delta);
-      }
-      setShowToast(false);
-      setTimeout(() => setShowToast(true), 0);
-    } else {
-      updateCount(menu.menuId, delta);
+            
+        if (currentCount >= menu.quantity) {
+            setToastMessage("재고를 초과했어요.");
+            setShowToast(false);
+            setTimeout(() => setShowToast(true), 0);
+            return;
+        }
+
+        if (currentCount === 0) {
+            addMenu({
+                ...menu,
+                id: menu.menuId,
+                store: storeDetail?.name,
+                price: menu.salePrice,
+                originalPrice: menu.costPrice,
+            });
+        } else {
+            updateCount(menu.menuId, delta);
+        }
+
+        setToastMessage("내 밥상에 추가되었어요.");
+        setShowToast(false);
+        setTimeout(() => setShowToast(true), 0);
     }
+
   };
 
   useEffect(() => {

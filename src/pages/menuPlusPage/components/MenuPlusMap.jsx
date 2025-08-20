@@ -23,6 +23,7 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
     const [selectedDistance, setSelectedDistance] = useState(null); // 선택한 가게와의 거리
     const [routeCoords, setRouteCoords] = useState([]); // 경로 좌표 배열
     const [showToast, setShowToast] = useState(false); // 토스트 메시지 표시 여부
+    const [toastMessage, setToastMessage] = useState("");
     const [sheetHeight, setSheetHeight] = useState(0); // BottomSheet 높이
 
     const { decided, agreed } = useLocationPermission(); // 위치 권한 결정 여부
@@ -145,6 +146,7 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                     setStoreId = { setSelectedStoreId }
                     stores = { stores }
                     setShowToast = { setShowToast }
+                    setToastMessage = { setToastMessage }
                     categoryLabels = { CATEGORY_LABELS }
                     userPos = { currentPos }
                     setStoreDetail = { setStoreDetail }
@@ -155,6 +157,7 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                 <div className = "toastContainer">
                     <Toast
                         duration = { 2000 }
+                        toastText = { toastMessage }
                         onClose = { () => setShowToast(false) }
                     />                    
                 </div>
