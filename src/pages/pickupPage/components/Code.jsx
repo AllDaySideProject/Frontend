@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Modal } from "../../../components/Modal";
 import { pickupCodePutApi } from "../../../api/pickup/pickupCodePutApi";
+import { useMenu } from "../../../components/MenuContext";
 
 export const Code = () => {
     const navigate = useNavigate();
@@ -17,6 +18,8 @@ export const Code = () => {
     const [pressed, setPressed] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const { clearMenus } = useMenu();
+
     const handleEndClick = () => {
         setPressed(prev => !prev);
         setIsModalOpen(true); // 완료 버튼 누를 때 모달 열기
@@ -26,6 +29,7 @@ export const Code = () => {
         try {
             await pickupCodePutApi(pickupCode);
             setIsModalOpen(false);
+            clearMenus(); 
             navigate(`/pickup/complete`);
             console.log("픽업 완료 성공 후 화면 이동");            
         } catch (error) {
