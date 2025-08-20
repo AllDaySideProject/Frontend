@@ -63,25 +63,31 @@ export const MainMenuPage = () => {
         console.log("선택한 메뉴 삭제 완료");
     }
 
-    const handleReserve = async () => {
+    // 모달 열기
+    const handleReserveClick = () => {
+        if (menus.length === 0) {
+            console.warn("예약할 메뉴가 없음");
+            return;
+        }
+        setIsModalOpen(true);
+    };
+
+    // 실제 예약 실행
+    const confirmReserve = async () => {
         try {
             const items = menus.map(m => ({
                 menuId: m.menuId, count: m.count
-            }))
-
-            if (items.length === 0) {
-                console.warn("예약할 메뉴가 없음");
-                return;
-            }
+            }));
 
             const reserveRes = await pickupReservePostApi(items);
             console.log("예약 응답: ", reserveRes);
 
-            navigate("/pickup", { state: reserveRes });
+            setIsModalOpen(false); // 모달 닫기
+            navigate("/pickup", { state: reserveRes }); // 예약 완료 후 이동
         } catch (error) {
             console.error("예약 실패:", error);
         }
-    }
+    };
 
     return (
         <>
@@ -100,17 +106,21 @@ export const MainMenuPage = () => {
                 setMode = { setMode } 
                 onDeleteClick = { handleDeleteClick } // 삭제 기능 콘솔
                 selectedCount = { selectedIds.size } // 선택 개수 판단 > 0이면 삭제하기 버튼 비활성화
-                onReserveClick = { handleReserve }
+                onReserveClick = { handleReserveClick }
             />
 
             { isModalOpen && (
-                <div className = "modalOverLay">
+                <div className="modalOverLay">
                     <Modal 
-                        modalText = "선택한 메뉴를 삭제하겠습니까?"
+                        modalText={mode === "delete" 
+                            ? "선택한 메뉴를 삭제하겠습니까?" 
+                            : "픽업 예약을 진행하시겠습니까?" }
                         leftButtonText = "취소"
                         onLeftClick = { () => setIsModalOpen(false) }
-                        rightButtonText = "삭제하기"
-                        onRightClick = { onRightBtnClick }
+                        rightButtonText = { mode === "delete" ? "삭제하기" : "확인" }
+                        onRightClick = { mode === "delete" 
+                            ? onRightBtnClick   // 삭제 함수
+                            : confirmReserve }    // 예약 함수
                     />                    
                 </div>
             )}
