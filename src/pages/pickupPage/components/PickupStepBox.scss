@@ -19,6 +19,7 @@
     }
 
     &.active {
+        z-index: 2000;
         border-bottom: 0.2rem solid #0EA64B; 
 
         p {
