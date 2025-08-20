@@ -2,7 +2,7 @@ import ScreenContainer from "../../../components/ScreenContainer";
 import "./TipComponent.scss";
 
 export const TipComponent = ({
-    bgColor, padding, gap, title, description, imgPadding, image
+    bgColor, padding, gap, title, description, imgPadding, image, imgWidth, imgHeight
 }) => {
     return (
         <ScreenContainer bgColor = { bgColor }>
@@ -18,7 +18,14 @@ export const TipComponent = ({
                     className = "tipImgContainer"
                     style = {{ padding: imgPadding }}
                 >
-                    <img src = { image } />
+                    <img 
+                        className = "tipComponentImg"
+                        src = { image } 
+                        style = {{
+                            width: imgWidth || "15.625rem",
+                            height: imgHeight || "15.625rem"
+                        }}
+                    />
                 </div>
             </div>
         </ScreenContainer>

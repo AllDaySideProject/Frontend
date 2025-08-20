@@ -7,10 +7,10 @@ import TIME from "../../../assets/pickup/second.svg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import TIP2 from "../../../assets/tips/tip-2.svg";
-import TIP3 from "../../../assets/tips/tip-3.svg";
-import TIP4 from "../../../assets/tips/tip-4.svg";
-import SCROLL from "../../../assets/tips/tipScroll.svg";
+import TIP2 from "../../../assets/tips/tip-2.png";
+import TIP3 from "../../../assets/tips/tip-3.png";
+import TIP4 from "../../../assets/tips/tip-4.png";
+import SCROLL from "../../../assets/tips/tipScroll.png";
 
 export const Complete = () => {
     const [sec, setSec] = useState(2);

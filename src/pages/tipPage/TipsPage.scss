@@ -25,5 +25,7 @@
   );
   transform: translateX(-50%);
   z-index: 1001; // 버튼보다 위
-  pointer-events: none; // 버튼 클릭 막지 않도촉
+  pointer-events: none; // 버튼 클릭 막지 않도록
+  width: 2.375rem;
+  height: 0.875rem;
 }
