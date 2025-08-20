@@ -11,9 +11,9 @@ export const MenuEdit = ({ mode, setMode, selectedIds, toggleSelect, menuIds }) 
     
     const isDelete = mode === "delete"; // 삭제 모드 여부
 
-    const originalTotal = menus.reduce((sum, m) => sum + (m.costPrice) * (m.count), 0);
-    const discount = menus.reduce((sum, m) => sum + ((m.costPrice) - (m.salePrice)) * (m.count), 0);
-    const saleTotal = menus.reduce((sum, m) => sum + (m.salePrice) * (m.count), 0);
+    const originalTotal = menus.reduce((sum, m) => sum + (m.salePrice) * (m.count), 0);
+    const discount = menus.reduce((sum, m) => sum + ((m.salePrice) - (m.costPrice)) * (m.count), 0);
+    const saleTotal = menus.reduce((sum, m) => sum + (m.costPrice) * (m.count), 0);
 
     const fmt = (n) => Number(n).toLocaleString("ko-KR");
 

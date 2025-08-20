@@ -161,8 +161,8 @@ export const BottomSheet = ({
                 menu={{
                     id: menu.menuId,
                     name: menu.name,
-                    originalPrice: menu.costPrice,
-                    salePrice: menu.salePrice,
+                    originalPrice: menu.salePrice,
+                    salePrice: menu.costPrice,
                     availableQuantity: menu.quantity,
                     count: added?.count ?? 0,
                     salePercent: menu.salePercent,

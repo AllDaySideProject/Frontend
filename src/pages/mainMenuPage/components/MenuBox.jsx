@@ -6,7 +6,7 @@ import CHECKEDBOX from "../../../assets/main/checkedBox.svg";
 import { categoryIcons } from "../../../assets/icons/categoryIcons";
 
 export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, menu }) => {
-    const { name, storeName, costPrice, salePrice, category, count, salePercent  } = menu;
+    const { name, storeName, costPrice, salePrice, category, count, salePercent  } = menu; // 가격 수정 필요
 
     const fmt = (n) => Number(n).toLocaleString("ko-KR");
 
@@ -31,12 +31,12 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
                 </div>
                 <div className = "menuBoxRight">
                     <div className = "originText">
-                        <p className = "originalPrice">{ fmt(costPrice * count) }</p>
+                        <p className = "originalPrice">{ fmt(salePrice * count) }</p>
                         <p className = "originWon">원</p>                    
                     </div>
                     <div className = "finalInfo">
                         <p className = "discountRate">{ salePercent }%</p>
-                        <p className = "finalPrice">{ fmt(salePrice * count) }원</p>                    
+                        <p className = "finalPrice">{ fmt(costPrice * count) }원</p>                    
                     </div>
                 </div>
             </div>   
