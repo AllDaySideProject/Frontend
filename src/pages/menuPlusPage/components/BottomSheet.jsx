@@ -96,7 +96,7 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, se
                 if (menu.count === 1) {
                     addMenu({
                         ...menu,
-                        id: menu.menuId,
+                        menuId: menu.menuId,
                         store: storeDetail?.name,
                         price: menu.salePrice,
                         originalPrice: menu.costPrice,
@@ -161,7 +161,7 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, se
                         <SheetBox
                             key = { menu.menuId }
                             menu = {{
-                                id: menu.menuId,
+                                menuId: menu.menuId,
                                 name: menu.name,
                                 originalPrice: menu.costPrice,
                                 salePrice: menu.salePrice,

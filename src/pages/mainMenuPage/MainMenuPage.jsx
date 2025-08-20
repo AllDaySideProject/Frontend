@@ -30,23 +30,25 @@ export const MainMenuPage = () => {
             }
         };
         fetchMenus();
-    }, [menus]);
+    }, []);
 
     useEffect(() => {
         if (mode !== "delete") setSelectedIds(new Set()); // 모드 변경 시 선택 초기화
     }, [mode]);
 
-    const toggleSelect = (id) => {
+    const toggleSelect = (menuId) => {
         if (mode !== "delete") return; // 삭제 모드에서만 선택 가능
         setSelectedIds(prev => {
             const next = new Set(prev);
-            next.has(id) ? next.delete(id) : next.add(id);
+            next.has(menuId) ? next.delete(menuId) : next.add(menuId);
         return next;
         });
     };
 
     const handleDeleteClick = () => {
         if (selectedIds.size === 0) return; // 메뉴 선택하지 않으면 기능 없음
+        console.log("selectedIds:", Array.from(selectedIds));
+        console.log("menus in context:", menus);
         console.log("삭제할 메뉴 ID:", Array.from(selectedIds)); // 선택한 메뉴 콘솔 메시지
         setIsModalOpen(true);
         console.log("삭제 모달 열기");
