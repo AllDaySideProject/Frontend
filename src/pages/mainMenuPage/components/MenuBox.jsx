@@ -1,8 +1,8 @@
 import "./MenuBox.scss";
 
 import LOCATION from "../../../assets/main/location.svg";
-import CHECKBOX from "../../../assets/main/checkBox.svg";
-import CHECKEDBOX from "../../../assets/main/checkedBox.svg";
+import CHECKBOX from "../../../assets/main/checkBox.png";
+import CHECKEDBOX from "../../../assets/main/checkedBox.png";
 import { categoryIcons } from "../../../assets/icons/categoryIcons";
 
 export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, menu }) => {
@@ -43,6 +43,7 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
 
             { isDelete && (
                 <img 
+                    className = "mainCheckImg"
                     src = { isSelected ? CHECKEDBOX : CHECKBOX }
                     onClick = { () => onToggleSelect?.() }
                 />
