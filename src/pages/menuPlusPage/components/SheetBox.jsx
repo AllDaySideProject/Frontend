@@ -32,9 +32,9 @@ export const SheetBox = ({ menu, onCountChange }) => {
                 </div>
             </div>
             <div className = "sheetBoxRight">
-                <img src = { MINUS } onClick = { () => onCountChange(-1) } />
+                <img src = { MINUS } onClick = { () => onCountChange(-1) } style = {{ cursor: "pointer" }} />
                 <p className = "sheetCount">{ count }</p>
-                <img src = { PLUS } onClick = {() => onCountChange(1) } />
+                <img src = { PLUS } onClick = {() => onCountChange(1) } style = {{ cursor: "pointer" }} />
             </div>
         </div>
     )
