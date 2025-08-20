@@ -13,22 +13,24 @@ export const pickupReservePostApi = async (items) => {
         const status = error.response?.status;
         const data = error.response?.data;
 
+
         switch (status) {
             case 400:
                 switch (data.code) {
                     case "GLOBAL_400_2":
-                        console.error("잘못된 요청: ", data.message);
+                        console.error("잘못된 요청:", data.message);
                         break;
                     case "MENU_OUT_OF_STOCK_400_2":
-                        console.error("재고 부족: ", data.message);
+                        console.error("재고 부족:", data.message);
                         break;
                     case "MENU_EXPIRED_400_1":
-                        console.error("판매 마감: ", data.message);
+                        console.error("판매 마감:", data.message);
                         break;
                     default:
-                        console.error("기타 잘못된 요청: ", data.message);
+                        console.error("기타 잘못된 요청:", data.message);
                 }
                 break;
+    
 
             case 404:
                 console.error("찾을 수 없음: ", data.message);

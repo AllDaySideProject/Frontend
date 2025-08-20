@@ -30,8 +30,8 @@ export const Code = () => {
             await pickupCodePutApi(pickupCode);
             setIsModalOpen(false);
             clearMenus(); 
-            navigate(`/pickup/complete`);
             console.log("픽업 완료 성공 후 화면 이동");            
+            navigate(`/pickup/complete`);
         } catch (error) {
             console.error(error);
         }
