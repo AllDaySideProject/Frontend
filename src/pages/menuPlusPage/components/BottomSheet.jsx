@@ -92,7 +92,7 @@ export const BottomSheet = ({
             addMenu({
                 ...menu,
                 id: menu.menuId,
-                store: storeDetail?.name,
+                storeName: storeDetail?.name,
                 price: menu.salePrice,
                 originalPrice: menu.costPrice,
             });
