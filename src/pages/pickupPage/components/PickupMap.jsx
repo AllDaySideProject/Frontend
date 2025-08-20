@@ -6,7 +6,6 @@ import STORE_GR from "../../../assets/map/storeLocation-green.svg";
 import STORE_WH from "../../../assets/map/storeLocation-white.svg";
 import { getDistanceMeters } from "../../../components/map/mapUtils";
 import { DistanceBox } from "../../../components/map/DistanceBox";
-import { mapRoutePostApi } from "../../../api/map/mapRoutePostApi";
 
 export default function PickupMap({ userPos, destinations = [], paths = [], height = "50rem", width, useBent = false, selectedId, onDestinationClick }) {
   // if (!userPos) return null;

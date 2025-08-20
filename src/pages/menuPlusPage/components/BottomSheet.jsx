@@ -31,7 +31,7 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, se
         };
 
         fetchMenus();
-    }, []);
+    }, [storeId, userPos]);
 
     const startY = useRef(0); // 드래그 시작 위치
     const startHeight = useRef(0); // 드래그 시작 시 높이

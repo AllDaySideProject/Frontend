@@ -30,7 +30,7 @@ export const MainMenuPage = () => {
             }
         };
         fetchMenus();
-    }, []);
+    }, [menus.length]);
 
     useEffect(() => {
         if (mode !== "delete") setSelectedIds(new Set()); // 모드 변경 시 선택 초기화

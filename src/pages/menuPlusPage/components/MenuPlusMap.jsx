@@ -50,7 +50,7 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
         };
 
         fetchStores();
-    }, []);
+    }, [userPos]);
 
     const CATEGORY_LABELS = { // 카테고리 라벨
         KOREAN: "한식 전문점",

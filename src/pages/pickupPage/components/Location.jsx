@@ -88,7 +88,7 @@ export const Location = () => {
     };
 
     fetchData();
-  }, [reservation, userPos.lat, userPos.lng]);
+  }, [reservation, userPos]);
 
   return (
     <div className = "locationBg">
