@@ -6,7 +6,7 @@ import usePricing from "../../../hooks/usePricing";
 import { categoryIcons } from "../../../assets/icons/categoryIcons";
 
 export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, menu }) => {
-    const { name, storeName, count, price, originalPrice, category } = menu;
+    const { name, store, count, price, originalPrice, category } = menu;
 
     const isDelete = mode === "delete";
 
@@ -29,7 +29,7 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
                     />
                     <div className = "infoBox">
                         <div className = "menuInfo">
-                            <p className = "storeName">{ storeName }</p>
+                            <p className = "storeName">{ store }</p>
                             <p className = "menuBoxName">{ name }</p>
                             <p className = "menuCount">수량: { count }개</p>
                         </div>
