@@ -24,7 +24,14 @@ export const BottomSheet = ({ height, setHeight, storeId, setStoreId, stores, se
                 setLocalStoreDetail(data);
                 setStoreDetail(data);
 
-                setMenus((data.menus || []).map(m => ({ ...m, count: 0, availableQuantity: m.quantity }))); // 메뉴 리스트
+                setMenus(prev => (data.menus || []).map(m => { // 메뉴 리스트
+                    const old = prev.find(pm => pm.menuId === m.menuId);
+
+                    return { 
+                        ...m, count: old?.count ?? 0, availableQuantity: m.quantity 
+                    }
+                }));
+
             } catch (error) {
                 console.error("메뉴 조회 실패", error);
             }
