@@ -1,8 +1,14 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { useKakaoLoader } from "react-kakao-maps-sdk";
 
 const LocationPermissionCtx = createContext(null); // 전역 상태
 
 export const LocationPermissionProvider = ({ children }) => {
+    useKakaoLoader({
+        appkey: process.env.REACT_APP_KAKAO_JS_KEY,
+        libraries: ["services"],
+    });
+  
     const [agreed, setAgreed] = useState(() => localStorage.getItem("localAgreed") === "true"); // 허용 여부
     const [decided, setDecided] = useState(() => localStorage.getItem("localDecided") === "true"); // 결정 여부
     const [address, setAddress] = useState(() => localStorage.getItem("localAddress") || ""); // 한글 주소 문자열
@@ -12,22 +18,14 @@ export const LocationPermissionProvider = ({ children }) => {
     useEffect(() => localStorage.setItem("localDecided", String(decided)), [decided]);
     useEffect(() => localStorage.setItem("localAddress", address || ""), [address]);
 
-    useEffect(() => {
-        const script = document.createElement("script");
-        script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_JS_KEY}&autoload=false&libraries=services`;
-        script.async = true;
-        document.head.appendChild(script);
-    }, []);
-
     const fetchAddressKakao = (lat, lng) => {
-    return new Promise((resolve, reject) => {
-        if (!window.kakao || !window.kakao.maps) {
-            console.warn("카카오 SDK 로드 안 됨");
-            resolve("");
-            return;
-        }
+        return new Promise((resolve, reject) => {
+            if (!window.kakao || !window.kakao.maps) {
+                console.warn("카카오 SDK 로드 안 됨");
+                resolve("");
+                return;
+            }
 
-        window.kakao.maps.load(() => {
             const geocoder = new window.kakao.maps.services.Geocoder();
             geocoder.coord2Address(lng, lat, (result, status) => {
                 if (status === window.kakao.maps.services.Status.OK) {
@@ -37,8 +35,8 @@ export const LocationPermissionProvider = ({ children }) => {
                         "";
 
                     if (!fullAddress) {
-                        resolve("");
-                        return;
+                            resolve("");
+                            return;
                     }
 
                     const parts = fullAddress.split(" ");
@@ -48,7 +46,6 @@ export const LocationPermissionProvider = ({ children }) => {
                 }
             });
         });
-    });
     };
 
 
