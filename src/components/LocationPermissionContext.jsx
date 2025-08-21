@@ -12,39 +12,43 @@ export const LocationPermissionProvider = ({ children }) => {
     useEffect(() => localStorage.setItem("localDecided", String(decided)), [decided]);
     useEffect(() => localStorage.setItem("localAddress", address || ""), [address]);
 
-    const fetchAddressKakao = async (lat, lng) => {
-        const REST_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
-        if (!REST_KEY) {
-            console.warn("REST API KEY 누락");
-            return "";
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_JS_KEY}&autoload=false&libraries=services`;
+        script.async = true;
+        document.head.appendChild(script);
+    }, []);
+
+    const fetchAddressKakao = (lat, lng) => {
+    return new Promise((resolve, reject) => {
+        if (!window.kakao || !window.kakao.maps) {
+            console.warn("카카오 SDK 로드 안 됨");
+            resolve("");
+            return;
         }
 
-        const url = `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lng}&y=${lat}`;
-        try {
-            const res = await fetch(url, {
-                headers: { Authorization: `KakaoAK ${REST_KEY}` }
+        window.kakao.maps.load(() => {
+            const geocoder = new window.kakao.maps.services.Geocoder();
+            geocoder.coord2Address(lng, lat, (result, status) => {
+                if (status === window.kakao.maps.services.Status.OK) {
+                    const fullAddress =
+                        result[0].road_address?.address_name ||
+                        result[0].address?.address_name ||
+                        "";
+
+                    if (!fullAddress) {
+                        resolve("");
+                        return;
+                    }
+
+                    const parts = fullAddress.split(" ");
+                    resolve(parts.length >= 2 ? `${parts[0]} ${parts[1]}` : fullAddress);
+                } else {
+                    reject("주소 변환 실패");
+                }
             });
-
-            if (!res.ok) {
-                return "";
-            }
-
-            const json = await res.json();
-            const d = json.documents?.[0];
-            const fullAddress =
-                d?.address?.address_name ||
-                d?.road_address?.address_name || "";
-
-            if (!fullAddress) return "";
-
-            const parts = fullAddress.split(" ");
-            return parts.length >= 2
-                ? `${parts[0]} ${parts[1]}`
-                : fullAddress;
-        } catch (err) {
-            console.log("예외 에러: ", err);
-            return "";
-        }
+        });
+    });
     };
 
 
