@@ -7,10 +7,10 @@ import { TipComponent } from "./components/TipComponent";
 import { ButtonComponent } from "../../components/ButtonComponent"
 import { useNavigate } from "react-router-dom";
 
-import TIP2 from "../../assets/tips/tip-2.svg";
-import TIP3 from "../../assets/tips/tip-3.svg";
-import TIP4 from "../../assets/tips/tip-4.svg";
-import SCROLL from "../../assets/tips/tipScroll.svg";
+import TIP2 from "../../assets/tips/tip-2.png";
+import TIP3 from "../../assets/tips/tip-3.png";
+import TIP4 from "../../assets/tips/tip-4.png";
+import SCROLL from "../../assets/tips/tipScroll.png";
 
 export const TipsPage = () => {
     const navigate = useNavigate();
@@ -21,6 +21,8 @@ export const TipsPage = () => {
             description: "양파, 대파, 청양고추, 느타리버섯 등\n냉장고에 애매하게 남아있는 자투리 채소들이 있다면\n두부와 함께 푸짐한 조림으로 변신시켜 보세요!",
             image: TIP2,
             imgPadding: "0 0.81rem",
+            imgWidth: "18.75rem",
+            imgHeight: "18.75rem",
             gap: "0.12rem"
         },
         {
@@ -46,7 +48,11 @@ export const TipsPage = () => {
                 <TipComponent key = { index } { ...tip } />
             ))}
 
-            <img src={SCROLL} alt="" className="fixedArrowOverlay" />
+            <img 
+                src = { SCROLL } 
+                alt = "알뜰 식사 팁 스크롤" 
+                className = "fixedArrowOverlay" 
+            />
             <ButtonComponent 
                 width = "20.38rem"
                 bgColor = { '#0EA64B' }

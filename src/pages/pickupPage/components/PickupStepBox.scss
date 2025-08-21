@@ -7,6 +7,7 @@
     align-items: center;
     gap: 0.875rem;
     flex-shrink: 0;
+    cursor: pointer;
 
     p {
         color: #B0B0B0;
@@ -19,6 +20,7 @@
     }
 
     &.active {
+        z-index: 2000;
         border-bottom: 0.2rem solid #0EA64B; 
 
         p {

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
-import { Map } from "react-kakao-maps-sdk";
+import { Map, useKakaoLoader } from "react-kakao-maps-sdk";
 
 export const BaseKakaoMap = ({ // 지도 기본 래퍼
     center, // 지도 중심 좌표
@@ -7,6 +7,7 @@ export const BaseKakaoMap = ({ // 지도 기본 래퍼
     height = "100%", width = "100%",
     children, // 마커 + 경로
 }) => {
+
     const mapRef = useRef(null);
 
     const fitBounds = useCallback(() => { // 지도 범위 설정

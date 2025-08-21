@@ -26,7 +26,7 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
     const [toastMessage, setToastMessage] = useState("");
     const [sheetHeight, setSheetHeight] = useState(0); // BottomSheet 높이
 
-    const { decided, agreed } = useLocationPermission(); // 위치 권한 결정 여부
+    // const { decided, agreed } = useLocationPermission(); // 위치 권한 결정 여부
     const { pos: userPos, request } = useCurrentPosition(); // 현재 위치
 
     const [stores, setStores] = useState([]); // 가게 목록
@@ -150,6 +150,7 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                     categoryLabels = { CATEGORY_LABELS }
                     userPos = { currentPos }
                     setStoreDetail = { setStoreDetail }
+                    setRouteCoords = { setRouteCoords }
                 />                   
             )}
 

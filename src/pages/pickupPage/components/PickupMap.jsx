@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { CustomOverlayMap, MapMarker, Polyline } from "react-kakao-maps-sdk";
 import { BaseKakaoMap } from "../../../components/map/BaseKakaoMap";
-import USER from "../../../assets/map/userLocation.svg";
-import STORE_GR from "../../../assets/map/storeLocation-green.svg";
-import STORE_WH from "../../../assets/map/storeLocation-white.svg";
+import USER from "../../../assets/map/userLocation.png";
+import STORE_GR from "../../../assets/map/storeLocation-green.png";
+import STORE_WH from "../../../assets/map/storeLocation-white.png";
 import { getDistanceMeters } from "../../../components/map/mapUtils";
 import { DistanceBox } from "../../../components/map/DistanceBox";
 

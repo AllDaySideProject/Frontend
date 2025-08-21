@@ -1,7 +1,7 @@
 import "./MenuPlus.scss";
 import ScreenContainer from "../../../components/ScreenContainer";
 
-import MAIN from "../../../assets/main/main.svg";
+import MAIN from "../../../assets/main/main.png";
 import PLUS from "../../../assets/main/plus.svg";
 
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,14 @@ export const MenuPlus = () => {
                     <p className = "subTitleText">내 주변 매물을 똑똑하게 연결해 드려요.</p>
                 </div>
                 <div className = "imageContainer">
-                    <img src = { MAIN } alt = "내 밥상 추가 아이콘" />
+                    <img 
+                        src = { MAIN } 
+                        style = {{
+                            width: "12.5rem",
+                            height: "9.375rem"
+                        }}
+                        alt = "내 밥상 추가 아이콘"
+                    />
                 </div>
                 <div 
                     className = "plusButton"

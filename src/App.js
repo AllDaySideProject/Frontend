@@ -14,6 +14,8 @@ import { useEffect } from "react";
 import { useMenu } from "./components/MenuContext";
 import { AiSuggestion } from "./pages/aiSuggestion/AiSuggestion";
 
+import PICKUPCOMPLETE from "./assets/pickup/pickupComplete.png";
+
 function App() {
   const { menus } = useMenu();
 
@@ -22,14 +24,33 @@ function App() {
       const img = new Image();
       img.src = src;
     });
+
+    const completeImg = new Image();
+    completeImg.src = PICKUPCOMPLETE;
   }, []);
 
   return (
     <LocationPermissionProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={ menus.length > 0 ? <Navigate to="/main/menu" replace /> : <MainPage /> } />
-          <Route path="/main/menu" element={<MainMenuPage />} />
+
+          <Route 
+            path="/" 
+            element={ 
+              menus.length > 0 
+                ? <Navigate to="/main/menu" replace /> 
+                : <MainPage /> } 
+          />
+
+          <Route
+            path="/main/menu"
+            element={
+              menus.length > 0
+                ? <MainMenuPage />
+                : <Navigate to="/" replace />
+            }
+          />         
+          
           <Route path="/pickup" element={<PickupPage />} />
           <Route path="/pickup/complete" element={<PickupCompletePage />} />
           <Route path="/tips" element={<TipsPage />} />
