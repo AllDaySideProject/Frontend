@@ -1,3 +1,5 @@
+import "./MainMenuPage.scss";
+
 import { useEffect, useState } from "react";
 import { Header } from "../mainPage/components/Header";
 import { ButtonRow } from "./components/ButtonRow";
@@ -90,7 +92,8 @@ export const MainMenuPage = () => {
     };
 
     return (
-        <>
+        <div className="mainMenuBg">
+        <div className = "mainMenuWrapper">
             <Header />  
             <MenuEdit 
                 mode = { mode }
@@ -124,6 +127,7 @@ export const MainMenuPage = () => {
                     />                    
                 </div>
             )}
-        </>
+        </div>
+        </div>
     )
 }
