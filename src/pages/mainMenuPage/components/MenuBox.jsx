@@ -1,6 +1,5 @@
 import "./MenuBox.scss";
 
-import LOCATION from "../../../assets/main/location.svg";
 import CHECKBOX from "../../../assets/main/checkBox.png";
 import CHECKEDBOX from "../../../assets/main/checkedBox.png";
 import { categoryIcons } from "../../../assets/icons/categoryIcons";

@@ -4,7 +4,6 @@ import ScreenContainer from "../../../components/ScreenContainer";
 import { MenuBox } from "./MenuBox";
 import { PriceText } from "./PriceText";
 import { useMenu } from "../../../components/MenuContext";
-import { useEffect } from "react";
 
 export const MenuEdit = ({ mode, setMode, selectedIds, toggleSelect, menuIds }) => {
     const { menus } = useMenu(); // 전역 상태에서 메뉴 목록 가져오기

@@ -1,6 +1,5 @@
 import "./Code.scss";
 
-import ScreenContainer from "../../../components/ScreenContainer"
 import { ButtonComponent } from "../../../components/ButtonComponent";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";

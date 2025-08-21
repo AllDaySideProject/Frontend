@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { CustomOverlayMap, MapMarker, Polyline } from "react-kakao-maps-sdk";
 import { BaseKakaoMap } from "../../../components/map/BaseKakaoMap";
 import USER from "../../../assets/map/userLocation.png";
