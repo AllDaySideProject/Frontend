@@ -12,38 +12,6 @@ export const LocationPermissionProvider = ({ children }) => {
     useEffect(() => localStorage.setItem("localDecided", String(decided)), [decided]);
     useEffect(() => localStorage.setItem("localAddress", address || ""), [address]);
 
-    // const fetchAddressKakao = async (lat, lng) => { // 카카오 사용 좌표 > 주소 역지오코딩
-    //     const REST_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
-    //     if (!REST_KEY) {
-    //         console.warn("REST API KEY 누락");
-    //         return "";
-    //     };
-
-    //     const url = `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lng}&y=${lat}`; // 경도: x = lng, 위도: y = lat
-
-    //     try {
-    //         const res = await fetch(url, {
-    //             headers: { Authorization: `KakaoAK ${REST_KEY}`} // 카카오 API 인증 방식
-    //         });
-
-    //         if (!res.ok) {
-    //             console.warn("REST API KEY 실패");
-    //             return ""; // 호출 실패 시 빈 문자열 반환
-    //         }
-
-    //         const json = await res.json();
-    //         // const fullAddress = json.documents?.[0]?.address?.address_name || ""; // 전체 지번 주소
-    //         const d = json.documents?.[0];
-    //         const fullAddress = d?.address?.address_name || d?.road_address?.address_name || "";
-
-    //         const parts = fullAddress.split(" "); // 시, 구 공백으로 분리
-    //         return parts.length >= 2 ? `${ parts[0] } ${ parts[1] }` : fullAddress;
-    //     } catch (err) {
-    //         console.log("예외 에러: ", err);
-    //         return "";
-    //     };
-    // };
-
     const fetchAddressKakao = async (lat, lng) => {
         const REST_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
         if (!REST_KEY) {
@@ -95,7 +63,10 @@ export const LocationPermissionProvider = ({ children }) => {
 
                 console.log("위치 정보 동의 상태: 허용");
 
-                const { latitude, longitude } = pos.coords;
+                const latitude = 37.468355;
+                const longitude = 127.039073;
+
+                // const { latitude, longitude } = pos.coords;
                 const addr = await fetchAddressKakao(latitude, longitude);
 
                 setAddress(addr || "");
