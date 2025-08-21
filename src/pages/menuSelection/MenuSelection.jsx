@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import {Menu} from './components/Menu'
 import ScreenContainer from '../../components/ScreenContainer';
 import HeaderArrow from '../../components/HeaderArrow';
-import './MenuSelection.scss'
 import { CompleteButton } from './components/CompleteButton';
 import { StoreSelectionModal } from './components/StoreSelectionModal';
 import menuSuggestGet from '../../api/menuSelection/menuSuggestGet';
 import {categoryIcons} from '../../assets/icons/categoryIcons';
 import { useCurrentPosition } from '../../hooks/useCurrentPosition';
 import { useMenu } from '../../components/MenuContext';
+import './MenuSelection.scss'
 //양재 at 센터 위경도 
 const FIXED_LAT = 37.4683;
 const FIXED_LNG = 127.0391;
@@ -17,7 +17,7 @@ const FIXED_POS = { lat: FIXED_LAT, lng: FIXED_LNG };
 
 export  const MenuSelection = () => {
   const navigate=useNavigate();
-  const {addMenu, updateCount, removeMenu}=useMenu();//로컬에 저장하는 용도
+  const {menus: cartMenus, addMenu, updateCount, removeMenu}=useMenu();//로컬에 저장하는 용도
 
   const [menus, setMenus]=useState([]);
   const [selectMenus, setSelectMenus]=useState([]);//선택된 메뉴의 인덱스를 전달하기 위한 변수
@@ -29,6 +29,8 @@ export  const MenuSelection = () => {
   const { pos, loading, request } = useCurrentPosition();
   const [fetching, setFetching] = useState(false);
   const [fetchError, setFetchError] = useState(null);
+  
+  
   //pos=lat, lng
   // 마운트 시 위치 요청
   useEffect(() => {
@@ -64,6 +66,34 @@ export  const MenuSelection = () => {
       }
     })();
 }, [pos]);
+//로컬에 메뉴가 있으면 해당 메뉴 selected상태 랜더링
+  useEffect(()=>{
+    if(!cartMenus)return;
+    //이름 기준으로 일치하는 카드 인덱스 숮집
+    const nameSet = new Set(cartMenus.map(cm=>cm.name));
+    const indices=[];
+    menus.forEach((it,idx)=>{
+      if(nameSet.has(it.name)) indices.push(idx);
+    });
+
+    //상세 정보
+  
+    setSelectedMenuDetails(()=>{
+      const next={};
+      cartMenus.forEach(cm=>{
+        next[cm.name]={
+          menuId:cm.menuId,
+          store:cm.store,//가게 명
+          quantity:cm.count,//수량
+          unitPrice:cm.unitPrice,//가격
+          price:(cm.unitPrice)*(cm.count),//총액
+        };
+      });
+    return next; 
+    });
+    
+    setSelectMenus(indices);
+  }, [menus, cartMenus]);
 
 
   const handleMenuClick=(index)=>{
@@ -144,9 +174,6 @@ export  const MenuSelection = () => {
       setSelectMenus(prev => prev.filter(index => index !== menuIndex));
     }
   };
-  
-  // 선택된 메뉴 이름 목록 생성
-  const selectedMenuNames = selectMenus.map(index => menus[index].name);
   
   return (
     <ScreenContainer>
