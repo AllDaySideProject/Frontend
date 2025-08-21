@@ -6,8 +6,18 @@
 
   width: 100%;
   max-width: 24.375rem;
+}
 
-  background: transparent;
+.exploreMapContainer .HeaderBar {
+  position: absolute;   /* 지도 위에 겹치기 */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+
+  .SwitchGroup {
+    background-color: #FAFAFA;
+  }
 }
 
 .toastContainer {

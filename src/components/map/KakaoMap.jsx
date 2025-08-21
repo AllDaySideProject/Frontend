@@ -3,7 +3,7 @@ import { Map, MapMarker, Polyline } from "react-kakao-maps-sdk";
 
 import STORE_GR from "../../assets/map/storeLocation-green.svg";
 import STORE_WH from "../../assets/map/storeLocation-white.svg";
-import USER from "../../assets/map/userLocation.svg";
+import USER from "../../assets/map/userLocation.png";
 
 import { useLocationPermission } from '../LocationPermissionContext';
 import { useCurrentPosition } from '../../hooks/useCurrentPosition';

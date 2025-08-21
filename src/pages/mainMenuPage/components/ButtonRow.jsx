@@ -38,10 +38,11 @@ export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDelet
             >
                 <ButtonComponent 
                     width = { '6.88rem' }
+                    bdColor = { '#0EA64B' }
                     bgColor = { '#FFFFFF' }
                     buttonText = { isDelete ? "취소" : "더 추가하기" } // 모드에 따른 문구 변경
                     textSize = { '0.88rem' }
-                    textColor = { '#B0B0B0' }
+                    textColor = { '#0EA64B' }
                     onClick = { handleLeftClick }
                 />
                 <ButtonComponent

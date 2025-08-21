@@ -1,0 +1,14 @@
+.mainMenuBg {
+  background-color: #c9f3bf; 
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.mainMenuWrapper {
+  background-color: #fafafa; 
+  max-width: 390px;         
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}

@@ -34,6 +34,8 @@
     gap: 0.12rem;
 
     .locationIcon {
+        cursor: pointer;
+        
         &.on {
             width: 1rem;
             height: 1rem;

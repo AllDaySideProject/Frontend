@@ -2,7 +2,7 @@ import "./TipHeader.scss";
 
 import ScreenContainer from "../../../components/ScreenContainer"
 
-import TIP1 from "../../../assets/tips/tip-1.svg";
+import TIP1 from "../../../assets/tips/tip-1.png";
 
 export const TipHeader = ({ bgColor = "#EDF8F8" }) => {
     return (
@@ -15,7 +15,10 @@ export const TipHeader = ({ bgColor = "#EDF8F8" }) => {
                         내 맘대로 즐기는 알뜰 한 끼
                     </p>
                 </div>
-                <img src = { TIP1 } />
+                <img 
+                    className = "tipHeaderImg"
+                    src = { TIP1 } 
+                />
             </div>            
         </ScreenContainer>
 
