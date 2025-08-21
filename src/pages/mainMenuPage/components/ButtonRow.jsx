@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ButtonComponent } from "../../../components/ButtonComponent"
 import ScreenContainer from "../../../components/ScreenContainer"
 
-export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDeleteClick, paddingTop, paddingBottom }) => {
+export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDeleteClick, paddingTop, paddingBottom, onReserveClick }) => {
     const navigate = useNavigate();
     const isDelete = mode === "delete"; // 삭제 모드 여부
     const rightDisabled = isDelete && selectedCount === 0; // 삭제 모드 + 선택 0 = 오른쪽 버튼 비활성화
@@ -26,8 +26,7 @@ export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDelet
             onDeleteClick?.();
             console.log("선택한 메뉴 삭제")
         } else {
-            navigate(`/pickup`);
-            console.log("픽업 예약으로 이동"); 
+            onReserveClick?.(); // 픽업 예약
         }
     }
 

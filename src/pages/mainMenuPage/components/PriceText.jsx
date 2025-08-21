@@ -12,7 +12,7 @@ export const PriceText = ({ fontColor, priceTitle, price, tone = "normal" }) => 
                 className = "priceText"
                 style = {{ color: fontColor }}
             >
-                { isDiscount && "-" }{ price }원
+                { price }원
             </p>
         </div>
     )

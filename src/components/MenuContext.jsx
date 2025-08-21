@@ -13,32 +13,43 @@ export const MenuProvider = ({ children }) => {
     }, [menus]);
 
     const addMenu = (menu) => {
-    setMenus(prev => {
-        const exists = prev.find(m => m.id === menu.id);
+        setMenus(prev => {
+            const exists = prev.find(m => m.menuId === menu.menuId);
 
-        if (exists) {
-        return prev.map(m =>
-            m.id === menu.id
-            ? { ...m, count: (m.count ?? 0) + 1 }
-            : m
-        );
-        }
+            if (exists) {
+                // 수량 한도 체크
+                if (exists.count < exists.maxQuantity) {
+                    return prev.map((m) =>
+                        m.menuId === menu.menuId
+                            ? { ...m, count: m.count + 1 }
+                            : m
+                    );
+                }
+                return prev; // 더 이상 추가 불가
+            }
 
-        return [...prev, { ...menu, count: menu.count ?? 1 }];
-    });
+            // 처음 담을 때만 추가됨 (기본 수량 1)
+            return [...prev, { ...menu, count: 1, maxQuantity: menu.quantity }];
+        });
     };
 
 
-    const updateCount = (id, delta) => {
-        setMenus(prev =>
-        prev.map(m =>
-            m.id === id
-            ? { ...m, count: Math.max((m.count ?? 0) + delta, 0) }
-            : m
-    ))};
+    const updateCount = (menuId, delta) => {
+        setMenus((prev) =>
+            prev
+                .map((m) => {
+                    if (m.menuId !== menuId) return m;
+                    let newCount = m.count + delta;
+                    if (newCount > m.maxQuantity) newCount = m.maxQuantity;
+                    return { ...m, count: newCount };
+                })
+                .filter(m => m.count > 0) // 0이면 아예 제거
+        );
+    };
 
-    const removeMenu = (id) => { // 메뉴 제거
-        setMenus(prev => prev.filter(m => m.id !== id));
+
+    const removeMenu = (menuId) => { // 메뉴 제거
+        setMenus(prev => prev.filter(m => m.menuId !== menuId));
     };
 
     const clearMenus = () => {
@@ -46,8 +57,17 @@ export const MenuProvider = ({ children }) => {
         localStorage.removeItem("menus"); // 로컬 스토리지에서 메뉴 데이터 제거
     };
 
+    const replaceMenus = (newMenus) => {
+        setMenus(prev =>
+            newMenus.map(newM => {
+                const old = prev.find(m => m.menuId === newM.menuId);
+                return old ? { ...old, maxQuantity: newM.quantity } : null; // 이전 count 유지, 없으면 기본 1
+            })
+        );
+    };
+
     return (
-        <MenuContext.Provider value = {{ menus, addMenu, updateCount, removeMenu, clearMenus }}> 
+        <MenuContext.Provider value = {{ menus, addMenu, updateCount, removeMenu, clearMenus, replaceMenus }}> 
             { children }
         </MenuContext.Provider>
     )
