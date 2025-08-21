@@ -9,6 +9,7 @@ import { StoreSelectionModal } from './components/StoreSelectionModal';
 import menuSuggestGet from '../../api/menuSelection/menuSuggestGet';
 import {categoryIcons} from '../../assets/icons/categoryIcons';
 import { useCurrentPosition } from '../../hooks/useCurrentPosition';
+import { useMenu } from '../../components/MenuContext';
 //양재 at 센터 위경도 
 const FIXED_LAT = 37.4683;
 const FIXED_LNG = 127.0391;
@@ -16,6 +17,7 @@ const FIXED_POS = { lat: FIXED_LAT, lng: FIXED_LNG };
 
 export  const MenuSelection = () => {
   const navigate=useNavigate();
+  const {addMenu, updateCount, removeMenu}=useMenu();//로컬에 저장하는 용도
 
   const [menus, setMenus]=useState([]);
   const [selectMenus, setSelectMenus]=useState([]);//선택된 메뉴의 인덱스를 전달하기 위한 변수
@@ -83,7 +85,13 @@ export  const MenuSelection = () => {
   };
 
   
-  const handleModalComplete = (menuName, storeName, quantity, unitPrice) => {
+  const handleModalComplete = (
+    menuName, 
+    storeName, 
+    quantity, 
+    unitPrice,
+    menuId,
+    stock) => {
     // 모달 완료 시 선택된 메뉴 정보 저장
 
     const price = (Number(unitPrice) || 0) * (Number(quantity) || 1);
@@ -91,6 +99,7 @@ export  const MenuSelection = () => {
     setSelectedMenuDetails(prev => ({
       ...prev,
       [menuName]: {
+        menuId,
         store: storeName,
         quantity,
         unitPrice,//개별 가격  
@@ -104,11 +113,24 @@ export  const MenuSelection = () => {
       setSelectMenus(prev => [...prev, menuIndex]);
     }
 
+    addMenu({//로컬에 최초 메뉴 1개 담기
+      menuId:menuId,
+      name:menuName,
+      store:storeName,
+      unitPrice,
+      quantity:stock,
+    });
+    const extra=Math.max(0, Number(quantity)-1);
+    if(extra>0){
+      updateCount(menuId, extra);
+    }
+
     setIsModalOpen(false);
     setModalMenuName('');
   };
 
-  const handleDeleteMenu = (menuName) => {
+  const handleDeleteMenu = (menuName, menuId) => {
+    removeMenu(menuId);
     // 선택된 메뉴 정보 삭제
     setSelectedMenuDetails(prev => {
       const newDetails = { ...prev };
@@ -146,7 +168,8 @@ export  const MenuSelection = () => {
               isSelected={selectMenus.includes(index)}
               onClick={()=>handleMenuClick(index)}
               onAddClick={() => handleAddButtonClick(item.name)}
-              onDelete={() => handleDeleteMenu(item.name)}
+              onDelete={() => 
+                handleDeleteMenu(item.name, selectedMenuDetails[item.name]?.menuId)}
               menuDetails={selectedMenuDetails[item.name]} // 선택된 메뉴의 상세 정보 전달
             />
           ))}

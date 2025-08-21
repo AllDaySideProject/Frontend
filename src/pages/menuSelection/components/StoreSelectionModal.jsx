@@ -49,7 +49,7 @@
           const raw = response?.data ?? [];
 
           const list = raw.map((s, idx) => ({
-            id: s.menuId ?? idx,
+            menuId: s.menuId ?? idx,
             name: s.storeName,
             distance: `${(s.distance ?? 0).toFixed(2)}km`,
             unitPrice: s.salePrice ?? 0,             
@@ -92,10 +92,13 @@
     const handleBasketDone = () => {
       if (onComplete && selectedMenus?.length > 0) {
         onComplete(
-          selectedMenus[0],
-          selectedStore,
-          selectedQuantity,
-          selectedStoreObj?.unitPrice ?? 0
+          selectedMenus[0], //menuName
+          selectedStore,  //storeName
+          selectedQuantity, // quantity
+          selectedStoreObj?.unitPrice ?? 0, //unitPrice 없으면 0
+          selectedStoreObj?.menuId ?? null, // storeId 없으면 null
+          selectedStoreObj?.stock?? 0 ,// 재고(최대 수량)
+
         );
       }
       onClose?.();

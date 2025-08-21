@@ -21,7 +21,7 @@ export const HeaderArrow = ({ initialMode = "suggestion" }) => {
     else if (p.startsWith("/menu/map") || p === "/map") setMode("map");
   }, [location.pathname]);
 
-  const goBack = () => navigate("/main/menu");
+  const goBack = () => navigate("/");
 
   const select = (nextMode) => {
     setMode(nextMode);
