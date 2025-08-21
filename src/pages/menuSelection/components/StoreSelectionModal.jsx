@@ -49,17 +49,22 @@
           const raw = response?.data ?? [];
 
           const list = raw.map((s, idx) => ({
-            menuId: s.menuId ?? idx,
-            name: s.storeName,
+            id:s.menuId??idx,
+            menuId: s.menuId ,
+            name: s.name,
+            storeName:s.storeName,
+            category:s.category,
+            costPrice:s.costPrice,
+            salePrice:s.salePrice,
+            salePercent:s.salePercent,
+            stock:s.quantity,
             distance: `${(s.distance ?? 0).toFixed(2)}km`,
-            unitPrice: s.salePrice ?? 0,             
             unitPriceText: `${(s.salePrice ?? 0).toLocaleString()}원`,
-            stock: s.quantity ?? 0,             
           }));
           setStores(list);
           setStep('store');//열릴 때 항상 첫단계로
           setShellEnter(true);//쉘 slideUp 트리거
-          setSelectedStore(list?.[0]?.name ?? '');
+          setSelectedStore(list?.[0]?.storeName ?? '');
         }catch(error){
           console.log("가게 불러오기 실패", error);
           setStores([]);
@@ -77,8 +82,8 @@
       const st=listRef.current.scrollTop;
       const index=Math.round(st/PER_ROW);//상단 기준 현재 행 계산하기
       const clamped=Math.min(Math.max(index,0), stores.length-1);
-      const name=stores[clamped].name;
-      if(name!==selectedStore) setSelectedStore(name);
+      const storeName=stores[clamped].storeName;
+      if(storeName!==selectedStore) setSelectedStore(storeName);
     }
 
     const goQuantity=()=>setStep('quantity');
@@ -92,19 +97,23 @@
     const handleBasketDone = () => {
       if (onComplete && selectedMenus?.length > 0) {
         onComplete(
-          selectedMenus[0], //menuName
-          selectedStore,  //storeName
-          selectedQuantity, // quantity
-          selectedStoreObj?.unitPrice ?? 0, //unitPrice 없으면 0
-          selectedStoreObj?.menuId ?? null, // storeId 없으면 null
-          selectedStoreObj?.stock?? 0 ,// 재고(최대 수량)
-
+          selectedMenus?.[0] ?? '',
+          selectedStoreObj?.storeName, // 가게 명
+          selectedQuantity, // 선택 수량
+          selectedStoreObj?.salePrice ?? 0,//판매가
+          selectedStoreObj?.menuId ?? null,//id,
+          selectedStoreObj?.stock ?? 0,//재고
+          {
+            costPrice:selectedStoreObj?.costPrice ?? null,
+            salePercent:selectedStoreObj?.salePercent ?? 0,
+            category : selectedStoreObj?.category ?? null,
+          }
         );
       }
       onClose?.();
     };
   
-    const selectedStoreObj = stores.find(s => s.name === selectedStore);
+    const selectedStoreObj = stores.find(s => s.storeName === selectedStore);
 
 
     return (
@@ -128,7 +137,7 @@
 
               <div className="storeList" ref={listRef} onScroll={handleStoreScroll}>
                 {stores.map((store, index) => {
-                  const isSelected = store.name === selectedStore;
+                  const isSelected = store.storeName === selectedStore;
                   return (
                     <div
                       key={store.id}
@@ -136,7 +145,7 @@
                       style={{ height: ITEM_HEIGHT }}
                     >
                       <div className="storeInfo">
-                        <div className="storeName">{store.name}</div>
+                        <div className="storeName">{store.storeName}</div>
                         <div className="storeDetails">
                           <span className="distance">{store.distance}</span>
                           <span className="price">{store.unitPriceText}</span>

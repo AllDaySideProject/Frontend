@@ -83,10 +83,10 @@ export  const MenuSelection = () => {
       cartMenus.forEach(cm=>{
         next[cm.name]={
           menuId:cm.menuId,
-          store:cm.store,//가게 명
+          store:cm.storeName,//가게 명
           quantity:cm.count,//수량
-          unitPrice:cm.unitPrice,//가격
-          price:(cm.unitPrice)*(cm.count),//총액
+          unitPrice:cm.salePrice,//가격
+          price:(cm.salePrice)*(cm.count),//총액
         };
       });
     return next; 
@@ -119,12 +119,14 @@ export  const MenuSelection = () => {
     menuName, 
     storeName, 
     quantity, 
-    unitPrice,
+    salePrice,
     menuId,
-    stock) => {
+    stock,
+    extra//{costPrice, salePercent, category}
+  ) => {
     // 모달 완료 시 선택된 메뉴 정보 저장
 
-    const price = (Number(unitPrice) || 0) * (Number(quantity) || 1);
+    const price = (Number(salePrice) || 0) * (Number(quantity) || 1);
 
     setSelectedMenuDetails(prev => ({
       ...prev,
@@ -132,28 +134,32 @@ export  const MenuSelection = () => {
         menuId,
         store: storeName,
         quantity,
-        unitPrice,//개별 가격  
+        unitPrice: Number(salePrice) || 0,//개별 가격  
         price,//총액
       }
     }));
       // 해당 메뉴를 선택 상태로 만들기
-
     const menuIndex = menus.findIndex(item => item.name === menuName);
     if (menuIndex !== -1 && !selectMenus.includes(menuIndex)) {
       setSelectMenus(prev => [...prev, menuIndex]);
     }
 
     addMenu({//로컬에 최초 메뉴 1개 담기
-      menuId:menuId,
-      name:menuName,
-      store:storeName,
-      unitPrice,
-      quantity:stock,
+      id: menuId,
+      menuId,
+      name: menuName,
+      storeName,
+      category: extra.category,
+      costPrice:extra.costPrice,
+      originalPrice:salePrice,
+      salePrice: salePrice,
+      price: extra.costPrice,
+      salePercent: extra.salePercent,
+      quantity: stock,
+      maxQuantity: stock,
     });
-    const extra=Math.max(0, Number(quantity)-1);
-    if(extra>0){
-      updateCount(menuId, extra);
-    }
+    const extraCount=quantity-1;
+    if(extraCount>0) updateCount(menuId, extraCount);
 
     setIsModalOpen(false);
     setModalMenuName('');
