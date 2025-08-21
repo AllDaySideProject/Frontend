@@ -19,15 +19,23 @@ export const PickupPage = () => {
         }
     };
 
+    const isCodePhase = phase !== "check"; 
+
     return (
-        <div className = "pickupPage">
+        <div className={`pickupPage ${isCodePhase ? "codeMode" : ""}`}>
             <PickupHeader />
             <PickupIntro phase = { phase } />
             <PickupState phase = { phase } onChange = { handlePhaseChange } />
 
-            <div className="pickupContent">
-                { (phase === "check") ? <Location /> : <Code /> }
-            </div>
+            
+            { (phase === "check") ? 
+            
+                ( <Location /> ) : (
+                
+                <div className="pickupContent">
+                    <Code /> 
+                </div>
+                )}
         </div>
     )
 }
