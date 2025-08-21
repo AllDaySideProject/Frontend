@@ -27,7 +27,7 @@ export const SheetBox = ({ menu, onCountChange }) => {
                     <p className = "sheetOriginalPrice">{ fmt(originalPrice) }원</p>
                     <div className = "leftMainText">
                         <p className = "sheetPrice">{ fmt(salePrice) }원</p>
-                        <p className = "sheetDiscount">{ salePercent }%</p>
+                        <p className = "sheetDiscount">-{ salePercent }%</p>
                     </div>
                 </div>
             </div>
