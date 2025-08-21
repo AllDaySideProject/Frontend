@@ -38,7 +38,7 @@ export const Code = () => {
     }
 
     return (
-        <ScreenContainer>
+        <div className = "codeWrapper">
             <div className = "codeContainer">
                 <p className = "codeText">{ pickupCode }</p>
                 <p className = "description">
@@ -50,6 +50,7 @@ export const Code = () => {
             <ButtonComponent 
                 className = "btnBox"
                 buttonText = "픽업 완료"
+                width = { "20.375rem" }
                 bgColor = { pressed ? '#0EA64B' : '#FAFAFA' }
                 bdColor = { '#0EA64B' }
                 textColor = { pressed ? '#FAFAFA' : '#0EA64B' }
@@ -68,6 +69,6 @@ export const Code = () => {
                 </div>
             )}
 
-        </ScreenContainer>
+        </div>
     )
 }

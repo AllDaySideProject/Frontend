@@ -1,3 +1,5 @@
+import "./PickupPage.scss";
+
 import { useState } from "react";
 import { PickupIntro } from "./components/PickupIntro";
 import { PickupState } from "./components/PickupState";
@@ -18,12 +20,14 @@ export const PickupPage = () => {
     };
 
     return (
-        <>
+        <div className = "pickupPage">
             <PickupHeader />
             <PickupIntro phase = { phase } />
             <PickupState phase = { phase } onChange = { handlePhaseChange } />
 
-            { (phase === "check") ? <Location /> : <Code /> }
-        </>
+            <div className="pickupContent">
+                { (phase === "check") ? <Location /> : <Code /> }
+            </div>
+        </div>
     )
 }
