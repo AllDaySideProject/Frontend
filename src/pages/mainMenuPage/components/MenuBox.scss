@@ -1,7 +1,7 @@
 .menuBoxContainer {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    // align-items: center;
 
     width: 18.88rem;
     height: 3.43rem;
@@ -80,6 +80,7 @@
 .menuBoxRight {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     gap: 0.25rem;
 
     .originText {

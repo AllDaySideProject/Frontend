@@ -17,12 +17,24 @@ export const BottomSheet = ({
   categoryLabels,
   userPos,
   setStoreDetail,
-  setRouteCoords
+  setRouteCoords,
 }) => {
   const { menus, addMenu, updateCount, replaceMenus } = useMenu(); // 전역 상태
   const store = stores.find((s) => s.id === storeId); // 선택된 가게 정보
 
   const [storeDetail, setLocalStoreDetail] = useState(null);
+
+  useEffect(() => {
+    if (height > 0) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [height]);
 
   // 메뉴 조회
   useEffect(() => {
@@ -40,7 +52,7 @@ export const BottomSheet = ({
     };
 
     fetchMenus();
-  }, [storeId, userPos]);
+  }, [storeId]);
 
   // 드래그 관련 상태
   const startY = useRef(0);
