@@ -6,15 +6,23 @@ import STORE_WH from "../../../assets/map/storeLocation-white.png";
 import { getDistanceMeters } from "../../../components/map/mapUtils";
 import { DistanceBox } from "../../../components/map/DistanceBox";
 
-export default function PickupMap({ userPos, destinations = [], paths = [], height = "50rem", width, useBent = false, selectedId, onDestinationClick }) {
+export default function PickupMap({ 
+  userPos, // 사용자 현재 위치
+  destinations = [], // 목적지 매장 리스트
+  paths = [], // 경로 좌표 배열
+  height = "50rem", // 지도 높이
+  width, // 지도 너비
+  selectedId, // 선택된 매장
+  onDestinationClick // 매장 클릭 시
+}) {
   // if (!userPos) return null;
 
-  const selectedDest = destinations.find(d => d.storeId === selectedId) || null;
-  const selectedDistance = selectedDest
+  const selectedDest = destinations.find(d => d.storeId === selectedId) || null; // 현재 선택된 매장 정보
+  const selectedDistance = selectedDest // 선택된 매장까지의 거리
     ? (getDistanceMeters(userPos, selectedDest) / 1000).toFixed(2)
     : null;
 
-  const boundsPoints = [  // 사용자 위치 + 모든 목적지 + 모든 경로 좌표
+  const boundsPoints = [ // 사용자 위치 + 모든 목적지 + 모든 경로 좌표
     userPos,
     ...destinations,
     ...paths.flat()

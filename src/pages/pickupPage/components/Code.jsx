@@ -10,6 +10,7 @@ import { useMenu } from "../../../components/MenuContext";
 export const Code = () => {
     const navigate = useNavigate();
 
+    // 전달받은 상태
     const location = useLocation();
     const reserveRes = location.state;
     const pickupCode = reserveRes?.code; 
@@ -17,16 +18,16 @@ export const Code = () => {
     const [pressed, setPressed] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const { clearMenus } = useMenu();
+    const { clearMenus } = useMenu(); // 전역 상태 메뉴 비우기 함수
 
-    const handleEndClick = () => {
+    const handleEndClick = () => { // 픽업 완료 버튼 클릭
         setPressed(prev => !prev);
         setIsModalOpen(true); // 완료 버튼 누를 때 모달 열기
     }
 
-    const onEndBtnClick = async () => {
+    const onEndBtnClick = async () => { // 모달 확인 버튼 클릭
         try {
-            await pickupCodePutApi(pickupCode);
+            await pickupCodePutApi(pickupCode); // 서버에 픽업 완료 전달
             setIsModalOpen(false);
             clearMenus(); 
             console.log("픽업 완료 성공 후 화면 이동");            
