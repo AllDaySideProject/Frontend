@@ -2,7 +2,7 @@ import "./TipsPage.scss";
 
 import { TipHeader } from "./components/TipHeader";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TipComponent } from "./components/TipComponent";
 import { ButtonComponent } from "../../components/ButtonComponent"
 import { useNavigate } from "react-router-dom";
@@ -41,6 +41,19 @@ export const TipsPage = () => {
             gap: "0.75rem"
         }]);
 
+    const [showScroll, setShowScroll] = useState(true);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) // 화면 높이 + 스크롤 높이 >= 스크롤 포함한 페이지 높이
+                setShowScroll(false);
+            else setShowScroll(true);
+        }
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    })
+
     return (
         <>
             <TipHeader />
@@ -48,11 +61,14 @@ export const TipsPage = () => {
                 <TipComponent key = { index } { ...tip } />
             ))}
 
-            <img 
-                src = { SCROLL } 
-                alt = "알뜰 식사 팁 스크롤" 
-                className = "fixedArrowOverlay" 
-            />
+            { showScroll && (
+                <img 
+                    src = { SCROLL } 
+                    alt = "알뜰 식사 팁 스크롤" 
+                    className = "fixedArrowOverlay" 
+                />                
+            )}
+            
             <ButtonComponent 
                 width = "20.38rem"
                 bgColor = { '#0EA64B' }
