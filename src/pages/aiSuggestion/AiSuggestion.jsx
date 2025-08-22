@@ -44,6 +44,7 @@ export const AiSuggestion = () => {
   // const {pos, loading:coordsLoading, request}=useCurrentPosition();
   const conceptOf=(name)=>DataType.find(d=>d.name===name)?.concept;
 
+  const {addMenu, updateCount, removeMenu}=useMenu();
   
   useEffect(()=>{
     const concept=conceptOf(selectedType);
@@ -87,21 +88,49 @@ export const AiSuggestion = () => {
     setShowStoreModal(true);
   };
 
-  const handleModalComplete=(menuName, storeName, quantity, salePrice)=>{
+  const handleModalComplete=(
+    menuName, 
+    storeName, 
+    quantity, 
+    salePrice,
+    menuId,
+    stock,
+    extra//{costPrice, salePercent, category}
+  )=>{
     const unit = Number(salePrice)||0;//판매가
+    const total=unit*(quantity||1);
     setSelectedMenus((prev)=>[
       ...prev, 
-      {name: menuName, 
-       store: storeName, 
-       quantity,
-       unitPrice:unit, 
-       price: unit*quantity//총액
+      {
+        name: menuName, 
+        store: storeName, 
+        quantity,
+        unitPrice:unit, 
+        price: total,
        },
-    ]);
+    ])
+    addMenu({//로컬에 최초 메뉴 1개 담기
+      id: menuId,
+      menuId,
+      name: menuName,
+      storeName,
+      category: extra.category,
+      costPrice:extra.costPrice,
+      originalPrice:salePrice,
+      salePrice: salePrice,
+      price: extra.costPrice,
+      salePercent: extra.salePercent,
+      quantity: stock,
+      maxQuantity: stock,
+    });
+    const extraCount=quantity-1;
+    if(extraCount>0) updateCount(menuId, extraCount);
+
     setShowStoreModal(false);
     setMenuForModal(null);
   }
-  const handleDelete = (menuName) => {
+  const handleDelete = (menuName, menuId) => {
+    if(menuId)removeMenu(menuId)
     setSelectedMenus((prev) => prev.filter((m) => m.name !== menuName));
   };
   const handleModalClose = () => {
@@ -146,7 +175,7 @@ export const AiSuggestion = () => {
                 isSelected={!!menuDetails}
                 menuDetails={menuDetails}
                 onAddClick={() => handleAddClick(m)}
-                onDelete={() => handleDelete(m.name)}
+                onDelete={() => handleDelete(m.name, menuDetails?.menuId)}
               />
             );
           })}
