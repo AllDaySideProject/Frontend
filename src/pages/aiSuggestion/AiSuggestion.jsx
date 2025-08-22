@@ -4,10 +4,11 @@ import { Menu } from '../menuSelection/components/Menu'
 import { StoreSelectionModal } from '../menuSelection/components/StoreSelectionModal'
 import {SuggestionType} from './components/SuggestionType'
 import { CompleteButton } from '../menuSelection/components/CompleteButton'
-import diet from '../../assets/aiSuggestion/diet.svg'
-import bulkUp from '../../assets/aiSuggestion/bulk_up.svg'
-import lowBloodSuger from '../../assets/aiSuggestion/low_blood_sugar.svg'
-import lowCarBo from '../../assets/aiSuggestion/low_carbohydrate.svg'
+import diet from '../../assets/aiSuggestion/diet.png'
+import bulkUp from '../../assets/aiSuggestion/bulk_up.png'
+import lowBloodSuger from '../../assets/aiSuggestion/low_blood_suger.png'
+import lowCarBo from '../../assets/aiSuggestion/low_carbohydrate.png'
+import lowSalt from '../../assets/aiSuggestion/low_salt.png'
 import HeaderArrow from '../../components/HeaderArrow'
 import './AiSuggestion.scss'
 
@@ -18,6 +19,8 @@ const dummyDataType=[
   {imgSrc: lowCarBo,      name: '저탄고지', imgWidth: 40, imgHeight: 40},
   {imgSrc: bulkUp,        name: '벌크업',   imgWidth: 50, imgHeight: 50},
   {imgSrc: lowBloodSuger, name: '혈당',     imgWidth: 40, imgHeight: 40},
+  {imgSrc: lowSalt, name: '저염',     imgWidth: 50, imgHeight: 50},
+  
 ]
 const dummyDataMenu=[
   { img: link, name: "진미채볶음" },
