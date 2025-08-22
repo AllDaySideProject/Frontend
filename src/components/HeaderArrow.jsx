@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import BACK from "../assets/back.svg";
-import AiIcon from "../assets/manuHeader/ai_header.svg";
-import MapIcon from "../assets/manuHeader/map_header.svg";
-import SuggestionIcon from "../assets/manuHeader/suggestion_header.svg";
+import AiIcon from "../assets/manuHeader/ai_header.png";
+import MapIcon from "../assets/manuHeader/map_header.png";
+import SuggestionIcon from "../assets/manuHeader/suggestion_header.png";
 
 export const HeaderArrow = ({ initialMode = "suggestion" }) => {
   const [mode, setMode] = useState(initialMode); // 'suggestion' | 'ai' | 'map'
