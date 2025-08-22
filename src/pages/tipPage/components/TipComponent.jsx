@@ -4,6 +4,14 @@ import "./TipComponent.scss";
 export const TipComponent = ({
     bgColor, padding, gap, title, description, imgPadding, image, imgWidth, imgHeight
 }) => {
+    const formattedTitle = title.split(",").map((line, idx, arr) => (
+        <span key = { idx }>
+            { line }
+            { idx < arr.length - 1 && "," }
+            <br />
+        </span>
+    ));
+    
     return (
         <ScreenContainer bgColor = { bgColor }>
             <div 
@@ -11,7 +19,7 @@ export const TipComponent = ({
                 style = {{ padding, gap }}
             >
                 <div className = "tipText">
-                    { title && <p className = "tipTitle">{ title }</p> }
+                    { title && <p className = "tipTitle">{ formattedTitle }</p> }
                     { description && <p className = "tipDescription">{ description }</p> }
                 </div>
                 <div 
