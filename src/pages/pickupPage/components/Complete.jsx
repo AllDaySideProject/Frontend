@@ -11,10 +11,15 @@ import TIP2 from "../../../assets/tips/tip-2.png";
 import TIP3 from "../../../assets/tips/tip-3.png";
 import TIP4 from "../../../assets/tips/tip-4.png";
 import SCROLL from "../../../assets/tips/tipScroll.png";
+import { pickupTipPostApi } from "../../../api/pickup/pickupTipPostApi";
 
 export const Complete = () => {
-    const [sec, setSec] = useState(2);
+    const [sec, setSec] = useState(3);
     const navigate = useNavigate();
+    const location = useLocation(); // 픽업 페이지에서 상태로 전달된 데이터
+    const menus = location.state?.menus || []; // 넘겨받은 메뉴 배열 꺼냄
+
+    const [tips, setTips] = useState([]);
 
     useEffect(() => {
         [TIP2, TIP3, TIP4, SCROLL].forEach((src) => {
@@ -28,12 +33,21 @@ export const Complete = () => {
         return () => clearInterval(t);
     }, []);
 
-    const location = useLocation(); // 픽업 페이지에서 상태로 전달된 데이터
-    const menus = location.state?.menus || []; // 넘겨받은 메뉴 배열 꺼냄
+    useEffect(() => {
+        const preloadTips = async () => {
+        try {
+            const data = await pickupTipPostApi(menus);
+            setTips(data);
+        } catch (error) {
+            console.error("불러오기 실패:", error);
+        }
+        };
+        if (menus.length > 0) preloadTips();
+    }, [menus]);
 
     useEffect(() => {
-        if (sec <= 0) navigate(`/tips`, { state: { menus }});
-    }, [sec, menus, navigate]);
+        if (sec <= 0 && tips.length > 0) navigate(`/tips`, { state: { menus, tips }});
+    }, [sec, menus, tips, navigate]);
 
     return (
         <ScreenContainer>

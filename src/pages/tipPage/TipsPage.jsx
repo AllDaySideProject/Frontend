@@ -16,30 +16,15 @@ import { pickupTipPostApi } from "../../api/pickup/pickupTipPostApi";
 
 export const TipsPage = () => {
     const navigate = useNavigate();
-
     const location = useLocation();
-    const menus = location.state?.menus || [];
+    const preloadedTips = location.state?.tips || [];
 
-    const [tipsData, setTipsData] = useState([]);
-
-    useEffect(() => {
-        const fetchTips = async () => {
-            try {
-                const data = await pickupTipPostApi(menus);
-                const images = [TIP2, TIP3, TIP4];
-
-                setTipsData(data.map((item, idx) => ({
-                    title: item.title,
-                    description: item.content,
-                    image: images[idx % images.length]
-                })));
-            } catch (error) {
-                console.error(error);
-            }
-        }
-
-        if (menus.length > 0) fetchTips();
-    }, []);
+    const images = [TIP2, TIP3, TIP4];
+    const tipsData = preloadedTips.map((item, idx) => ({
+        title: item.title,
+        description: item.content,
+        image: images[idx % images.length]
+    }));
 
     return (
         <>
