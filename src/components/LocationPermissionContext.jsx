@@ -18,7 +18,7 @@ export const LocationPermissionProvider = ({ children }) => {
     useEffect(() => localStorage.setItem("localDecided", String(decided)), [decided]);
     useEffect(() => localStorage.setItem("localAddress", address || ""), [address]);
 
-    const fetchAddressKakao = (lat, lng) => {
+    const fetchAddressKakao = (lat, lng) => { // 위도, 경도 주소로 변환
         return new Promise((resolve, reject) => {
             if (!window.kakao || !window.kakao.maps) {
                 console.warn("카카오 SDK 로드 안 됨");
@@ -29,7 +29,7 @@ export const LocationPermissionProvider = ({ children }) => {
             const geocoder = new window.kakao.maps.services.Geocoder();
             geocoder.coord2Address(lng, lat, (result, status) => {
                 if (status === window.kakao.maps.services.Status.OK) {
-                    const fullAddress =
+                    const fullAddress = // 도로명 주소 > 지번 주소 순으로 반환
                         result[0].road_address?.address_name ||
                         result[0].address?.address_name ||
                         "";
@@ -39,7 +39,7 @@ export const LocationPermissionProvider = ({ children }) => {
                             return;
                     }
 
-                    const parts = fullAddress.split(" ");
+                    const parts = fullAddress.split(" "); // 주소 문자열을 공백 단위로 분리
                     resolve(parts.length >= 2 ? `${parts[0]} ${parts[1]}` : fullAddress);
                 } else {
                     reject("주소 변환 실패");
@@ -83,7 +83,7 @@ export const LocationPermissionProvider = ({ children }) => {
         );
     }, [fetchAddressKakao]);
 
-    useEffect(() => {
+    useEffect(() => { // 결정하지 않았을 경우 요청
         if (!decided) requestLocation();
     }, [decided, requestLocation]);
 
@@ -94,7 +94,7 @@ export const LocationPermissionProvider = ({ children }) => {
     );
 };
 
-export const useLocationPermission = () => {
+export const useLocationPermission = () => { // 프로바이더 사용 위한 커스텀 훅
     const ctx = useContext(LocationPermissionCtx);
     if (!ctx) throw new Error("프로바이더 누락");
     return ctx;
