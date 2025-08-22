@@ -182,7 +182,7 @@ export  const MenuSelection = () => {
   };
   
   return (
-    <ScreenContainer>
+    <ScreenContainer style={{ minHeight: '100vh' }}>
       <HeaderArrow/>
       <div className='MenuSelectionLayout'>{/*전체 페이지 구조 레이아웃*/}
         <div className='MenuSelectionTitle'>오늘은 어떤 메뉴로 <br/>밥상을 채워볼까요?</div>{/*페이지 타이틀*/}
