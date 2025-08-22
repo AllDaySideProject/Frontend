@@ -23,7 +23,7 @@ export const SheetBox = ({ menu, onCountChange }) => {
                     }
                 </div>
                 <div className ="sheetBoxLeftText">
-                    <p className = "sheetMenuName">{ name }</p>
+                    <p className = "sheetMenuName">{ name }</p> 
                     <p className = "sheetOriginalPrice">{ fmt(originalPrice) }원</p>
                     <div className = "leftMainText">
                         <p className = "sheetPrice">{ fmt(salePrice) }원</p>
