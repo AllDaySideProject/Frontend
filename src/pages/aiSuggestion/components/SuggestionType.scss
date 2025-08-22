@@ -33,6 +33,8 @@
 
 .SuggestionTypeCardContent {
   font-size: 13px;
+  
+  font-family: Pretendard;
   line-height: 1;
   color: #222;
 }
@@ -47,6 +49,7 @@
 .SuggestionTypeCard.is-selected .SuggestionTypeCardContent {
   color: #0EA64B;
   font-weight: 700;
+  font-family: Pretendard;
 }
 
 .SuggestionTypeCard:hover .SuggestionTypeThumb {
