@@ -11,11 +11,11 @@ import { useLocation } from "react-router-dom";
 export const Location = () => {
   const { decided, agreed } = useLocationPermission();
   // const { pos: userPos, request } = useCurrentPosition();
-  const [paths, setPaths] = useState([]);
-  const [destinations, setDestinations] = useState([]);
-  const [selectedId, setSelectedId] = useState(null);
+  const [paths, setPaths] = useState([]); // 경로
+  const [destinations, setDestinations] = useState([]); // 방문할 가게 리스트
+  const [selectedId, setSelectedId] = useState(null); // 선택한 가게
 
-  const location = useLocation();
+  const location = useLocation(); // 이전 페이지에서 넘겨받은 예약
   const reservation = location.state;
 
     // useEffect(() => {
@@ -33,24 +33,21 @@ export const Location = () => {
           return;
         }
 
-        // 1. 경로 조회
-        const routeRes = await mapRoutePostApi(
+        const routeRes = await mapRoutePostApi( // 최적 경로 조회
           userPos.lat,
           userPos.lng,
           reservation.storeList
         );
         console.log("경로 응답:", routeRes);
 
-        if (routeRes.polyline) {
+        if (routeRes.polyline) { // 경로 디코딩해서 저장
           const decoded = decodePolyline(routeRes.polyline);
-          setPaths([decoded]);
+          setPaths([decoded]); // 지도에 표시할 경로
         }
 
-        // 2. 모든 가게 좌표 가져오기
-        const stores = await mapStoreListGetApi(userPos.lat, userPos.lng);
+        const stores = await mapStoreListGetApi(userPos.lat, userPos.lng); // 전체 가게 좌표 가져오기
 
-        // 3. 예약된 가게별 상세 조회
-        const storeDetails = await Promise.all(
+        const storeDetails = await Promise.all( // 예약된 가게 상세 조회
             reservation.storeList.map(async (storeId) => {
                 const menuData = await mapMenuListGetApi(
                     storeId,
@@ -58,7 +55,7 @@ export const Location = () => {
                     userPos.lng
                 );
 
-                const store = stores.find((s) => s.storeId === storeId);
+                const store = stores.find((s) => s.storeId === storeId); // 아이디에 맞는 좌표 매칭
 
                 return {
                     storeId,
@@ -72,8 +69,7 @@ export const Location = () => {
             })
         );
 
-        // 4. 최적화된 순서 반영
-        if (routeRes.optimizedStoreIds) {
+        if (routeRes.optimizedStoreIds) { // 최적 경로 순서 반영
             const filtered = routeRes.optimizedStoreIds
                 .map((id) => storeDetails.find((s) => s.storeId === id))
                 .filter(Boolean);

@@ -1,6 +1,5 @@
 import "./PickupHeader.scss";
 
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import BACK from "../../../assets/back.svg";
@@ -10,7 +9,7 @@ export const PickupHeader = () => {
   const navigate = useNavigate();
   
   const handleClick = () => {
-    navigate(-1);
+    navigate("/");
   }
 
   return (

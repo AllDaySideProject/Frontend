@@ -61,7 +61,7 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
         HOME_MADE: "수제 반찬가게",
     };
 
-    const boundsPoints = [currentPos, ...stores, ...routeCoords];
+    const boundsPoints = [currentPos, ...stores, ...routeCoords]; // 지도 bounds 계산
 
     // if (!userPos) return null;
 
@@ -96,7 +96,7 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                     }}
 
                     onClick = { () => {
-                        const dist = getDistanceMeters(currentPos, s);
+                        const dist = getDistanceMeters(currentPos, s); // 거리 계산
 
                         setSelectedStoreId(s.storeId); // 선택한 가게 ID
                         setRouteCoords([currentPos, { lat: s.lat, lng: s.lng }]);

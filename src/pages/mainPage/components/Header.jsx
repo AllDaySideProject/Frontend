@@ -8,7 +8,7 @@ import ScreenContainer from "../../../components/ScreenContainer";
 import { useLocationPermission } from "../../../components/LocationPermissionContext";
 
 export const Header = () => {
-    const { agreed, address, requestLocation } = useLocationPermission();
+    const { agreed, address, requestLocation } = useLocationPermission(); // 위치 권한 상태 가져오기
 
     return (
         <ScreenContainer>

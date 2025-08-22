@@ -17,7 +17,6 @@ export const BottomSheet = ({
   categoryLabels,
   userPos,
   setStoreDetail,
-  setRouteCoords
 }) => {
   const { menus, addMenu, updateCount, replaceMenus } = useMenu(); // 전역 상태
   const store = stores.find((s) => s.id === storeId); // 선택된 가게 정보
@@ -94,8 +93,8 @@ export const BottomSheet = ({
                 ...menu,
                 id: menu.menuId,
                 storeName: storeDetail?.name,
-                price: menu.costPrice,
-                originalPrice: menu.salePrice,
+                price: menu.salePrice,
+                originalPrice: menu.costPrice,
             });
         } else {
             updateCount(menu.menuId, delta);
@@ -104,6 +103,10 @@ export const BottomSheet = ({
         setToastMessage("내 밥상에 추가되었어요.");
         setShowToast(false);
         setTimeout(() => setShowToast(true), 0);
+    } else if (delta < 0) {
+      if (currentCount > 0) {
+        updateCount(menu.menuId, delta);
+      }
     }
 
   };
@@ -126,7 +129,6 @@ export const BottomSheet = ({
           onClick={() => {
             setHeight(0);
             setStoreId(null);
-            setRouteCoords([]);
           }}
         />
       )}
@@ -163,8 +165,8 @@ export const BottomSheet = ({
                 menu={{
                     id: menu.menuId,
                     name: menu.name,
-                    originalPrice: menu.costPrice,
-                    salePrice: menu.salePrice,
+                    originalPrice: menu.salePrice,
+                    salePrice: menu.costPrice,
                     availableQuantity: menu.quantity,
                     count: added?.count ?? 0,
                     salePercent: menu.salePercent,
