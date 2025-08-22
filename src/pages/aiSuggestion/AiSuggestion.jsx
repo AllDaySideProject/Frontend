@@ -139,7 +139,7 @@ export const AiSuggestion = () => {
   };
 
   return (
-    <ScreenContainer>
+  <ScreenContainer style={{ minHeight: '100vh' }}>
       <HeaderArrow/>
       <div className='AiSuggestionLayout'>
         <div className='AiSuggestionTitle'>오늘 이런 메뉴는 어떠세요?</div>
