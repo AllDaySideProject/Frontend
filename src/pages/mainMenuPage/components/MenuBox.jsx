@@ -5,11 +5,11 @@ import CHECKEDBOX from "../../../assets/main/checkedBox.png";
 import { categoryIcons } from "../../../assets/icons/categoryIcons";
 
 export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, menu }) => {
-    const { name, storeName, costPrice, salePrice, category, count, salePercent  } = menu; // 가격 수정 필요
+    const { name, storeName, costPrice, salePrice, category, count, salePercent  } = menu; // 메뉴 데이터 구조 분해
 
     const fmt = (n) => Number(n).toLocaleString("ko-KR");
 
-    const isDelete = mode === "delete";
+    const isDelete = mode === "delete"; // 삭제 모드 여부
 
     return (
         <div className = { isDelete ? "deleteContainer" : undefined }>
@@ -22,29 +22,29 @@ export const MenuBox = ({ mode = "normal", isSelected = false, onToggleSelect, m
                     />
                     <div className = "infoBox">
                         <div className = "menuInfo">
-                            <p className = "storeName">{ storeName }</p>
-                            <p className = "menuBoxName">{ name }</p>
-                            <p className = "menuCount">수량: { count }개</p>
+                            <p className = "storeName">{ storeName }</p> {/* 가게 이름 */}
+                            <p className = "menuBoxName">{ name }</p> {/* 메뉴 이름 */}
+                            <p className = "menuCount">수량: { count }개</p> {/* 수량 */}
                         </div>
                     </div>
                 </div>
                 <div className = "menuBoxRight">
                     <div className = "originText">
-                        <p className = "originalPrice">{ fmt(costPrice * count) }</p>
+                        <p className = "originalPrice">{ fmt(costPrice * count) }</p> {/* 메뉴 원가 */}
                         <p className = "originWon">원</p>                    
                     </div>
                     <div className = "finalInfo">
-                        <p className = "discountRate">{ salePercent }%</p>
-                        <p className = "finalPrice">{ fmt(salePrice * count) }원</p>                    
+                        <p className = "discountRate">{ salePercent }%</p> {/* 메뉴 할인율 */}
+                        <p className = "finalPrice">{ fmt(salePrice * count) }원</p> {/* 메뉴 할인가 */}             
                     </div>
                 </div>
             </div>   
 
-            { isDelete && (
+            { isDelete && ( // 삭제 모드일 때만 체크 박스 표시
                 <img 
                     className = "mainCheckImg"
-                    src = { isSelected ? CHECKEDBOX : CHECKBOX }
-                    onClick = { () => onToggleSelect?.() }
+                    src = { isSelected ? CHECKEDBOX : CHECKBOX } // 선택 여부에 따라 이미지 변경
+                    onClick = { () => onToggleSelect?.() } // 클릭 시 토글
                 />
             )}         
         </div>
