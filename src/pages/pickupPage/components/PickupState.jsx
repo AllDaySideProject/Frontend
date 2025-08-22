@@ -14,7 +14,7 @@ export const PickupState = ({ phase, onChange }) => {
                 />
                 <PickupStepBox 
                     stepText = "픽업코드" 
-                    active = { phase === "pickup" }
+                    active = { phase === "pickup" || phase === "step" }
                     onClick = { () => onChange("pickup") }
                 />                
             </div>

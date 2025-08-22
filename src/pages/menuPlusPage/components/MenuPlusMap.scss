@@ -1,0 +1,29 @@
+.exploreMapContainer {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 24.375rem;
+}
+
+.exploreMapContainer .HeaderBar {
+  position: absolute;   /* 지도 위에 겹치기 */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+
+  .SwitchGroup {
+    background-color: #FAFAFA;
+  }
+}
+
+.toastContainer {
+  position: fixed; 
+  bottom: 1.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3000;
+}

@@ -1,5 +1,5 @@
 import "./index.scss";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 
 import { MainPage } from "./pages/mainPage/MainPage";
 import { MainMenuPage } from "./pages/mainMenuPage/MainMenuPage";
@@ -8,23 +8,59 @@ import { MenuSelection } from "./pages/menuSelection/MenuSelection";
 import { PickupPage } from "./pages/pickupPage/PickupPage";
 import { PickupCompletePage } from "./pages/pickupPage/PickupCompletePage";
 import { TipsPage } from "./pages/tipPage/TipsPage";
+import { MenuPlusPage } from "./pages/menuPlusPage/MenuPlusPage";
+import { categoryIcons } from "./assets/icons/categoryIcons";
+import { useEffect } from "react";
+import { useMenu } from "./components/MenuContext";
 import { AiSuggestion } from "./pages/aiSuggestion/AiSuggestion";
+
+import PICKUPCOMPLETE from "./assets/pickup/pickupComplete.png";
+
 function App() {
+  const { menus } = useMenu();
+
+  useEffect(() => {
+    Object.values(categoryIcons).forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    const completeImg = new Image();
+    completeImg.src = PICKUPCOMPLETE;
+  }, []);
+
   return (
     <LocationPermissionProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/main/menu" element={<MainMenuPage />} />
+
+          <Route 
+            path="/" 
+            element={ 
+              menus.length > 0 
+                ? <Navigate to="/main/menu" replace /> 
+                : <MainPage /> } 
+          />
+
+          <Route
+            path="/main/menu"
+            element={
+              menus.length > 0
+                ? <MainMenuPage />
+                : <Navigate to="/" replace />
+            }
+          />         
+          
           <Route path="/pickup" element={<PickupPage />} />
           <Route path="/pickup/complete" element={<PickupCompletePage />} />
           <Route path="/tips" element={<TipsPage />} />
           <Route path="/menuselect" element={<MenuSelection />} />
+          <Route path="/menu/map" element={<MenuPlusPage />} />
           <Route path="/aiSuggest" element={<AiSuggestion/>}/>
         </Routes>    
       </BrowserRouter>      
     </LocationPermissionProvider>
-  );
+  )
 }
 
 export default App;

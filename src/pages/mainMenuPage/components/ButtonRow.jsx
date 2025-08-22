@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ButtonComponent } from "../../../components/ButtonComponent"
 import ScreenContainer from "../../../components/ScreenContainer"
 
-export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDeleteClick }) => {
+export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDeleteClick, paddingTop, paddingBottom, onReserveClick }) => {
     const navigate = useNavigate();
     const isDelete = mode === "delete"; // 삭제 모드 여부
     const rightDisabled = isDelete && selectedCount === 0; // 삭제 모드 + 선택 0 = 오른쪽 버튼 비활성화
@@ -15,7 +15,7 @@ export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDelet
             setMode("normal"); // 삭제 취소 시 일반 모드로
             console.log("일반 모드");
         } else {
-            navigate(``);
+            navigate(`/menuselect`);
             console.log("내 밥상 추가로 이동");            
         }
     }
@@ -26,20 +26,23 @@ export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDelet
             onDeleteClick?.();
             console.log("선택한 메뉴 삭제")
         } else {
-            navigate(`/pickup`);
-            console.log("픽업 예약으로 이동"); 
+            onReserveClick?.(); // 픽업 예약
         }
     }
 
     return (
         <ScreenContainer>
-            <div className = "buttonContainer">
+            <div 
+                className = "rowButtonContainer"
+                style = {{ paddingTop: paddingTop, paddingBottom: paddingBottom }}
+            >
                 <ButtonComponent 
                     width = { '6.88rem' }
+                    bdColor = { '#0EA64B' }
                     bgColor = { '#FFFFFF' }
                     buttonText = { isDelete ? "취소" : "더 추가하기" } // 모드에 따른 문구 변경
                     textSize = { '0.88rem' }
-                    textColor = { '#B0B0B0' }
+                    textColor = { '#0EA64B' }
                     onClick = { handleLeftClick }
                 />
                 <ButtonComponent

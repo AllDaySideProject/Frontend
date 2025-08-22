@@ -1,8 +1,21 @@
-.codeContainer {
+.codeWrapper {
     display: flex;
+    height: 100%; 
+    flex: 1;
     flex-direction: column;
     justify-content: center;
-    padding: 6.62rem 0;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.codeContainer {
+    display: flex;
+    height: 100%; 
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // padding: 6.62rem 0;
     gap: 2.5rem;
 
     .codeText {
@@ -24,4 +37,8 @@
         line-height: 140%;
         letter-spacing: -0.01875rem;
     }
+}
+
+.btnBox {
+    margin-bottom: 2.75rem;
 }

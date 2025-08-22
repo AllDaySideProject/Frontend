@@ -21,13 +21,13 @@ export const HeaderArrow = ({ initialMode = "suggestion" }) => {
     else if (p.startsWith("/menu/map") || p === "/map") setMode("map");
   }, [location.pathname]);
 
-  const goBack = () => navigate(-1);
+  const goBack = () => navigate("/");
 
   const select = (nextMode) => {
     setMode(nextMode);
     if (nextMode === "suggestion") navigate("/menuselect");
     else if (nextMode === "ai") navigate("/aiSuggest");
-    else if (nextMode === "map") navigate("/Map");
+    else if (nextMode === "map") navigate("/menu/map");
   };
 
   return (

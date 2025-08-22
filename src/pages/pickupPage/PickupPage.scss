@@ -1,0 +1,21 @@
+.pickupPage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Code 단계에서만 적용되는 스타일 */
+.pickupPage.codeMode {
+  align-items: center;
+  background-color: #c9f3bf;
+}
+
+.pickupPage.codeMode .pickupContent {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 24.375rem;
+  width: 100%;
+  background-color: #FAFAFA;
+}

@@ -1,13 +1,14 @@
+import "./PickupPage.scss";
+
 import { useState } from "react";
-import { HeaderArrow } from "../../components/HeaderArrow";
 import { PickupIntro } from "./components/PickupIntro";
 import { PickupState } from "./components/PickupState";
 import { Code } from "./components/Code";
 import { Location } from "./components/Location";
+import { PickupHeader } from "./components/PickupHeader";
 
 export const PickupPage = () => {
     const [phase, setPhase] = useState("check");
-
 
     const handlePhaseChange = (next) => {
         if (phase === "check" && next === "pickup") {
@@ -18,14 +19,23 @@ export const PickupPage = () => {
         }
     };
 
+    const isCodePhase = phase !== "check"; 
+
     return (
-        <>
-            <HeaderArrow />
+        <div className={`pickupPage ${isCodePhase ? "codeMode" : ""}`}>
+            <PickupHeader />
             <PickupIntro phase = { phase } />
             <PickupState phase = { phase } onChange = { handlePhaseChange } />
 
-            { phase === "check" && <Location /> }
-            { phase === "pickup" && <Code /> }     
-        </> 
+            
+            { (phase === "check") ? 
+            
+                ( <Location /> ) : (
+                
+                <div className="pickupContent">
+                    <Code /> 
+                </div>
+                )}
+        </div>
     )
 }
