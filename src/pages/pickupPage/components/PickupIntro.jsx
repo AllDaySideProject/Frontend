@@ -9,7 +9,7 @@ import CHECK from "../../../assets/pickup/check.svg";
 import PICKUP from "../../../assets/pickup/pickup.svg";
 
 export const PickupIntro = ({ phase }) => {
-    const stepIcon = phase === "step" ? STEP_GN : STEP_GY;
+    const stepIcon = phase === "step" ? STEP_GN : STEP_GY; // 단계 아이콘 선태
     
     return (
         <ScreenContainer>

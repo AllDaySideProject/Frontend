@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./Toast.scss";
 
 export const Toast = ({ duration = 1000, onClose, toastText }) => {
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(true); // 표시 여부
 
     useEffect(() => {
         if (!toastText) return;

@@ -8,9 +8,9 @@ import ScreenContainer from "../../../components/ScreenContainer"
 export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDeleteClick, paddingTop, paddingBottom, onReserveClick }) => {
     const navigate = useNavigate();
     const isDelete = mode === "delete"; // 삭제 모드 여부
-    const rightDisabled = isDelete && selectedCount === 0; // 삭제 모드 + 선택 0 = 오른쪽 버튼 비활성화
+    const rightDisabled = isDelete && selectedCount === 0; // 삭제 모드일 때 선택하지 않으면 = 오른쪽 버튼 비활성화
 
-    const handleLeftClick = () => {
+    const handleLeftClick = () => { // 왼쪽 버튼 클릭
         if (isDelete) {
             setMode("normal"); // 삭제 취소 시 일반 모드로
             console.log("일반 모드");
@@ -20,7 +20,7 @@ export const ButtonRow = ({ mode = "normal", selectedCount = 0, setMode, onDelet
         }
     }
 
-    const handleRightClick = () => {
+    const handleRightClick = () => { // 오른족 버튼 클릭
         if (isDelete) {
             if (selectedCount === 0) return; // 메뉴 선택되지 않았을 경우
             onDeleteClick?.();

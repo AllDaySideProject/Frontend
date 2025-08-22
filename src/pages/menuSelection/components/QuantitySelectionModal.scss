@@ -52,6 +52,7 @@
 .q-menuName {
   font-size: 16px;
   font-weight: 600;
+  font-family: Pretendard;
   color: #0EA64B;
   margin-bottom: 8px;
 }
@@ -64,6 +65,7 @@
 .quantitySelectionTitle {
   font-size: 20px;
   font-weight: 400;
+  font-family: Pretendard;
   color: #111111;
   margin-bottom: 20px;
 }
@@ -106,6 +108,7 @@
 .quantityText {
   font-size: 20px;
   font-weight: 500;
+  font-family: Pretendard;
   color: #c9c9c9;
   &.selected {
     color: #111111;
@@ -129,6 +132,7 @@
   padding: 16px 32px;
   font-size: 16px;
   font-weight: 600;
+  font-family: Pretendard;
   cursor: pointer;
   transition: background-color 0.2s ease;
   width: 327px;
