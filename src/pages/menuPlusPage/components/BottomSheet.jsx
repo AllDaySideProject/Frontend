@@ -7,22 +7,21 @@ import { useEffect, useRef, useState } from "react";
 import { mapMenuListGetApi } from "../../../api/map/mapMenuListGetApi";
 
 export const BottomSheet = ({
-  height, // 바텀 시트 높이
-  setHeight, // 높이 변경 함수
-  storeId, // 선택한 가게 id
-  setStoreId, // 가게 선택 해제 함수
-  stores, // 가게 목록
-  setShowToast, // 토스트 노출 여부 상태
-  setToastMessage, // 토스트 메시지 상태
-  categoryLabels, // 카테고리 라벨 매핑
-  userPos, // 사용자 위치
-  setStoreDetail, // 부모 상태에 가게 정보 저장
-  setRouteCoords // 경로 좌표
+  height,
+  setHeight,
+  storeId,
+  setStoreId,
+  stores,
+  setShowToast,
+  setToastMessage,
+  categoryLabels,
+  userPos,
+  setStoreDetail,
 }) => {
   const { menus, addMenu, updateCount, replaceMenus } = useMenu(); // 전역 상태
   const store = stores.find((s) => s.id === storeId); // 선택된 가게 정보
 
-  const [storeDetail, setLocalStoreDetail] = useState(null); // 로컬 가게 정보
+  const [storeDetail, setLocalStoreDetail] = useState(null);
 
   // 메뉴 조회
   useEffect(() => {
@@ -31,7 +30,7 @@ export const BottomSheet = ({
     const fetchMenus = async () => {
       try {
         const data = await mapMenuListGetApi(storeId, userPos.lat, userPos.lng);
-        setLocalStoreDetail(data); // 로컬 상태 업데이트
+        setLocalStoreDetail(data);
         setStoreDetail(data);
         // replaceMenus(data.menus || []);
       } catch (error) {
@@ -73,36 +72,41 @@ export const BottomSheet = ({
     document.removeEventListener("touchend", handleDragEnd);
   };
 
-  const [pendingUpdate, setPendingUpdate] = useState(null); // 수량 변경
+  // 수량 변경
+  const [pendingUpdate, setPendingUpdate] = useState(null);
 
   const updateCountLocal = (menu, delta) => {
     const added = menus.find(m => m.menuId === menu.menuId);
     const currentCount = added?.count ?? 0; 
 
-    if (delta > 0) { // 추가 동작
+    if (delta > 0) {
             
-        if (currentCount >= menu.quantity) { // 재고 조회
+        if (currentCount >= menu.quantity) {
             setToastMessage("재고를 초과했어요.");
             setShowToast(false);
             setTimeout(() => setShowToast(true), 0);
             return;
         }
 
-        if (currentCount === 0) { // 장바구니에 없는 메뉴 새로 추가
+        if (currentCount === 0) {
             addMenu({
                 ...menu,
                 id: menu.menuId,
                 storeName: storeDetail?.name,
-                price: menu.costPrice,
-                originalPrice: menu.salePrice,
+                price: menu.salePrice,
+                originalPrice: menu.costPrice,
             });
         } else {
-            updateCount(menu.menuId, delta); // 이미 담긴 메뉴 수량 변경
+            updateCount(menu.menuId, delta);
         }
 
         setToastMessage("내 밥상에 추가되었어요.");
         setShowToast(false);
         setTimeout(() => setShowToast(true), 0);
+    } else if (delta < 0) {
+      if (currentCount > 0) {
+        updateCount(menu.menuId, delta);
+      }
     }
 
   };
@@ -125,7 +129,6 @@ export const BottomSheet = ({
           onClick={() => {
             setHeight(0);
             setStoreId(null);
-            setRouteCoords([]);
           }}
         />
       )}
@@ -162,8 +165,8 @@ export const BottomSheet = ({
                 menu={{
                     id: menu.menuId,
                     name: menu.name,
-                    originalPrice: menu.costPrice,
-                    salePrice: menu.salePrice,
+                    originalPrice: menu.salePrice,
+                    salePrice: menu.costPrice,
                     availableQuantity: menu.quantity,
                     count: added?.count ?? 0,
                     salePercent: menu.salePercent,
