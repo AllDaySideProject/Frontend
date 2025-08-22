@@ -17,6 +17,7 @@ export const BottomSheet = ({
   categoryLabels,
   userPos,
   setStoreDetail,
+  setRouteCoords
 }) => {
   const { menus, addMenu, updateCount, replaceMenus } = useMenu(); // 전역 상태
   const store = stores.find((s) => s.id === storeId); // 선택된 가게 정보
@@ -123,12 +124,13 @@ export const BottomSheet = ({
 
   return (
     <ScreenContainer>
-      {height > 0 && (
+      { height > 0 && (
         <div
           className="bottomSheetBackground"
           onClick={() => {
             setHeight(0);
             setStoreId(null);
+            setRouteCoords([]);
           }}
         />
       )}
