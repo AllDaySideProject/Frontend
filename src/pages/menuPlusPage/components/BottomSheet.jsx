@@ -52,7 +52,7 @@ export const BottomSheet = ({
     };
 
     fetchMenus();
-  }, [storeId, userPos]);
+  }, [storeId]);
 
   // 드래그 관련 상태
   const startY = useRef(0);
