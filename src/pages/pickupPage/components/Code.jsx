@@ -31,7 +31,7 @@ export const Code = () => {
             setIsModalOpen(false);
             clearMenus(); 
             console.log("픽업 완료 성공 후 화면 이동");            
-            navigate(`/pickup/complete`);
+            navigate(`/pickup/complete`, { state: { menus: location.state?.menus }});
         } catch (error) {
             console.error(error);
         }

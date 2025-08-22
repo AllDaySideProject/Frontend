@@ -5,7 +5,7 @@ import ScreenContainer from "../../../components/ScreenContainer";
 import PICKUP from "../../../assets/pickup/pickupComplete.png";
 import TIME from "../../../assets/pickup/second.svg";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import TIP2 from "../../../assets/tips/tip-2.png";
 import TIP3 from "../../../assets/tips/tip-3.png";
@@ -28,9 +28,12 @@ export const Complete = () => {
         return () => clearInterval(t);
     }, []);
 
+    const location = useLocation(); // 픽업 페이지에서 상태로 전달된 데이터
+    const menus = location.state?.menus || []; // 넘겨받은 메뉴 배열 꺼냄
+
     useEffect(() => {
-        if (sec <= 0) navigate(`/tips`);
-    })
+        if (sec <= 0) navigate(`/tips`, { state: { menus }});
+    }, [sec, menus, navigate]);
 
     return (
         <ScreenContainer>
