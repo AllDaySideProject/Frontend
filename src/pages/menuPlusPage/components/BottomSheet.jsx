@@ -17,12 +17,24 @@ export const BottomSheet = ({
   categoryLabels,
   userPos,
   setStoreDetail,
-  setRouteCoords
+  setRouteCoords,
 }) => {
   const { menus, addMenu, updateCount, replaceMenus } = useMenu(); // 전역 상태
   const store = stores.find((s) => s.id === storeId); // 선택된 가게 정보
 
   const [storeDetail, setLocalStoreDetail] = useState(null);
+
+  useEffect(() => {
+    if (height > 0) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [height]);
 
   // 메뉴 조회
   useEffect(() => {
@@ -40,7 +52,7 @@ export const BottomSheet = ({
     };
 
     fetchMenus();
-  }, [storeId, userPos]);
+  }, [storeId]);
 
   // 드래그 관련 상태
   const startY = useRef(0);
@@ -94,8 +106,8 @@ export const BottomSheet = ({
                 ...menu,
                 id: menu.menuId,
                 storeName: storeDetail?.name,
-                price: menu.costPrice,
-                originalPrice: menu.salePrice,
+                price: menu.salePrice,
+                originalPrice: menu.costPrice,
             });
         } else {
             updateCount(menu.menuId, delta);
@@ -104,6 +116,10 @@ export const BottomSheet = ({
         setToastMessage("내 밥상에 추가되었어요.");
         setShowToast(false);
         setTimeout(() => setShowToast(true), 0);
+    } else if (delta < 0) {
+      if (currentCount > 0) {
+        updateCount(menu.menuId, delta);
+      }
     }
 
   };
@@ -120,7 +136,7 @@ export const BottomSheet = ({
 
   return (
     <ScreenContainer>
-      {height > 0 && (
+      { height > 0 && (
         <div
           className="bottomSheetBackground"
           onClick={() => {

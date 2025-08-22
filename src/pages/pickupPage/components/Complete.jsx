@@ -7,6 +7,7 @@ import TIME from "../../../assets/pickup/second.svg";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
+import TIP1 from "../../../assets/tips/tip-1.png";
 import TIP2 from "../../../assets/tips/tip-2.png";
 import TIP3 from "../../../assets/tips/tip-3.png";
 import TIP4 from "../../../assets/tips/tip-4.png";
@@ -14,21 +15,21 @@ import SCROLL from "../../../assets/tips/tipScroll.png";
 import { pickupTipPostApi } from "../../../api/pickup/pickupTipPostApi";
 
 export const Complete = () => {
-    const [sec, setSec] = useState(3);
+    const [sec, setSec] = useState(3); // 화면에 표시할 남은 초 3
     const navigate = useNavigate();
     const location = useLocation(); // 픽업 페이지에서 상태로 전달된 데이터
     const menus = location.state?.menus || []; // 넘겨받은 메뉴 배열 꺼냄
 
     const [tips, setTips] = useState([]);
 
-    useEffect(() => {
-        [TIP2, TIP3, TIP4, SCROLL].forEach((src) => {
+    useEffect(() => { // 알뜰 식사 팁 페이지 이동 시 로딩 없이 바로 이미지 보이도록
+        [TIP1, TIP2, TIP3, TIP4, SCROLL].forEach((src) => {
             const img = new Image();
             img.src = src;
         });
     }, []);
 
-    useEffect(() => {
+    useEffect(() => { // 1초씩 감소 타이머
         const t = setInterval(() => setSec(s => s - 1), 1000);
         return () => clearInterval(t);
     }, []);
