@@ -105,7 +105,6 @@ export default function MenuPlusMap() { // 내 위치 + 주변 가게 마커 표
                         setStoreDetail({ ...s, distance: dist });
 
                         setSheetHeight(24.63); // BottomSheet 열기
-
                     }}
                 />
                 );
