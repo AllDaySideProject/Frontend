@@ -23,8 +23,8 @@
   border-color: #0EA64B;
   background: #0EA64B;
   color: white;
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
 }
 
 .selectedButtons {
@@ -42,11 +42,12 @@
   justify-content: center;
   transition: all 0.3s ease;
   padding: 0;
+  
 }
 
 .deleteButton img {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   pointer-events: none;
 }
 

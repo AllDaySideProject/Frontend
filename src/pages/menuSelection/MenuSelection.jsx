@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import {Menu} from './components/Menu'
 import ScreenContainer from '../../components/ScreenContainer';
 import HeaderArrow from '../../components/HeaderArrow';
-import './MenuSelection.scss'
 import { CompleteButton } from './components/CompleteButton';
 import { StoreSelectionModal } from './components/StoreSelectionModal';
 import menuSuggestGet from '../../api/menuSelection/menuSuggestGet';
 import {categoryIcons} from '../../assets/icons/categoryIcons';
 import { useCurrentPosition } from '../../hooks/useCurrentPosition';
+import { useMenu } from '../../components/MenuContext';
+import './MenuSelection.scss'
 //양재 at 센터 위경도 
 const FIXED_LAT = 37.4683;
 const FIXED_LNG = 127.0391;
@@ -16,6 +17,7 @@ const FIXED_POS = { lat: FIXED_LAT, lng: FIXED_LNG };
 
 export  const MenuSelection = () => {
   const navigate=useNavigate();
+  const {menus: cartMenus, addMenu, updateCount, removeMenu}=useMenu();//로컬에 저장하는 용도
 
   const [menus, setMenus]=useState([]);
   const [selectMenus, setSelectMenus]=useState([]);//선택된 메뉴의 인덱스를 전달하기 위한 변수
@@ -27,6 +29,8 @@ export  const MenuSelection = () => {
   const { pos, loading, request } = useCurrentPosition();
   const [fetching, setFetching] = useState(false);
   const [fetchError, setFetchError] = useState(null);
+  
+  
   //pos=lat, lng
   // 마운트 시 위치 요청
   useEffect(() => {
@@ -62,6 +66,34 @@ export  const MenuSelection = () => {
       }
     })();
 }, [pos]);
+//로컬에 메뉴가 있으면 해당 메뉴 selected상태 랜더링
+  useEffect(()=>{
+    if(!cartMenus)return;
+    //이름 기준으로 일치하는 카드 인덱스 숮집
+    const nameSet = new Set(cartMenus.map(cm=>cm.name));
+    const indices=[];
+    menus.forEach((it,idx)=>{
+      if(nameSet.has(it.name)) indices.push(idx);
+    });
+
+    //상세 정보
+  
+    setSelectedMenuDetails(()=>{
+      const next={};
+      cartMenus.forEach(cm=>{
+        next[cm.name]={
+          menuId:cm.menuId,
+          store:cm.storeName,//가게 명
+          quantity:cm.count,//수량
+          unitPrice:cm.salePrice,//가격
+          price:(cm.salePrice)*(cm.count),//총액
+        };
+      });
+    return next; 
+    });
+    
+    setSelectMenus(indices);
+  }, [menus, cartMenus]);
 
 
   const handleMenuClick=(index)=>{
@@ -83,32 +115,58 @@ export  const MenuSelection = () => {
   };
 
   
-  const handleModalComplete = (menuName, storeName, quantity, unitPrice) => {
+  const handleModalComplete = (
+    menuName, 
+    storeName, 
+    quantity, 
+    salePrice,
+    menuId,
+    stock,
+    extra//{costPrice, salePercent, category}
+  ) => {
     // 모달 완료 시 선택된 메뉴 정보 저장
 
-    const price = (Number(unitPrice) || 0) * (Number(quantity) || 1);
+    const price = (Number(salePrice) || 0) * (Number(quantity) || 1);
 
     setSelectedMenuDetails(prev => ({
       ...prev,
       [menuName]: {
+        menuId,
         store: storeName,
         quantity,
-        unitPrice,//개별 가격  
+        unitPrice: Number(salePrice) || 0,//개별 가격  
         price,//총액
       }
     }));
       // 해당 메뉴를 선택 상태로 만들기
-
     const menuIndex = menus.findIndex(item => item.name === menuName);
     if (menuIndex !== -1 && !selectMenus.includes(menuIndex)) {
       setSelectMenus(prev => [...prev, menuIndex]);
     }
 
+    addMenu({//로컬에 최초 메뉴 1개 담기
+      id: menuId,
+      menuId,
+      name: menuName,
+      storeName,
+      category: extra.category,
+      costPrice:extra.costPrice,
+      originalPrice:salePrice,
+      salePrice: salePrice,
+      price: extra.costPrice,
+      salePercent: extra.salePercent,
+      quantity: stock,
+      maxQuantity: stock,
+    });
+    const extraCount=quantity-1;
+    if(extraCount>0) updateCount(menuId, extraCount);
+
     setIsModalOpen(false);
     setModalMenuName('');
   };
 
-  const handleDeleteMenu = (menuName) => {
+  const handleDeleteMenu = (menuName, menuId) => {
+    removeMenu(menuId);
     // 선택된 메뉴 정보 삭제
     setSelectedMenuDetails(prev => {
       const newDetails = { ...prev };
@@ -122,9 +180,6 @@ export  const MenuSelection = () => {
       setSelectMenus(prev => prev.filter(index => index !== menuIndex));
     }
   };
-  
-  // 선택된 메뉴 이름 목록 생성
-  const selectedMenuNames = selectMenus.map(index => menus[index].name);
   
   return (
     <ScreenContainer>
@@ -146,7 +201,8 @@ export  const MenuSelection = () => {
               isSelected={selectMenus.includes(index)}
               onClick={()=>handleMenuClick(index)}
               onAddClick={() => handleAddButtonClick(item.name)}
-              onDelete={() => handleDeleteMenu(item.name)}
+              onDelete={() => 
+                handleDeleteMenu(item.name, selectedMenuDetails[item.name]?.menuId)}
               menuDetails={selectedMenuDetails[item.name]} // 선택된 메뉴의 상세 정보 전달
             />
           ))}
