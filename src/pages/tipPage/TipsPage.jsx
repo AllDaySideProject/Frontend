@@ -43,7 +43,7 @@ export const TipsPage = () => {
         <>
             <TipHeader />
             { tipsData.map((tip, index) => (
-                <TipComponent key = { index } { ...tip } />
+                <TipComponent key = { index } { ...tip } bgColor = { index === 1 ? "#EDEDF8" : "#FFFFFF" } />
             ))}
 
             { showScroll && (
