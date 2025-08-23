@@ -69,7 +69,7 @@ React와 SCSS를 활용해 사용자 친화적인 화면을 구현했으며, 서
 |----------------|
 | <img src="./src/assets/screenshots/main.png" width="250" /> |
 
-| 메뉴 선택 (📸) | AI 추천 (📸) | 지도에서 선택 (📸) |
+| 메뉴 선택 (🎬) | AI 추천 (🎬) | 지도에서 선택 (🎬) |
 |----------------|--------------|------------------|
 | <img src="./src/assets/screenshots/menu1.gif" width="250" /> | <img src="./src/assets/screenshots/ai.gif" width="250" /> | <img src="./src/assets/screenshots/map.gif" width="250" /> |
 
@@ -77,7 +77,7 @@ React와 SCSS를 활용해 사용자 친화적인 화면을 구현했으며, 서
 |---------------|---------------------------|
 | <img src = "./src/assets/screenshots/cart.png" width = "250" /> | <img src = "./src/assets/screenshots/cart-delete.gif" width = "250" /> |
 
-| 픽업 지도 (🎬) | 픽업 코드 (📸) | 알뜰팁 (📸) |
+| 픽업 지도 (📸) | 픽업 코드 (📸) | 알뜰팁 (🎬) |
 |--------------------|----------------|-------------|
 | <img src = "./src/assets/screenshots/pickup-map.png" width = "250" /> | <img src = "./src/assets/screenshots/pickup-code.png" width = "250" /> | <img src = "./src/assets/screenshots/tip.gif" width = "250" /> |
 
