@@ -67,7 +67,7 @@ React와 SCSS를 활용해 사용자 친화적인 화면을 구현했으며, 서
 
 | 메인 화면 (📸) | 메뉴 선택 (📸) | AI 추천 (📸) | 지도에서 선택 (📸) |
 |----------------|------------------|------------------|-----------|
-| <img src = "./src/assets/screenshots/main.png" width = "250" />  | <img src = "./src/assets/screenshots/menu1.gif" width = "250" /> | <img src="./src/assets/screenshots/menu2.png" width="250"/> | <img src = "./src/assets/screenshots/map.gif" width = "250" /> |
+| <img src = "./src/assets/screenshots/main.png" width = "250" />  | <img src = "./src/assets/screenshots/menu1.gif" width = "250" /> | <img src = "./src/assets/screenshots/ai.gif" width="250" /> | <img src = "./src/assets/screenshots/map.gif" width = "250" /> |
 
 | 장바구니 (📸) | 장바구니에서 삭제 (🎬) |
 |---------------|---------------------------|
@@ -80,4 +80,4 @@ React와 SCSS를 활용해 사용자 친화적인 화면을 구현했으며, 서
 ---
 
 ## 🌐 배포
-👉 [서비스 바로가기](https://jf-frontend.vercel.app)
+👉 [잔반 플러팅 바로가기](https://jf-frontend.vercel.app)
