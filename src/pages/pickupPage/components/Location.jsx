@@ -94,7 +94,6 @@ export const Location = () => {
           paths = { paths }
           destinations = { destinations }
           width = "24.375rem"
-          height = "31.81rem"
           selectedId = { selectedId }
           onDestinationClick = { setSelectedId }
         />

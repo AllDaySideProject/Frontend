@@ -10,7 +10,7 @@ export default function PickupMap({
   userPos, // 사용자 현재 위치
   destinations = [], // 목적지 매장 리스트
   paths = [], // 경로 좌표 배열
-  height = "50rem", // 지도 높이
+  height = "100%", // 지도 높이
   width, // 지도 너비
   selectedId, // 선택된 매장
   onDestinationClick // 매장 클릭 시
