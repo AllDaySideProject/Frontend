@@ -60,14 +60,14 @@ export const MenuEdit = ({ mode, setMode, selectedIds, toggleSelect, menuIds }) 
                             tone = "discount"
                             priceTitle = "할인 금액"
                             fontColor = { '#DC2626' }
-                            price = { fmt(discount) }
+                            price = { `-${fmt(discount)}` }
                         />
                     </div>
                     <div className = "finalPrice">
                         <p>총 구매 금액</p>
                         <div className = "priceInfo">
                             <p className = "percentInfo">
-                                { originalTotal > 0 ? Math.round((discount / originalTotal) * 100) : 0 }%
+                                { originalTotal > 0 ? `-${Math.round((discount / originalTotal) * 100)}` : 0 }%
                             </p>
                             <p>{ fmt(saleTotal) }원</p>
                         </div>

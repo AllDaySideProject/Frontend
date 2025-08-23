@@ -83,14 +83,17 @@ export const MainMenuPage = () => {
             console.log("예약 응답: ", reserveRes);
 
             setIsModalOpen(false); // 모달 닫기
-            navigate("/pickup", { state: reserveRes }); // 예약 완료 후 이동
+            navigate("/pickup", { state: { 
+                ...reserveRes,
+                menus: menus.map(m => m.name) 
+            }}); // 예약 완료 후 이동
         } catch (error) {
             console.error("예약 실패:", error);
         }
     };
 
     return (
-        <div className="mainMenuBg">
+        <div className = "mainMenuBg">
         <div className = "mainMenuWrapper">
             <Header />  
             <MenuEdit 
