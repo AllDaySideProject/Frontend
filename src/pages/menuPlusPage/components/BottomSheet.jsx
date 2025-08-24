@@ -189,7 +189,7 @@ export const BottomSheet = ({
                 onCountChange={(delta) => updateCountLocal(menu, delta)}
                 />
             );
-        })};
+        })}
         </div>
       </div>
     </ScreenContainer>
