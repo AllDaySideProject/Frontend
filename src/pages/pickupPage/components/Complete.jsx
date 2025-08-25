@@ -28,12 +28,7 @@ export const Complete = () => {
             img.src = src;
         });
     }, []);
-
-    useEffect(() => { // 1초씩 감소 타이머
-        const t = setInterval(() => setSec(s => s - 1), 1000);
-        return () => clearInterval(t);
-    }, []);
-
+    
     useEffect(() => {
         const preloadTips = async () => {
         try {
@@ -47,8 +42,8 @@ export const Complete = () => {
     }, [menus]);
 
     useEffect(() => {
-        if (sec <= 0 && tips.length > 0) navigate(`/tips`, { state: { menus, tips }});
-    }, [sec, menus, tips, navigate]);
+        if (tips.length > 0) navigate(`/tips`, { state: { menus, tips }});
+    }, [menus, tips, navigate]);
 
     return (
         <ScreenContainer>
@@ -66,8 +61,7 @@ export const Complete = () => {
                         </p>
                     </div>
                     <div className = "leftTime">
-                        <img src = { TIME } />
-                        <p>{ sec }초 뒤 이동</p>
+                        <p>잠시 후 알뜰 식사 TIP으로 이동해요</p>
                     </div>
                 </div>
             </div>
