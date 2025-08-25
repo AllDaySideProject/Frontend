@@ -17,7 +17,15 @@ export default function PickupMap({
 }) {
   // if (!userPos) return null;
 
-  const selectedDest = destinations.find(d => d.storeId === selectedId) || null; // 현재 선택된 매장 정보
+  const uniqueDestinations = Object.values(
+    destinations.reduce((acc, cur) => { // 가게 누적
+      acc[cur.storeId] = cur;
+      return acc;
+    }, {})
+  );
+
+
+  const selectedDest = uniqueDestinations.find(d => d.storeId === selectedId) || null; // 현재 선택된 매장 정보
   const selectedDistance = selectedDest // 선택된 매장까지의 거리
     ? (getDistanceMeters(userPos, selectedDest) / 1000).toFixed(2)
     : null;
@@ -46,7 +54,7 @@ export default function PickupMap({
         }}
       />
 
-      { destinations.map(dest => { // 목적지 마커
+      { uniqueDestinations.map(dest => { // 목적지 마커
         const isSelected = dest.storeId === selectedId;
         return (
           <MapMarker
