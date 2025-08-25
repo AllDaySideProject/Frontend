@@ -192,7 +192,7 @@ export  const MenuSelection = () => {
         {fetchError && <div className="MenuError">{fetchError}</div>}
 
 
-        <div className='MenuCard'  >{/* 메뉴 카드 배치 방법*/}
+        <div className='MenuCard'  style={{paddingBottom:'80px'}}>{/* 메뉴 카드 배치 방법*/}
           {menus.map((item, index)=>(
             <Menu 
               key={item.id} 

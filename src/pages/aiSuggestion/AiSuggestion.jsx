@@ -164,7 +164,7 @@ export const AiSuggestion = () => {
         {fetching && <div className="MenuLoading">추천 메뉴 불러오는 중…</div>}
         {fetchError && <div className="MenuError">{fetchError}</div>}
          {/* 메뉴 리스트 */}
-        <div className="MenuList" ref={listRef}>
+        <div className="MenuList" ref={listRef} style={{paddingBottom:'80px'}}>
           {menus.map((m) => {
             const menuDetails = selectedMenus.find((sel) => sel.name === m.name);
             return (
