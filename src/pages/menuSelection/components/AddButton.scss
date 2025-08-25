@@ -2,7 +2,6 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: 2px solid #ccc;
   background: white;
   color: #ccc;
   font-size: 20px;
@@ -13,6 +12,7 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  border: 0;
 }
 
 .AddButton:hover {
@@ -26,6 +26,7 @@
   color: white;
   width: 32px;
   height: 32px;
+  border: 0;
 }
 
 .selectedButtons {
