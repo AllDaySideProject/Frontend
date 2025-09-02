@@ -11,7 +11,7 @@ import lowCarBo from '../../assets/aiSuggestion/low_carbohydrate.png'
 import lowSalt from '../../assets/aiSuggestion/low_salt.png'
 import HeaderArrow from '../../components/HeaderArrow'
 import aiSuggestionPost from '../../api/aiSuggestion/aiSuggestionPost'
-//import { useCurrentPosition } from '../../hooks/useCurrentPosition'
+import { useCurrentPosition } from '../../hooks/useCurrentPosition'
 import { categoryIcons } from '../../assets/icons/categoryIcons'
 import { useMenu } from '../../components/MenuContext'
 import './AiSuggestion.scss'
@@ -40,8 +40,8 @@ export const AiSuggestion = () => {
   const [menuForModal, setMenuForModal]=useState(null);
   const [selectedMenus, setSelectedMenus]=useState([]);
   const listRef=useRef(null);
-  // 현재 위치 받아오기
-  // const {pos, loading:coordsLoading, request}=useCurrentPosition();
+  //현재 위치 받아오기
+  const {pos, loading:coordsLoading, request}=useCurrentPosition();
   const conceptOf=(name)=>DataType.find(d=>d.name===name)?.concept;
 
   const {addMenu, updateCount, removeMenu}=useMenu();
